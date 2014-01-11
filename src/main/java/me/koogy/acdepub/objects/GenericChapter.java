@@ -1,6 +1,7 @@
 package me.koogy.acdepub.objects;
 
 import java.util.List;
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * Details of a chapter. Preamble, Chapters and PostAmble are all chapters.
@@ -11,14 +12,14 @@ public class GenericChapter {
     String numbering;
     String title;
     List<GenericParagraph> paras;
-    String filename;
+    String id;
 
-    public String getFilename() {
-        return filename;
+    public String getId() {
+        return id;
     }
 
-    public void setFilename(String filename) {
-        this.filename = filename;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNumbering() {
@@ -29,6 +30,7 @@ public class GenericChapter {
         this.numbering = numbering;
     }
 
+    @XmlElement(name = "para")
     public List<GenericParagraph> getParas() {
         return paras;
     }
@@ -52,9 +54,9 @@ public class GenericChapter {
         s.append(", ");
         s.append("Title:{").append(title).append("}");
         s.append(", ");
-        s.append("Filename:{").append(filename).append("}");
+        s.append("Id:{").append(id).append("}");
         s.append(", ");
-        s.append("Paragraphs:{").append(paras).append("}");
+        s.append("Paragraphs:{").append(".").append("}");
         s.append("}");
         return s.toString();
     }

@@ -59,6 +59,7 @@ public class Book {
         this.author = author;
     }
 
+    @XmlElement(name = "chapter")
     public ArrayList<GenericChapter> getChapters() {
         return chapters;
     }
@@ -84,6 +85,7 @@ public class Book {
         this.parts = parts;
     }
 
+    @XmlElement(name = "postamble")
     public ArrayList<GenericChapter> getPostambles() {
         return postambles;
     }
@@ -92,6 +94,7 @@ public class Book {
         this.postambles = postambles;
     }
 
+    @XmlElement(name = "preamble")
     public ArrayList<GenericChapter> getPreambles() {
         return preambles;
     }
@@ -119,6 +122,12 @@ public class Book {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("Book:{");
+        s.append("Author:{").append(author).append("}");
+        s.append(", ");
+        s.append("Title:{").append(title).append("}");
+        s.append(", ");
+        s.append("Subtitle:{").append(subtitle).append("}");
+        s.append(", ");
         s.append("Preambles:{").append(preambles).append("}");
         s.append(", ");
         s.append("Parts:{").append(parts).append("}");
