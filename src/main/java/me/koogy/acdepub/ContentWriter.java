@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.UUID;
 import me.koogy.acdepub.objects.Book;
+import me.koogy.acdepub.objects.GenericChapter;
+import me.koogy.acdepub.objects.Part;
 
 /**
  * @author adean
@@ -35,15 +37,67 @@ public class ContentWriter {
             item(p, "cover", "cover.xhtml", "application/xhtml+xml");
             item(p, "title_page", "title_page.xhtml", "application/xhtml+xml");
             item(p, "cover-image", "cover-image.jpg", "image/jpeg");
-            // TODO manifest chapter items
+
+            // manifest chapter items
             // p.println("<item id=\"ch1\" href=\"ch1.xhtml\" media-type=\"application/xhtml+xml\"/>");
+            if (book.getPreambles() != null) {
+                for (GenericChapter chap : book.getPreambles()) {
+                    item(p, chap.getId());
+                }
+            }
+            if (book.getChapters() != null) {
+                for (GenericChapter chap : book.getChapters()) {
+                    item(p, chap.getId());
+                }
+            }
+            if (book.getParts() != null) {
+                for (Part part : book.getParts()) {
+                    item(p, part.getId());
+                    if (part.getChapters() != null) {
+                        for (GenericChapter chap : part.getChapters()) {
+                            item(p, chap.getId());
+                        }
+                    }
+                }
+            }
+            if (book.getPostambles() != null) {
+                for (GenericChapter chap : book.getPostambles()) {
+                    item(p, chap.getId());
+                }
+            }
             p.println("  </manifest>");
+
             // spine
             p.println("  <spine toc=\"ncx\">");
             p.println("    <itemref idref=\"cover\" linear=\"no\"/>");
             p.println("    <itemref idref=\"title_page\"/>");
-            // TODO spine chapter items
-            p.println("    <itemref idref=\"ch1\"/>");
+
+            // spine chapter items
+            if (book.getPreambles() != null) {
+                for (GenericChapter chap : book.getPreambles()) {
+                    p.println("    <itemref idref=\"" + chap.getId() + "\"/>");
+                }
+            }
+            if (book.getChapters() != null) {
+                for (GenericChapter chap : book.getChapters()) {
+                    p.println("    <itemref idref=\"" + chap.getId() + "\"/>");
+                }
+            }
+            if (book.getParts() != null) {
+                for (Part part : book.getParts()) {
+                    p.println("    <itemref idref=\"" + part.getId() + "\"/>");
+                    if (part.getChapters() != null) {
+                        for (GenericChapter chap : part.getChapters()) {
+                            p.println("    <itemref idref=\"" + chap.getId() + "\"/>");
+                        }
+                    }
+                }
+            }
+            if (book.getPostambles() != null) {
+                for (GenericChapter chap : book.getPostambles()) {
+                    p.println("<itemref idref=\"" + chap.getId() + "\"/>");
+                }
+            }
             p.println("  </spine>");
             p.println("</package>");
         } catch (IOException e) {
@@ -55,7 +109,10 @@ public class ContentWriter {
         }
     }
     
+    private static void item(PrintStream p, String id) {
+        item(p, id, id + ".xhtml", "application/xhtml+xml");
+    }
     private static void item(PrintStream p, String id, String href, String mediaType) {
-        p.format("    <item id=\"%s\" href=\"%s\" media-type=\"%s\"/>", id, href, mediaType);
+        p.format("    <item id=\"%s\" href=\"%s\" media-type=\"%s\"/>\n", id, href, mediaType);
     }
 }

@@ -8,7 +8,11 @@ import javax.xml.bind.annotation.XmlElement;
  */
 public class GenericParagraph {
     String contents;
-    
+
+    public GenericParagraph() {
+        System.out.println("GenericParagraph");
+    }
+
     @Override
     public String toString() {
         return("{Para}");

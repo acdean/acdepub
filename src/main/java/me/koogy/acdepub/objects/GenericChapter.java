@@ -14,6 +14,10 @@ public class GenericChapter {
     List<GenericParagraph> paras;
     String id;
 
+    public GenericChapter() {
+        System.out.println("GenericChapter");
+    }
+
     public String getId() {
         return id;
     }
