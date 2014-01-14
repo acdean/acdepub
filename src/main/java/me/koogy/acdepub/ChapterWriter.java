@@ -30,10 +30,14 @@ public class ChapterWriter {
             p.println("<body>");
             // Chapter Heading
             p.print("<h1>");
-            if (chapter.getNumbering() == null) {
+            if (chapter.getNumbering() != null) {
+                p.print("Chapter " + chapter.getNumbering());
+                if (chapter.getTitle() != null) {
+                    p.print("<br/>");
+                }
+            }
+            if (chapter.getTitle() != null) {
                 p.print(chapter.getTitle());
-            } else {
-                p.print("Chapter " + chapter.getNumbering() + "<br/>" + chapter.getTitle());  // TODO
             }
             p.println("</h1>");
             
