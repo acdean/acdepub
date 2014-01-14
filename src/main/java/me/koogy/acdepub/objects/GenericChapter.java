@@ -1,17 +1,19 @@
 package me.koogy.acdepub.objects;
 
 import java.util.List;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
+import me.koogy.acdepub.ParaHandler;
 
 /**
- * Details of a chapter. Preamble, Chapters and PostAmble are all chapters.
+ * Details of a chapter. Prefaces, Chapters and Appendices are all chapters.
  * @author adean
  */
 public class GenericChapter {
 
     String numbering;
     String title;
-    List<GenericParagraph> paras;
+    List<String> paras; // the payload
     String id;
 
     public GenericChapter() {
@@ -34,15 +36,16 @@ public class GenericChapter {
         this.numbering = numbering;
     }
 
-    @XmlElement(name = "para")
-    public List<GenericParagraph> getParas() {
+    @XmlAnyElement(ParaHandler.class)
+    public List<String> getParas() {
         return paras;
     }
 
-    public void setParas(List<GenericParagraph> paras) {
+    public void setParas(List<String> paras) {
         this.paras = paras;
     }
 
+    @XmlElement
     public String getTitle() {
         return title;
     }
@@ -60,7 +63,11 @@ public class GenericChapter {
         s.append(", ");
         s.append("Id:{").append(id).append("}");
         s.append(", ");
-        s.append("Paragraphs:{").append(".").append("}");
+        if (paras != null) {
+            for (String str : paras) {
+                s.append("Para{p}");
+            }
+        }
         s.append("}");
         return s.toString();
     }

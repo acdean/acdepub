@@ -4,20 +4,20 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.UUID;
 import me.koogy.acdepub.objects.Book;
-import me.koogy.acdepub.objects.GenericChapter;
 
 /**
- * Outputs a chapter file
+ * Writes a cover page, mostly image.
  * @author adean
  */
-public class ChapterWriter {
-    
-    public static void write(File dir, Book book, GenericChapter chapter) {
+public class CoverWriter {
+
+    public static void write(File dir, Book book) {
 
         PrintStream p = null;
         try {
-            File file = new File(dir, chapter.getId() + ".xhtml");
+            File file = new File(dir, "cover.xhtml");
             p = new PrintStream(new FileOutputStream(file));
 
             p.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -25,26 +25,16 @@ public class ChapterWriter {
             p.println("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
             p.println("<head>");
             p.println("<title>" + book.getTitle() + "</title>");
-            p.println("<link href=\"stylesheet.css\" type=\"text/css\" rel=\"stylesheet\"/>");
+            p.println("<style type=\"text/css\">img{ max-width: 100%; }</style>");
+            p.println("<link href=\"stylesheet.css\" type=\"text/css\" rel=\"stylesheet\" />");
             p.println("</head>");
             p.println("<body>");
-            // Chapter Heading
-            p.print("<h1>");
-            if (chapter.getNumbering() == null) {
-                p.print(chapter.getTitle());
-            } else {
-                p.print("Chapter " + chapter.getNumbering() + "<br/>" + chapter.getTitle());  // TODO
-            }
-            p.println("</h1>");
-            
-            // Paragraphs
-            for (String para : chapter.getParas()) {
-                p.println("<p>" + para + "</p>");
-            }
-            
+            p.println("<div id=\"cover-image\">");
+            p.println("<img src=\"cover-image.jpg\" alt=\"" + book.getTitle() + "\" />");
+            p.println("</div>");
             p.println("</body>");
             p.println("</html>");
-        
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

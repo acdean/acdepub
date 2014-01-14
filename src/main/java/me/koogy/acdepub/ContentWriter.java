@@ -18,7 +18,7 @@ public class ContentWriter {
 
         PrintStream p = null;
         try {
-            File file = new File(dir, "toc.ncx");
+            File file = new File(dir, "content.opf");
             p = new PrintStream(new FileOutputStream(file));
             
             p.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -40,8 +40,8 @@ public class ContentWriter {
 
             // manifest chapter items
             // p.println("<item id=\"ch1\" href=\"ch1.xhtml\" media-type=\"application/xhtml+xml\"/>");
-            if (book.getPreambles() != null) {
-                for (GenericChapter chap : book.getPreambles()) {
+            if (book.getPrefaces() != null) {
+                for (GenericChapter chap : book.getPrefaces()) {
                     item(p, chap.getId());
                 }
             }
@@ -60,8 +60,8 @@ public class ContentWriter {
                     }
                 }
             }
-            if (book.getPostambles() != null) {
-                for (GenericChapter chap : book.getPostambles()) {
+            if (book.getAppendices() != null) {
+                for (GenericChapter chap : book.getAppendices()) {
                     item(p, chap.getId());
                 }
             }
@@ -73,8 +73,8 @@ public class ContentWriter {
             p.println("    <itemref idref=\"title_page\"/>");
 
             // spine chapter items
-            if (book.getPreambles() != null) {
-                for (GenericChapter chap : book.getPreambles()) {
+            if (book.getPrefaces() != null) {
+                for (GenericChapter chap : book.getPrefaces()) {
                     p.println("    <itemref idref=\"" + chap.getId() + "\"/>");
                 }
             }
@@ -93,8 +93,8 @@ public class ContentWriter {
                     }
                 }
             }
-            if (book.getPostambles() != null) {
-                for (GenericChapter chap : book.getPostambles()) {
+            if (book.getAppendices() != null) {
+                for (GenericChapter chap : book.getAppendices()) {
                     p.println("<itemref idref=\"" + chap.getId() + "\"/>");
                 }
             }

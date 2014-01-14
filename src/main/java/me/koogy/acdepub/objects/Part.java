@@ -2,13 +2,11 @@ package me.koogy.acdepub.objects;
 
 import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Book can have many parts (or none)
  * @author adean
  */
-@XmlRootElement(name = "part")
 public class Part {
     String title;
     String numbering;

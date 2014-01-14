@@ -46,10 +46,27 @@ public class Book {
     String subtitle;
     String author;
     String date;
-    ArrayList<GenericChapter> preambles;
+    ArrayList<GenericChapter> prefaces;
     ArrayList<Part> parts;           // one of parts or chapters, not both
     ArrayList<GenericChapter> chapters;
-    ArrayList<GenericChapter> postambles;
+    ArrayList<GenericChapter> appendices;
+    String uuid;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
 
     public String getAuthor() {
         return author;
@@ -57,6 +74,23 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    @XmlElement(name = "preface")
+    public ArrayList<GenericChapter> getPrefaces() {
+        return prefaces;
+    }
+
+    public void setPrefaces(ArrayList<GenericChapter> prefaces) {
+        this.prefaces = prefaces;
     }
 
     @XmlElement(name = "chapter")
@@ -68,14 +102,6 @@ public class Book {
         this.chapters = chapters;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     @XmlElement(name = "part")
     public ArrayList<Part> getParts() {
         return parts;
@@ -85,40 +111,23 @@ public class Book {
         this.parts = parts;
     }
 
-    @XmlElement(name = "postamble")
-    public ArrayList<GenericChapter> getPostambles() {
-        return postambles;
+    @XmlElement(name = "appendix")
+    public ArrayList<GenericChapter> getAppendices() {
+        return appendices;
     }
 
-    public void setPostambles(ArrayList<GenericChapter> postambles) {
-        this.postambles = postambles;
+    public void setAppendices(ArrayList<GenericChapter> appendices) {
+        this.appendices = appendices;
     }
 
-    @XmlElement(name = "preamble")
-    public ArrayList<GenericChapter> getPreambles() {
-        return preambles;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setPreambles(ArrayList<GenericChapter> preambles) {
-        this.preambles = preambles;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
-    public String getSubtitle() {
-        return subtitle;
-    }
-
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("Book:{");
@@ -128,13 +137,13 @@ public class Book {
         s.append(", ");
         s.append("Subtitle:{").append(subtitle).append("}");
         s.append(", ");
-        s.append("Preambles:{").append(preambles).append("}");
+        s.append("Prefaces:{").append(prefaces).append("}");
         s.append(", ");
         s.append("Parts:{").append(parts).append("}");
         s.append(", ");
         s.append("Chapters:{").append(chapters).append("}");
         s.append(", ");
-        s.append("Postambles:{").append(postambles).append("}");
+        s.append("Appendices:{").append(appendices).append("}");
         s.append("}");
         return s.toString();
     }

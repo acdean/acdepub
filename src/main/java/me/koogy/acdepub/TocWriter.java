@@ -22,7 +22,7 @@ public class TocWriter {
         try {
             File file = new File(dir, "toc.ncx");
             p = new PrintStream(new FileOutputStream(file));
-            
+
             p.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             p.println("<ncx version=\"2005-1\" xmlns=\"http://www.daisy.org/z3986/2005/ncx/\">");
             p.println("  <head>");
@@ -51,11 +51,13 @@ public class TocWriter {
                 for (Part part : book.getParts()) {
                     navPoint(p, part.getTitle(), part.getId(), count);
                     count++;
-                    for (GenericChapter chap : part.getChapters()) {
-                        // don't bother with untitled chapters
-                        if (chap.getTitle() != null) {
-                            navPoint(p, chap.getTitle(), chap.getId(), count);
-                            count++;
+                    if (part.getChapters() != null) {
+                        for (GenericChapter chap : part.getChapters()) {
+                            // don't bother with untitled chapters
+                            if (chap.getTitle() != null) {
+                                navPoint(p, chap.getTitle(), chap.getId(), count);
+                                count++;
+                            }
                         }
                     }
                 }
