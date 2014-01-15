@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import me.koogy.acdepub.objects.Book;
 import me.koogy.acdepub.objects.GenericChapter;
+import me.koogy.acdepub.objects.Options;
 
 /**
  * Outputs a chapter file
@@ -13,7 +14,7 @@ import me.koogy.acdepub.objects.GenericChapter;
  */
 public class ChapterWriter {
     
-    public static void write(File dir, Book book, GenericChapter chapter) {
+    public static void write(File dir, Options options, Book book, GenericChapter chapter) {
 
         PrintStream p = null;
         try {
@@ -25,19 +26,20 @@ public class ChapterWriter {
             p.println("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
             p.println("<head>");
             p.println("<title>" + book.getTitle() + "</title>");
-            p.println("<link href=\"stylesheet.css\" type=\"text/css\" rel=\"stylesheet\"/>");
+            p.print("<link rel=\"stylesheet\" type=\"text/css\" href=\"stylesheet.css\"/>");
+
             p.println("</head>");
             p.println("<body>");
             // Chapter Heading
             p.print("<h1>");
             if (chapter.getNumbering() != null) {
-                p.print("Chapter " + chapter.getNumbering());
+                p.print("<div class=\"chapterNumber\">Chapter " + chapter.getNumbering() + "</div>");
                 if (chapter.getTitle() != null) {
                     p.print("<br/>");
                 }
             }
             if (chapter.getTitle() != null) {
-                p.print(chapter.getTitle());
+                p.print("<div class=\"chapterTitle\">" + chapter.getTitle() + "</div>");
             }
             p.println("</h1>");
             

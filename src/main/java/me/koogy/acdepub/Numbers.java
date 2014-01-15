@@ -1,11 +1,38 @@
 package me.koogy.acdepub;
 
 /**
- *
  * @author adean
  */
 public class Numbers {
 
+    public static String number(String style, int i) {
+        if (style.equals("one")) {
+            return words(i).toLowerCase();
+        }
+        if (style.equals("ONE")) {
+            return words(i).toUpperCase();
+        }
+        if (style.equals("One")) {
+            return words(i);
+        }
+        if (style.equals("i")) {
+            return roman(i);
+        }
+        if (style.equals("I")) {
+            return roman(i).toUpperCase();
+        }
+        if (style.equals("1")) {
+            return digits(i);
+        }
+        if (style.equals("a")) {
+            return alpha(i);
+        }
+        if (style.equals("A")) {
+            return alpha(i).toUpperCase();
+        }
+        return null;
+    }
+    
     public static String words(int i) {
         StringBuilder result = new StringBuilder();
         String hundredStr = null, tenStr = null, unitStr = null;
@@ -91,5 +118,48 @@ public class Numbers {
 
     public static String digits(int i) {
         return new Integer(i).toString();
+    }
+    
+    public static String alpha(int i) {
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        if (i <= 0 || i > alphabet.length()) {
+            return "";
+        }
+        return "" + alphabet.charAt(i - 1);
+    }
+    
+    // 0 to 399
+    private static String roman(int i) {
+        StringBuilder result = new StringBuilder();
+        switch (i / 100) {
+            case 3: result.append("ccc"); break;
+            case 2: result.append("cc"); break;
+            case 1: result.append("c"); break;
+        }
+        i = i % 100;
+        switch (i / 10) {
+            case 9: result.append("xc"); break;
+            case 8: result.append("lxxx"); break;
+            case 7: result.append("lxx"); break;
+            case 6: result.append("lx"); break;
+            case 5: result.append("l"); break;
+            case 4: result.append("xl"); break;
+            case 3: result.append("xxx"); break;
+            case 2: result.append("xx"); break;
+            case 1: result.append("x"); break;
+        }
+        i = i % 10;
+        switch (i) {
+            case 9: result.append("ix"); break;
+            case 8: result.append("viii"); break;
+            case 7: result.append("vii"); break;
+            case 6: result.append("vi"); break;
+            case 5: result.append("v"); break;
+            case 4: result.append("iv"); break;
+            case 3: result.append("iii"); break;
+            case 2: result.append("ii"); break;
+            case 1: result.append("i"); break;
+        }
+        return result.toString();
     }
 }

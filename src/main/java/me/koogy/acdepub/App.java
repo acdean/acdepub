@@ -9,6 +9,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import me.koogy.acdepub.objects.Book;
 import me.koogy.acdepub.objects.GenericChapter;
+import me.koogy.acdepub.objects.Options;
 import me.koogy.acdepub.objects.Part;
 
 /**
@@ -20,7 +21,6 @@ public class App
     private static final String BOOK_XML = "/home/adean/dev/NetBeansProjects/acdepub/src/test/xml/short_stories.xml";
     private static final String PREFACE_ID_FORMAT           = "pre_%03d";
     private static final String CHAPTER_ID_FORMAT           = "ch_%03d";
-    private static final String CHAPTER_NUMBERING_FORMAT    = "%d";    // roman, alphabetic?
     private static final String PART_ID_FORMAT              = "pt_%02d";
     private static final String PART_CHAPTER_ID_FORMAT      = "ch_%02d%03d";
     private static final String APPENDIX_ID_FORMAT          = "app_%03d";
@@ -33,6 +33,7 @@ public class App
         metadir.mkdirs();
         System.out.println("Dir: " + dir);
         UUID uid = UUID.randomUUID();
+        Options options = new Options();
         
         try {
             JAXBContext context = JAXBContext.newInstance(Book.class);
@@ -41,7 +42,7 @@ public class App
             Book book = (Book) um.unmarshal(new FileReader(BOOK_XML));
             
             // generate numbers and filenames
-            numberParts(book, true);
+            numberParts(book, options);
             
             // write everything
             ContentWriter.write(dir, book, uid);
@@ -51,34 +52,32 @@ public class App
             StylesheetWriter.write(dir);
             TitlePageWriter.write(dir, book);
             TocWriter.write(dir, book, uid);
-            
+
             // Chapters
             if (book.getPrefaces() != null) {
                 for (GenericChapter preface : book.getPrefaces()) {
-                    ChapterWriter.write(dir, book, preface);
+                    ChapterWriter.write(dir, options, book, preface);
                 }
             }
             if (book.getChapters() != null) {
                 for (GenericChapter chapter : book.getChapters()) {
-                    ChapterWriter.write(dir, book, chapter);
+                    ChapterWriter.write(dir, options, book, chapter);
                 }
             }
             if (book.getParts() != null) {
                 for (Part part : book.getParts()) {
-    //                PartWriter.write(dir, book, part);
+                    PartWriter.write(dir, options, book, part);
                     for (GenericChapter chapter : part.getChapters()) {
-                        ChapterWriter.write(dir, book, chapter);
+                        ChapterWriter.write(dir, options, book, chapter);
                     }
                 }
             }
             if (book.getAppendices() != null) {
                 for (GenericChapter appendix : book.getAppendices()) {
-                    ChapterWriter.write(dir, book, appendix);
+                    ChapterWriter.write(dir, options, book, appendix);
                 }
             }
 
-            System.out.println("Book: " + book);
-            
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -86,7 +85,7 @@ public class App
         }
     }
     
-    static void numberParts(Book book, boolean numberFromPart) {
+    static void numberParts(Book book, Options options) {
         int count;
         
         // preamble - no numbering
@@ -105,7 +104,7 @@ public class App
             count = 1;
             for(GenericChapter chap : book.getChapters()) {
                 chap.setId(String.format(CHAPTER_ID_FORMAT, count));
-                chap.setNumbering(String.format(CHAPTER_NUMBERING_FORMAT, count));
+                chap.setNumbering(numbering(options.getChapterName(), options.getChapterNumberStyle(), count));
                 count++;
             }
         }
@@ -118,7 +117,7 @@ public class App
                 if (part.getChapters() != null) {
                     for(GenericChapter chap : part.getChapters()) {
                         chap.setId(String.format(PART_CHAPTER_ID_FORMAT, partCount, count));
-                        chap.setNumbering(String.format(CHAPTER_NUMBERING_FORMAT, count));
+                        chap.setNumbering(numbering(options.getPartName(), options.getPartNumberStyle(), count));
                         count++;
                     }
                 }
@@ -134,5 +133,20 @@ public class App
                 count++;
             }
         }
+    }
+
+    // sets the numbering
+    // 'Part III' or 'Three' or null
+    private static String numbering(String name, String style, int i) {
+        StringBuilder sb = new StringBuilder(style);
+        if (style.equalsIgnoreCase("NONE")) {
+            return null;
+        }
+        if (name != null) {
+            sb.append(name);
+            sb.append(" ");
+        }
+        sb.append(Numbers.number(style, i));
+        return sb.toString();
     }
 }
