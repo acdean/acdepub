@@ -16,9 +16,9 @@ import me.koogy.acdepub.objects.Part;
  * Hello world!
  *
  */
-public class App 
+public class Main 
 {
-    private static final String BOOK_XML = "/home/adean/dev/NetBeansProjects/acdepub/src/test/xml/short_stories.xml";
+//    private static final String BOOK_XML = "/home/adean/dev/NetBeansProjects/acdepub/src/test/xml/short_stories.xml";
     private static final String PREFACE_ID_FORMAT           = "pre_%03d";
     private static final String CHAPTER_ID_FORMAT           = "ch_%03d";
     private static final String PART_ID_FORMAT              = "pt_%02d";
@@ -27,6 +27,11 @@ public class App
 
     public static void main( String[] args ) {
         
+        if (args.length != 1) {
+            System.out.println("Usage: generate filename");
+            System.exit(-1);
+        }
+        String filename = args[0];
         File dir = new File("/tmp/acdepub_" + (int)(Math.random() * 10000));
         dir.mkdirs();
         File metadir = new File(dir, "META-INF");
@@ -39,7 +44,7 @@ public class App
             JAXBContext context = JAXBContext.newInstance(Book.class);
             Unmarshaller um = context.createUnmarshaller();
             // read book from xml
-            Book book = (Book) um.unmarshal(new FileReader(BOOK_XML));
+            Book book = (Book) um.unmarshal(new FileReader(filename));
             
             // generate numbers and filenames
             numberParts(book, options);
