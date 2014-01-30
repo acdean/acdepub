@@ -7,6 +7,9 @@ import me.koogy.acdepub.ParaHandler;
 
 /**
  * Details of a chapter. Prefaces, Chapters and Appendices are all chapters.
+ * 
+ * A chapter can contain a title and many paragraphs
+ * 
  * @author adean
  */
 public class GenericChapter {

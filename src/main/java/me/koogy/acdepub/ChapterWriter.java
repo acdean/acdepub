@@ -33,18 +33,19 @@ public class ChapterWriter {
             // Chapter Heading
             p.print("<h1>");
             if (chapter.getNumbering() != null) {
-                p.print("<div class=\"chapterNumber\">Chapter " + chapter.getNumbering() + "</div>");
+                p.print("<span class=\"chapterNumber\">" + chapter.getNumbering() + "</span>");
                 if (chapter.getTitle() != null) {
                     p.print("<br/>");
                 }
             }
             if (chapter.getTitle() != null) {
-                p.print("<div class=\"chapterTitle\">" + chapter.getTitle() + "</div>");
+                p.print("<span class=\"chapterTitle\">" + chapter.getTitle() + "</span>");
             }
             p.println("</h1>");
             
             // Paragraphs
             for (String para : chapter.getParas()) {
+                // TODO translate special paragraphs -o- = hr etc
                 p.println("<p>" + para + "</p>");
             }
             

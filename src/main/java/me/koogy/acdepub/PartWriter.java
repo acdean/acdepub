@@ -33,13 +33,13 @@ public class PartWriter {
             p.print("<body>");
             p.print("<h1>");
             if (part.getNumbering() != null) {
-                p.print("<div class=\"partNumber\">Part " + part.getNumbering() + "</div>");
+                p.print("<span class=\"partNumber\">Part " + part.getNumbering() + "</span>");
                 if (part.getTitle() != null) {
                     p.print("<br/>");
                 }
             }
             if (part.getTitle() != null) {
-                p.print("<div class=\"partTitle\">" + part.getTitle() + "</div>");
+                p.print("<span class=\"partTitle\">" + part.getTitle() + "</span>");
             }
             p.println("</h1>");
             p.print("</body>");

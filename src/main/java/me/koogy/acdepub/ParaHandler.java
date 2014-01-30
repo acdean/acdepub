@@ -16,8 +16,8 @@ import javax.xml.transform.stream.StreamSource;
  */
 public class ParaHandler implements DomHandler<String, StreamResult> {
 
-    private static final String BIO_START_TAG = "<para>";
-    private static final String BIO_END_TAG = "</para>";
+    private static final String START_TAG = "<p>";
+    private static final String END_TAG = "</p>";
  
     private StringWriter xmlWriter = new StringWriter();
  
@@ -27,15 +27,16 @@ public class ParaHandler implements DomHandler<String, StreamResult> {
  
     public String getElement(StreamResult rt) {
         String xml = rt.getWriter().toString();
-        int beginIndex = xml.lastIndexOf(BIO_START_TAG) + BIO_START_TAG.length();
-        int endIndex = xml.lastIndexOf(BIO_END_TAG);
+        System.out.println("ParaHandler: getElement: " + xml);
+        int beginIndex = xml.lastIndexOf(START_TAG) + START_TAG.length();
+        int endIndex = xml.lastIndexOf(END_TAG);
         String element = xml.substring(beginIndex, endIndex);
         return element;
     }
  
     public Source marshal(String n, ValidationEventHandler errorHandler) {
         try {
-            String xml = BIO_START_TAG + n.trim() + BIO_END_TAG;
+            String xml = START_TAG + n.trim() + END_TAG;
             StringReader xmlReader = new StringReader(xml);
             return new StreamSource(xmlReader);
         } catch(Exception e) {

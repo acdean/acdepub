@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlElement;
 
 /**
  * Book can have many parts (or none)
+ * A Part has a title and many chapters
+ * 
  * @author adean
  */
 public class Part {

@@ -1,16 +1,17 @@
 package me.koogy.acdepub;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.UUID;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import me.koogy.acdepub.objects.Book;
 import me.koogy.acdepub.objects.GenericChapter;
 import me.koogy.acdepub.objects.Options;
+import me.koogy.acdepub.objects.Parser;
 import me.koogy.acdepub.objects.Part;
+import org.w3c.dom.Document;
 
 /**
  * Hello world!
@@ -26,13 +27,16 @@ public class Main
     private static final String APPENDIX_ID_FORMAT          = "app_%03d";
 
     public static void main( String[] args ) {
-        
+        String filename;
         if (args.length != 1) {
-            System.out.println("Usage: generate filename");
-            System.exit(-1);
+//            System.out.println("Usage: generate filename");
+//            System.exit(-1);
+            filename = "/home/adean/Documents/eBooks/dickens/grebt/acdepub/grebt.xml";
+        } else {
+            filename = args[0];
         }
-        String filename = args[0];
-        File dir = new File("/tmp/acdepub_" + (int)(Math.random() * 10000));
+        File file = new File(filename);
+        File dir = new File("/tmp/acdepub_" + file.getName());
         dir.mkdirs();
         File metadir = new File(dir, "META-INF");
         metadir.mkdirs();
@@ -41,10 +45,7 @@ public class Main
         Options options = new Options();
         
         try {
-            JAXBContext context = JAXBContext.newInstance(Book.class);
-            Unmarshaller um = context.createUnmarshaller();
-            // read book from xml
-            Book book = (Book) um.unmarshal(new FileReader(filename));
+            Book book = parse(filename);
             
             // generate numbers and filenames
             numberParts(book, options);
@@ -82,12 +83,34 @@ public class Main
                     ChapterWriter.write(dir, options, book, appendix);
                 }
             }
-
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // jaxb version (out of memory)
+    static Book parseJaxb(String filename) {
+        Book book = null;
+//      JAXBContext context = JAXBContext.newInstance(Book.class);
+//      Unmarshaller um = context.createUnmarshaller();
+//      // read book from xml
+//      book = (Book) um.unmarshal(new FileReader(filename));
+        return book;
+    }
+    
+    // dom version
+    static Book parse(String filename) {
+        Book book = new Book();
+        try {
+            File file = new File(filename);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(file);
+            Parser.parseBook(book, doc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return book;
     }
     
     static void numberParts(Book book, Options options) {
@@ -143,7 +166,7 @@ public class Main
     // sets the numbering
     // 'Part III' or 'Three' or null
     private static String numbering(String name, String style, int i) {
-        StringBuilder sb = new StringBuilder(style);
+        StringBuilder sb = new StringBuilder();
         if (style.equalsIgnoreCase("NONE")) {
             return null;
         }
