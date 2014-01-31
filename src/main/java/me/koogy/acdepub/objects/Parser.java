@@ -2,6 +2,7 @@ package me.koogy.acdepub.objects;
 
 import java.util.ArrayList;
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -16,7 +17,10 @@ public class Parser {
         parseInfo(book, doc);
         parsePrefix(book, doc);
         parseParts(book, doc);
-        parseChapters(book, doc);
+        if (book.parts == null) {
+            // there are no parts, chapters are standalone
+            parseChapters(book, doc);
+        }
         parseAppendix(book, doc);
     }
     
@@ -36,9 +40,34 @@ public class Parser {
             if (name.equalsIgnoreCase(Tag.DATE)) {
                 book.setDate(value);
             }
+            if (name.equalsIgnoreCase(Tag.OPTION)) {
+                parseOption(book, node);
+            }
         }
     }
 
+    // options determine rendering style
+    // they also have attributes - name, value
+    private static void parseOption(Book book, Node node) {
+        NamedNodeMap attr = node.getAttributes();
+        Node nameNode = attr.getNamedItem("name");
+        Node valueNode = attr.getNamedItem("value");
+        String name = nameNode.getTextContent();
+        String value = valueNode.getTextContent();
+        if (name.equalsIgnoreCase(Options.CHAPTER_NAME_PROPERTY)) {
+            book.getOptions().setChapterName(value);
+        }
+        if (name.equalsIgnoreCase(Options.CHAPTER_NUMBER_STYLE_PROPERTY)) {
+            book.getOptions().setChapterNumberStyle(value);
+        }
+        if (name.equalsIgnoreCase(Options.PART_NAME_PROPERTY)) {
+            book.getOptions().setPartName(value);
+        }
+        if (name.equalsIgnoreCase(Options.PART_NUMBER_STYLE_PROPERTY)) {
+            book.getOptions().setPartNumberStyle(value);
+        }
+    }
+    
     // these are chapters
     public static void parsePrefix(Book book, Document doc) {
         

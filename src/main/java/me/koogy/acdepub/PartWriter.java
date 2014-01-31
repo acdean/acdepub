@@ -14,8 +14,8 @@ import me.koogy.acdepub.objects.Part;
  */
 public class PartWriter {
     
-    public static void write(File dir, Options options, Book book, Part part) {
-
+    public static void write(File dir, Book book, Part part) {
+        Options options = book.getOptions();
         PrintStream p = null;
         try {
             File file = new File(dir, part.getId() + ".xhtml");

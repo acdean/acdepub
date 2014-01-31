@@ -6,10 +6,10 @@ package me.koogy.acdepub.objects;
  */
 public class Options {
 
-    public static String PART_NAME_PROPERTY = "part,name";
-    public static String PART_NUMBER_STYLE_PROPERTY = "part,number_style";
-    public static String CHAPTER_NAME_PROPERTY = "chapter,name";
-    public static String CHAPTER_NUMBER_STYLE_PROPERTY = "chapter,number_style";
+    public static String PART_NAME_PROPERTY = "part.name";
+    public static String PART_NUMBER_STYLE_PROPERTY = "part.number_style";
+    public static String CHAPTER_NAME_PROPERTY = "chapter.name";
+    public static String CHAPTER_NUMBER_STYLE_PROPERTY = "chapter.number_style";
 
     String partName = null;
     String partNumberStyle = null;

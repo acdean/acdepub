@@ -51,6 +51,7 @@ public class Book {
     ArrayList<GenericChapter> chapters;
     ArrayList<GenericChapter> appendices;
     String uuid;
+    Options options = new Options();
 
     public String getTitle() {
         return title;
@@ -128,6 +129,14 @@ public class Book {
         this.uuid = uuid;
     }
 
+    public Options getOptions() {
+        return options;
+    }
+
+    public void setOptions(Options options) {
+        this.options = options;
+    }
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("Book:{");
@@ -144,6 +153,8 @@ public class Book {
         s.append("Chapters:{").append(chapters).append("}");
         s.append(", ");
         s.append("Appendices:{").append(appendices).append("}");
+        s.append(", ");
+        s.append("Options:{").append(options).append("}");
         s.append("}");
         return s.toString();
     }

@@ -14,7 +14,8 @@ import me.koogy.acdepub.objects.Options;
  */
 public class ChapterWriter {
     
-    public static void write(File dir, Options options, Book book, GenericChapter chapter) {
+    public static void write(File dir, Book book, GenericChapter chapter) {
+        Options options = book.getOptions();
 
         PrintStream p = null;
         try {

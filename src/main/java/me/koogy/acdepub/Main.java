@@ -2,8 +2,6 @@ package me.koogy.acdepub;
 
 import java.io.File;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import me.koogy.acdepub.objects.Book;
@@ -42,13 +40,12 @@ public class Main
         metadir.mkdirs();
         System.out.println("Dir: " + dir);
         UUID uid = UUID.randomUUID();
-        Options options = new Options();
         
         try {
             Book book = parse(filename);
             
             // generate numbers and filenames
-            numberParts(book, options);
+            numberParts(book);
             
             // write everything
             ContentWriter.write(dir, book, uid);
@@ -62,25 +59,25 @@ public class Main
             // Chapters
             if (book.getPrefaces() != null) {
                 for (GenericChapter preface : book.getPrefaces()) {
-                    ChapterWriter.write(dir, options, book, preface);
+                    ChapterWriter.write(dir, book, preface);
                 }
             }
             if (book.getChapters() != null) {
                 for (GenericChapter chapter : book.getChapters()) {
-                    ChapterWriter.write(dir, options, book, chapter);
+                    ChapterWriter.write(dir, book, chapter);
                 }
             }
             if (book.getParts() != null) {
                 for (Part part : book.getParts()) {
-                    PartWriter.write(dir, options, book, part);
+                    PartWriter.write(dir, book, part);
                     for (GenericChapter chapter : part.getChapters()) {
-                        ChapterWriter.write(dir, options, book, chapter);
+                        ChapterWriter.write(dir, book, chapter);
                     }
                 }
             }
             if (book.getAppendices() != null) {
                 for (GenericChapter appendix : book.getAppendices()) {
-                    ChapterWriter.write(dir, options, book, appendix);
+                    ChapterWriter.write(dir, book, appendix);
                 }
             }
         } catch (Exception e) {
@@ -101,6 +98,7 @@ public class Main
     // dom version
     static Book parse(String filename) {
         Book book = new Book();
+        System.out.println("Options: " + book.getOptions());
         try {
             File file = new File(filename);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -113,7 +111,8 @@ public class Main
         return book;
     }
     
-    static void numberParts(Book book, Options options) {
+    static void numberParts(Book book) {
+        Options options = book.getOptions();
         int count;
         
         // preamble - no numbering

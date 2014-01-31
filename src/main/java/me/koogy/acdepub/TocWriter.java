@@ -42,7 +42,11 @@ public class TocWriter {
             // chapters
             if (book.getChapters() != null) {
                 for (GenericChapter chap : book.getChapters()) {
-                    navPoint(p, chap.getTitle(), chap.getId(), count);
+                    if (chap.getTitle() != null) {
+                        navPoint(p, chap.getTitle(), chap.getId(), count);
+                    } else {
+                        navPoint(p, chap.getNumbering(), chap.getId(), count);
+                    }
                     count++;
                 }
             }
