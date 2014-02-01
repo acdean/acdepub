@@ -1,6 +1,8 @@
 package me.koogy.acdepub.objects;
 
 import java.util.ArrayList;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -13,7 +15,10 @@ import org.w3c.dom.NodeList;
  */
 public class Parser {
     
+    private static Logger log = LogManager.getLogger(Parser.class);
+    
     public static void parseBook(Book book, Document doc) {
+        log.info("parseBook");
         parseInfo(book, doc);
         parsePrefix(book, doc);
         parseParts(book, doc);
@@ -25,6 +30,7 @@ public class Parser {
     }
     
     public static void parseInfo(Book book, Document doc) {
+        log.info("parseInfo");
         
         NodeList nodeList = doc.getElementsByTagName(Tag.INFO).item(0).getChildNodes();
         for (int i = 0 ; i < nodeList.getLength() ; i++) {
@@ -49,6 +55,7 @@ public class Parser {
     // options determine rendering style
     // they also have attributes - name, value
     private static void parseOption(Book book, Node node) {
+        log.info("parseOption");
         NamedNodeMap attr = node.getAttributes();
         Node nameNode = attr.getNamedItem("name");
         Node valueNode = attr.getNamedItem("value");
@@ -70,6 +77,7 @@ public class Parser {
     
     // these are chapters
     public static void parsePrefix(Book book, Document doc) {
+        log.info("parsePrefix");
         
         NodeList nodeList = doc.getElementsByTagName(Tag.PREFIX);
         if (nodeList.getLength() != 0) {
@@ -85,6 +93,7 @@ public class Parser {
     // these are chapters (not in parts)
     // TODO how to distinguish between the two?
     public static void parseChapters(Book book, Document doc) {
+        log.info("parseChapters");
         
         NodeList nodeList = doc.getElementsByTagName(Tag.CHAPTER);
         if (nodeList.getLength() != 0) {
@@ -99,6 +108,7 @@ public class Parser {
 
     // Parse parts, each of which can contain title and chapters
     public static void parseParts(Book book, Document doc) {
+        log.info("parseParts");
         
         NodeList partNodeList = doc.getElementsByTagName(Tag.PART);
         if (partNodeList.getLength() != 0) {
@@ -126,6 +136,7 @@ public class Parser {
 
     // these are chapters
     public static void parseAppendix(Book book, Document doc) {
+        log.info("parseAppendix");
         
         NodeList nodeList = doc.getElementsByTagName(Tag.APPENDIX);
         if (nodeList.getLength() != 0) {
@@ -139,6 +150,7 @@ public class Parser {
     }
 
     private static Chapter parseChapter(Node chapterNode) {
+        log.info("parseChapter");
         Chapter chapter = new Chapter();
         NodeList nodeList = chapterNode.getChildNodes();
         if (nodeList.getLength() != 0) {

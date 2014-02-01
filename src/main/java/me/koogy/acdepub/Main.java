@@ -1,6 +1,7 @@
 package me.koogy.acdepub;
 
 import java.io.File;
+import java.io.OutputStreamWriter;
 import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -9,32 +10,46 @@ import me.koogy.acdepub.objects.GenericChapter;
 import me.koogy.acdepub.objects.Options;
 import me.koogy.acdepub.objects.Parser;
 import me.koogy.acdepub.objects.Part;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 import org.w3c.dom.Document;
 
 /**
  * Hello world!
  *
  */
-public class Main 
-{
-//    private static final String BOOK_XML = "/home/adean/dev/NetBeansProjects/acdepub/src/test/xml/short_stories.xml";
-    private static final String PREFACE_ID_FORMAT           = "pre_%03d";
-    private static final String CHAPTER_ID_FORMAT           = "ch_%03d";
-    private static final String PART_ID_FORMAT              = "pt_%02d";
-    private static final String PART_CHAPTER_ID_FORMAT      = "ch_%02d%03d";
-    private static final String APPENDIX_ID_FORMAT          = "app_%03d";
+public class Main {
+    
+    private static Logger log = LogManager.getLogger(Main.class);
+
+    private static final String BOOK_XML = "/home/adean/Documents/eBooks/balzac/03/1456/balzac03.xml";
+    private static final String PREFACE_ID_FORMAT           = "pre%03d";
+    private static final String CHAPTER_ID_FORMAT           = "ch%03d";
+    private static final String PART_ID_FORMAT              = "pt%02d";
+    private static final String PART_CHAPTER_ID_FORMAT      = "ch%02d%03d";
+    private static final String APPENDIX_ID_FORMAT          = "app%03d";
 
     public static void main( String[] args ) {
+        
+        // setup logger
+        Logger rootLogger = Logger.getRootLogger();
+        rootLogger.setLevel(Level.DEBUG);
+        PatternLayout layout = new PatternLayout("%d{ABSOLUTE} %-5p %c{1} - %m%n");
+        rootLogger.addAppender(new ConsoleAppender(layout));
+
         String filename;
         if (args.length != 1) {
 //            System.out.println("Usage: generate filename");
 //            System.exit(-1);
-            filename = "/home/adean/Documents/eBooks/dickens/grebt/acdepub/grebt.xml";
+            filename = BOOK_XML; // debugging
         } else {
             filename = args[0];
         }
         File file = new File(filename);
-        File dir = new File("/tmp/acdepub_" + file.getName());
+        File dir = new File("/tmp/acdepub_" + file.getName().replace(".xml", ""));
         dir.mkdirs();
         File metadir = new File(dir, "META-INF");
         metadir.mkdirs();
@@ -46,6 +61,7 @@ public class Main
             
             // generate numbers and filenames
             numberParts(book);
+            log.debug("Book[" + book + "]");
             
             // write everything
             ContentWriter.write(dir, book, uid);
