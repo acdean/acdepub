@@ -4,6 +4,8 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
 import me.koogy.acdepub.ParaHandler;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 /**
  * Details of a chapter. Prefaces, Chapters and Appendices are all chapters.
@@ -14,13 +16,15 @@ import me.koogy.acdepub.ParaHandler;
  */
 public class GenericChapter {
 
+    private static Logger log = LogManager.getLogger(GenericChapter.class);
+
     String numbering;
     String title;
     List<String> paras; // the payload
     String id;
 
     public GenericChapter() {
-        System.out.println("GenericChapter");
+        log.debug("Constructor");
     }
 
     public String getId() {
@@ -67,9 +71,7 @@ public class GenericChapter {
         s.append("Id:{").append(id).append("}");
         s.append(", ");
         if (paras != null) {
-            for (String str : paras) {
-                s.append("Para{p}");
-            }
+            s.append("Paras x " + paras.size());
         }
         s.append("}");
         return s.toString();
