@@ -31,18 +31,26 @@ public class ChapterWriter {
 
             p.println("</head>");
             p.println("<body>");
-            // Chapter Heading
-            p.print("<h1>");
-            if (chapter.getNumbering() != null) {
-                p.print("<span class=\"chapterNumber\">" + chapter.getNumbering() + "</span>");
-                if (chapter.getTitle() != null) {
-                    p.print("<br/>");
+            if (!chapter.isNormalChapter() || book.getOptions().getChapterTitles()) {
+                // Chapter Heading
+                p.print("<h1>");
+                if (chapter.getNumbering() != null) {
+                    p.print("<span class=\"chapterNumber\">" + chapter.getNumbering() + "</span>");
+                    if (chapter.getTitle() != null) {
+                        p.print("<br/>");
+                    }
                 }
+                if (chapter.getTitle() != null) {
+                    p.print("<span class=\"chapterTitle\">" + chapter.getTitle() + "</span>");
+                }
+                p.println("</h1>");
             }
-            if (chapter.getTitle() != null) {
-                p.print("<span class=\"chapterTitle\">" + chapter.getTitle() + "</span>");
+            if (chapter.isNormalChapter() && !book.getOptions().getChapterTitles()) {
+                // no chapters - use book title as chapter title
+                p.print("<h1>");
+                p.print("<span class=\"chapterTitle\">" + book.getTitle() + "</span>");
+                p.println("</h1>");
             }
-            p.println("</h1>");
             
             // Paragraphs
             for (String para : chapter.getParas()) {

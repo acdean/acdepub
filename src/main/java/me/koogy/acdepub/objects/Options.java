@@ -6,29 +6,41 @@ package me.koogy.acdepub.objects;
  */
 public class Options {
 
-    public static String PART_NAME_PROPERTY = "part.name";
+    public static String PART_TITLE_TEXT_PROPERTY = "part.title_text";
     public static String PART_NUMBER_STYLE_PROPERTY = "part.number_style";
-    public static String CHAPTER_NAME_PROPERTY = "chapter.name";
+    public static String CHAPTER_TITLES_PROPERTY = "chapter.titles";
+    public static String CHAPTER_TITLE_TEXT_PROPERTY = "chapter.title_text";
     public static String CHAPTER_NUMBER_STYLE_PROPERTY = "chapter.number_style";
 
-    String partName = null;
+    String partTitleText = null;
     String partNumberStyle = null;
-    String chapterName = null;
+    String chapterTitleText = null;
     String chapterNumberStyle = null;
+    boolean chapterTitles = true;
     
     public Options() {
-        partName = System.getProperty(PART_NAME_PROPERTY, "Part");
+        partTitleText = System.getProperty(PART_TITLE_TEXT_PROPERTY, "Part");
         partNumberStyle = System.getProperty(PART_NUMBER_STYLE_PROPERTY, "1");
-        chapterName = System.getProperty(CHAPTER_NAME_PROPERTY, "Chapter");
+        chapterTitleText = System.getProperty(CHAPTER_TITLE_TEXT_PROPERTY, "Chapter");
         chapterNumberStyle = System.getProperty(CHAPTER_NUMBER_STYLE_PROPERTY, "I");
+        // whether any chapter number is printed - defaults to true
+        chapterTitles = System.getProperty(CHAPTER_TITLES_PROPERTY, "true").equalsIgnoreCase("true");
     }
     
-    public String getChapterName() {
-        return chapterName;
+    public boolean getChapterTitles() {
+        return chapterTitles;
     }
 
-    public void setChapterName(String chapterName) {
-        this.chapterName = chapterName;
+    public void setChapterTitles(boolean chapterTitles) {
+        this.chapterTitles = chapterTitles;
+    }
+
+    public String getChapterTitleText() {
+        return chapterTitleText;
+    }
+
+    public void setChapterTitleText(String chapterTitleText) {
+        this.chapterTitleText = chapterTitleText;
     }
 
     public String getChapterNumberStyle() {
@@ -39,12 +51,12 @@ public class Options {
         this.chapterNumberStyle = chapterNumberStyle;
     }
 
-    public String getPartName() {
-        return partName;
+    public String getPartTitleText() {
+        return partTitleText;
     }
 
-    public void setPartName(String partName) {
-        this.partName = partName;
+    public void setPartTitleText(String partTitleText) {
+        this.partTitleText = partTitleText;
     }
 
     public String getPartNumberStyle() {
@@ -53,5 +65,16 @@ public class Options {
 
     public void setPartNumberStyle(String partNumberStyle) {
         this.partNumberStyle = partNumberStyle;
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder("(");
+        str.append("chapter.titles[").append(getChapterTitles()).append("] ");
+        str.append("chapter.titleText[").append(getChapterTitleText()).append("] ");
+        str.append("chapter.numberStyle[").append(getChapterNumberStyle()).append("] ");
+        str.append("part.titleText[").append(getPartTitleText()).append("] ");
+        str.append("part.numberStyle[").append(getPartNumberStyle()).append("])");
+        return str.toString();
     }
 }

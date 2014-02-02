@@ -61,14 +61,17 @@ public class Parser {
         Node valueNode = attr.getNamedItem("value");
         String name = nameNode.getTextContent();
         String value = valueNode.getTextContent();
-        if (name.equalsIgnoreCase(Options.CHAPTER_NAME_PROPERTY)) {
-            book.getOptions().setChapterName(value);
+        if (name.equalsIgnoreCase(Options.CHAPTER_TITLES_PROPERTY)) {
+            book.getOptions().setChapterTitles(Boolean.parseBoolean(value));
+        }
+        if (name.equalsIgnoreCase(Options.CHAPTER_TITLE_TEXT_PROPERTY)) {
+            book.getOptions().setChapterTitleText(value);
         }
         if (name.equalsIgnoreCase(Options.CHAPTER_NUMBER_STYLE_PROPERTY)) {
             book.getOptions().setChapterNumberStyle(value);
         }
-        if (name.equalsIgnoreCase(Options.PART_NAME_PROPERTY)) {
-            book.getOptions().setPartName(value);
+        if (name.equalsIgnoreCase(Options.PART_TITLE_TEXT_PROPERTY)) {
+            book.getOptions().setPartTitleText(value);
         }
         if (name.equalsIgnoreCase(Options.PART_NUMBER_STYLE_PROPERTY)) {
             book.getOptions().setPartNumberStyle(value);
@@ -85,6 +88,7 @@ public class Parser {
             for (int i = 0 ; i < nodeList.getLength() ; i++) {
                 Node node = nodeList.item(i);
                 Chapter chapter = parseChapter(node);
+                chapter.setType(GenericChapter.PREFIX);
                 book.getPrefaces().add(chapter);
             }
         }
@@ -101,6 +105,7 @@ public class Parser {
             for (int i = 0 ; i < nodeList.getLength() ; i++) {
                 Node node = nodeList.item(i);
                 Chapter chapter = parseChapter(node);
+                chapter.setType(GenericChapter.CHAPTER);
                 book.getChapters().add(chapter);
             }
         }
@@ -126,6 +131,7 @@ public class Parser {
                     }
                     if (name.equalsIgnoreCase(Tag.CHAPTER)) {
                         Chapter chapter = parseChapter(childNode);
+                        chapter.setType(GenericChapter.PART_CHAPTER);
                         part.getChapters().add(chapter);
                     }
                 }
@@ -144,6 +150,7 @@ public class Parser {
             for (int i = 0 ; i < nodeList.getLength() ; i++) {
                 Node node = nodeList.item(i);
                 Chapter chapter = parseChapter(node);
+                chapter.setType(GenericChapter.APPENDIX);
                 book.getAppendices().add(chapter);
             }
         }

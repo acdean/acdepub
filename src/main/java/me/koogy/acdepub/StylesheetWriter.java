@@ -18,17 +18,19 @@ public class StylesheetWriter {
             File file = new File(dir, "stylesheet.css");
             p = new PrintStream(new FileOutputStream(file));
             
-            p.println("body {margin-left:5%; margin-right:5%; margin-top:5%; margin-bottom:5%; text-align:justify; font-size:medium;}");
-            p.println("h1 {text-align:center;}");
-            p.println("h2 {text-align:center;}");
-            p.println("h3 {text-align:center;}");
-            p.println("h4 {text-align:center;}");
-            p.println("h5 {text-align:center;}");
-            p.println("h6 {text-align:center;}");
-            p.println("h1.title {}");
-            p.println("h2.author {}");
-            p.println("h3.date {}");
-            p.println("p {text-indent:2em; margin-top:5px; margin-bottom:0px;}");
+            p.println("body {text-align:justify;}");
+            p.println("h1 {text-align:center; line-height:1em;}");
+            p.println("h2 {text-align:center; line-height:1em;}");
+            p.println("h3 {text-align:center; line-height:1em;}");
+            p.println("h4 {text-align:center; line-height:1em;}");
+            p.println("h5 {text-align:center; line-height:1em;}");
+            p.println("h6 {text-align:center; line-height:1em;}");
+            p.println("p {text-indent:2em; margin-top:0px; margin-bottom:0px;}");
+            // classes for aligning things
+            p.println(".centre {text-align:center}");
+            p.println(".center {text-align:center}");
+            p.println(".right {text-align:right}");
+            p.println("hr {width:50%;}");
             
         } catch (IOException e) {
             e.printStackTrace();

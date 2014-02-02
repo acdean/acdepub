@@ -16,12 +16,19 @@ import org.apache.log4j.Logger;
  */
 public class GenericChapter {
 
+    // chapter types
+    public static final int PREFIX          = 1;
+    public static final int CHAPTER         = 2;
+    public static final int PART_CHAPTER    = 3;
+    public static final int APPENDIX        = 4;
+    
     private static Logger log = LogManager.getLogger(GenericChapter.class);
 
-    String numbering;
-    String title;
-    List<String> paras; // the payload
-    String id;
+    private String numbering;
+    private String title;
+    private List<String> paras; // the payload
+    private String id;
+    private int type;   // type of chapter
 
     public GenericChapter() {
         log.debug("Constructor");
@@ -52,6 +59,14 @@ public class GenericChapter {
         this.paras = paras;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     @XmlElement
     public String getTitle() {
         return title;
@@ -61,6 +76,10 @@ public class GenericChapter {
         this.title = title;
     }
 
+    public boolean isNormalChapter() {
+        return (type == GenericChapter.CHAPTER || type == GenericChapter.PART_CHAPTER);
+    }
+    
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("Chapter:{");

@@ -147,7 +147,7 @@ public class Main {
             count = 1;
             for(GenericChapter chap : book.getChapters()) {
                 chap.setId(String.format(CHAPTER_ID_FORMAT, count));
-                chap.setNumbering(numbering(options.getChapterName(), options.getChapterNumberStyle(), count));
+                chap.setNumbering(numbering(options.getChapterTitleText(), options.getChapterNumberStyle(), count));
                 count++;
             }
         }
@@ -160,7 +160,7 @@ public class Main {
                 if (part.getChapters() != null) {
                     for(GenericChapter chap : part.getChapters()) {
                         chap.setId(String.format(PART_CHAPTER_ID_FORMAT, partCount, count));
-                        chap.setNumbering(numbering(options.getPartName(), options.getPartNumberStyle(), count));
+                        chap.setNumbering(numbering(options.getPartTitleText(), options.getPartNumberStyle(), count));
                         count++;
                     }
                 }

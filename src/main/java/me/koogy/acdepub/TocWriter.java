@@ -40,7 +40,7 @@ public class TocWriter {
             int count = 1;
             navPoint(p, "Title Page", "title_page", count++);
             // chapters
-            if (book.getChapters() != null) {
+            if (book.getChapters() != null && book.getOptions().getChapterTitles()) {
                 for (GenericChapter chap : book.getChapters()) {
                     if (chap.getTitle() != null) {
                         navPoint(p, chap.getTitle(), chap.getId(), count);
@@ -55,7 +55,7 @@ public class TocWriter {
                 for (Part part : book.getParts()) {
                     navPoint(p, part.getTitle(), part.getId(), count);
                     count++;
-                    if (part.getChapters() != null) {
+                    if (part.getChapters() != null && book.getOptions().getChapterTitles()) {
                         for (GenericChapter chap : part.getChapters()) {
                             // don't bother with untitled chapters
                             if (chap.getTitle() != null) {
