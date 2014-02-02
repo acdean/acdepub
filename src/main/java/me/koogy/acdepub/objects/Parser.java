@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -47,34 +46,8 @@ public class Parser {
                 book.setDate(value);
             }
             if (name.equalsIgnoreCase(Tag.OPTION)) {
-                parseOption(book, node);
+                Options.parseOption(book, node);
             }
-        }
-    }
-
-    // options determine rendering style
-    // they also have attributes - name, value
-    private static void parseOption(Book book, Node node) {
-        log.info("parseOption");
-        NamedNodeMap attr = node.getAttributes();
-        Node nameNode = attr.getNamedItem("name");
-        Node valueNode = attr.getNamedItem("value");
-        String name = nameNode.getTextContent();
-        String value = valueNode.getTextContent();
-        if (name.equalsIgnoreCase(Options.CHAPTER_TITLES_PROPERTY)) {
-            book.getOptions().setChapterTitles(Boolean.parseBoolean(value));
-        }
-        if (name.equalsIgnoreCase(Options.CHAPTER_TITLE_TEXT_PROPERTY)) {
-            book.getOptions().setChapterTitleText(value);
-        }
-        if (name.equalsIgnoreCase(Options.CHAPTER_NUMBER_STYLE_PROPERTY)) {
-            book.getOptions().setChapterNumberStyle(value);
-        }
-        if (name.equalsIgnoreCase(Options.PART_TITLE_TEXT_PROPERTY)) {
-            book.getOptions().setPartTitleText(value);
-        }
-        if (name.equalsIgnoreCase(Options.PART_NUMBER_STYLE_PROPERTY)) {
-            book.getOptions().setPartNumberStyle(value);
         }
     }
     

@@ -18,7 +18,7 @@ public class StylesheetWriter {
             File file = new File(dir, "stylesheet.css");
             p = new PrintStream(new FileOutputStream(file));
             
-            p.println("body {text-align:justify;}");
+            p.println("body {left-margin:2%, right-margin:2%; text-align:justify;}");
             p.println("h1 {text-align:center; line-height:1em;}");
             p.println("h2 {text-align:center; line-height:1em;}");
             p.println("h3 {text-align:center; line-height:1em;}");

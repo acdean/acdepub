@@ -1,10 +1,17 @@
 package me.koogy.acdepub.objects;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+
 /**
  * Options
  * @author adean
  */
 public class Options {
+
+    private static Logger log = LogManager.getLogger(Options.class);
 
     public static String PART_TITLE_TEXT_PROPERTY = "part.title_text";
     public static String PART_NUMBER_STYLE_PROPERTY = "part.number_style";
@@ -67,6 +74,32 @@ public class Options {
         this.partNumberStyle = partNumberStyle;
     }
     
+    // options determine rendering style
+    // they also have attributes - name, value
+    public static void parseOption(Book book, Node node) {
+        log.info("parseOption");
+        NamedNodeMap attr = node.getAttributes();
+        Node nameNode = attr.getNamedItem("name");
+        Node valueNode = attr.getNamedItem("value");
+        String name = nameNode.getTextContent();
+        String value = valueNode.getTextContent();
+        if (name.equalsIgnoreCase(CHAPTER_TITLES_PROPERTY)) {
+            book.getOptions().setChapterTitles(Boolean.parseBoolean(value));
+        }
+        if (name.equalsIgnoreCase(CHAPTER_TITLE_TEXT_PROPERTY)) {
+            book.getOptions().setChapterTitleText(value);
+        }
+        if (name.equalsIgnoreCase(CHAPTER_NUMBER_STYLE_PROPERTY)) {
+            book.getOptions().setChapterNumberStyle(value);
+        }
+        if (name.equalsIgnoreCase(PART_TITLE_TEXT_PROPERTY)) {
+            book.getOptions().setPartTitleText(value);
+        }
+        if (name.equalsIgnoreCase(PART_NUMBER_STYLE_PROPERTY)) {
+            book.getOptions().setPartNumberStyle(value);
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("(");
