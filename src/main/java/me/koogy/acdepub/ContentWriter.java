@@ -24,11 +24,13 @@ public class ContentWriter {
             p.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             p.println("<package version=\"2.0\" xmlns=\"http://www.idpf.org/2007/opf\" unique-identifier=\"BookId\">");
             p.println("  <metadata xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:opf=\"http://www.idpf.org/2007/opf\">");
-            p.println("    <dc:title>Four Weird Tales (Pandoc)</dc:title>");
+            p.println("    <dc:title>" + book.getTitle() + "</dc:title>");
             p.println("    <dc:language>en_GB</dc:language>");
             p.println("    <dc:identifier id=\"BookId\">urn:uuid:" + uid + "</dc:identifier>");
-            p.println("    <dc:creator opf:role=\"aut\">Algernon Blackwood</dc:creator>");
-            p.println("    <dc:date></dc:date>");
+            p.println("    <dc:creator opf:role=\"aut\">" + book.getAuthor() + "</dc:creator>");
+            if (book.getDate() != null) {
+                p.println("    <dc:date>" + book.getDate() + "</dc:date>");
+            }
             p.println("    <meta name=\"cover\" content=\"cover-image\"/>");
             p.println("  </metadata>");
             p.println("  <manifest>");
