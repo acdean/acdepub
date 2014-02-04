@@ -29,6 +29,7 @@ public class GenericChapter {
     private List<String> paras; // the payload
     private String id;
     private int type;   // type of chapter
+    private String content;
 
     public GenericChapter() {
         log.debug("Constructor");
@@ -80,6 +81,15 @@ public class GenericChapter {
         return (type == GenericChapter.CHAPTER || type == GenericChapter.PART_CHAPTER);
     }
     
+    @XmlElement
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("Chapter:{");

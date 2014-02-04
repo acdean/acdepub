@@ -134,18 +134,24 @@ public class Parser {
         Chapter chapter = new Chapter();
         NodeList nodeList = chapterNode.getChildNodes();
         if (nodeList.getLength() != 0) {
-            chapter.setParas(new ArrayList<String>());
+            StringBuilder s = new StringBuilder();
+//            chapter.setParas(new ArrayList<String>());
             for (int i = 0 ; i < nodeList.getLength() ; i++) {
                 Node node = nodeList.item(i);
                 String name = node.getNodeName();
                 String value = node.getTextContent();
                 if (name.equalsIgnoreCase(Tag.PARA)) {
-                    chapter.getParas().add(value);
+                    s.append("<p>").append(value).append("</p>\n");
+                    //chapter.getParas().add(value);
                 }
                 if (name.equals(Tag.TITLE)) {
                     chapter.setTitle(value);
                 }
+                if (name.equals(Tag.RULER)) {
+                    s.append("<hr/>\n");
+                }
             }
+            chapter.setContent(s.toString());
         }
         return chapter;
     }

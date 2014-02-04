@@ -10,6 +10,7 @@ public class Tag {
     public static final String PART     = "part";
     public static final String CHAPTER  = "chapter";
     public static final String PARA     = "p";
+    public static final String RULER    = "hr";
     public static final String APPENDIX = "appendix";
     
     public static final String TITLE    = "title";

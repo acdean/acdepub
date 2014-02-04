@@ -53,10 +53,11 @@ public class ChapterWriter {
             }
             
             // Paragraphs
-            for (String para : chapter.getParas()) {
-                // TODO translate special paragraphs -o- = hr etc
-                p.println("<p>" + para + "</p>");
-            }
+            p.println(chapter.getContent());
+//            for (String para : chapter.getParas()) {
+//                // TODO translate special paragraphs -o- = hr etc
+//                p.println("<p>" + para + "</p>");
+//            }
             
             p.println("</body>");
             p.println("</html>");
