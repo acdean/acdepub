@@ -14,6 +14,7 @@ public class Tag {
     public static final String APPENDIX = "appendix";
     
     public static final String TITLE    = "title";
+    public static final String SUBTITLE = "subtitle";
     public static final String AUTHOR   = "author";
     public static final String DATE     = "date";
     public static final String OPTION   = "option";
