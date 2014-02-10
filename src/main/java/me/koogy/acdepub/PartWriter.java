@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import me.koogy.acdepub.objects.Book;
+import me.koogy.acdepub.objects.Info;
 import me.koogy.acdepub.objects.Options;
 import me.koogy.acdepub.objects.Part;
 
@@ -15,7 +16,8 @@ import me.koogy.acdepub.objects.Part;
 public class PartWriter {
     
     public static void write(File dir, Book book, Part part) {
-        Options options = book.getOptions();
+        Info info = book.getInfo();
+        Options options = info.getOptions();
         PrintStream p = null;
         try {
             File file = new File(dir, part.getId() + ".xhtml");
@@ -26,7 +28,7 @@ public class PartWriter {
             p.print("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
 
             p.print("<head>");
-            p.print("<title>" + book.getTitle() + "</title>");
+            p.print("<title>" + info.getTitle() + "</title>");
             p.print("<link rel=\"stylesheet\" type=\"text/css\" href=\"stylesheet.css\"/>");
             p.print("</head>");
 
@@ -34,12 +36,12 @@ public class PartWriter {
             p.print("<h1>");
             if (part.getNumbering() != null) {
                 p.print("<span class=\"partNumber\">Part " + part.getNumbering() + "</span>");
-                if (part.getTitle() != null) {
+                if (info.getTitle() != null) {
                     p.print("<br/>");
                 }
             }
-            if (part.getTitle() != null) {
-                p.print("<span class=\"partTitle\">" + part.getTitle() + "</span>");
+            if (info.getTitle() != null) {
+                p.print("<span class=\"partTitle\">" + info.getTitle() + "</span>");
             }
             p.println("</h1>");
             p.print("</body>");

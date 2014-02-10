@@ -32,7 +32,7 @@
  */
 package me.koogy.acdepub.objects;
 
-import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -42,82 +42,58 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "book")
 public class Book {
-    String title;
-    String subtitle;
-    String author;
-    String date;
-    ArrayList<GenericChapter> prefaces;
-    ArrayList<Part> parts;           // one of parts or chapters, not both
-    ArrayList<GenericChapter> chapters;
-    ArrayList<GenericChapter> appendices;
+    Info info;
+    List<GenericChapter> prefaces;
+    List<Part> parts;           // one of parts or chapters, not both
+    List<GenericChapter> chapters;
+    List<GenericChapter> appendices;
     String uuid;
-    Options options = new Options();
 
-    public String getTitle() {
-        return title;
+    @XmlElement(name = "info")
+    public Info getInfo() {
+        return info;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    
-    public String getSubtitle() {
-        return subtitle;
+    public void setInfo(Info info) {
+        this.info = info;
     }
 
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    @XmlElement(name = "preface")
-    public ArrayList<GenericChapter> getPrefaces() {
+    @XmlElement(name = "prefix")
+    //@XmlAnyElement(PrefixHandler.class)
+    public List<GenericChapter> getPrefaces() {
         return prefaces;
     }
 
-    public void setPrefaces(ArrayList<GenericChapter> prefaces) {
+    public void setPrefaces(List<GenericChapter> prefaces) {
         this.prefaces = prefaces;
     }
 
+//    @XmlAnyElement(ChapterHandler.class)
     @XmlElement(name = "chapter")
-    public ArrayList<GenericChapter> getChapters() {
+    public List<GenericChapter> getChapters() {
         return chapters;
     }
 
-    public void setChapters(ArrayList<GenericChapter> chapters) {
+    public void setChapters(List<GenericChapter> chapters) {
         this.chapters = chapters;
     }
 
     @XmlElement(name = "part")
-    public ArrayList<Part> getParts() {
+    public List<Part> getParts() {
         return parts;
     }
 
-    public void setParts(ArrayList<Part> parts) {
+    public void setParts(List<Part> parts) {
         this.parts = parts;
     }
 
     @XmlElement(name = "appendix")
-    public ArrayList<GenericChapter> getAppendices() {
+//    @XmlAnyElement(AppendixHandler.class)
+    public List<GenericChapter> getAppendices() {
         return appendices;
     }
 
-    public void setAppendices(ArrayList<GenericChapter> appendices) {
+    public void setAppendices(List<GenericChapter> appendices) {
         this.appendices = appendices;
     }
 
@@ -129,22 +105,10 @@ public class Book {
         this.uuid = uuid;
     }
 
-    public Options getOptions() {
-        return options;
-    }
-
-    public void setOptions(Options options) {
-        this.options = options;
-    }
-
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("Book:{");
-        s.append("Author:{").append(author).append("}");
-        s.append(", ");
-        s.append("Title:{").append(title).append("}");
-        s.append(", ");
-        s.append("Subtitle:{").append(subtitle).append("}");
+        s.append("Info:{").append(info).append("}");
         s.append(", ");
         s.append("Prefaces:{").append(prefaces).append("}");
         s.append(", ");
@@ -153,8 +117,6 @@ public class Book {
         s.append("Chapters:{").append(chapters).append("}");
         s.append(", ");
         s.append("Appendices:{").append(appendices).append("}");
-        s.append(", ");
-        s.append("Options:{").append(options).append("}");
         s.append("}");
         return s.toString();
     }

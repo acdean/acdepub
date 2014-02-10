@@ -1,9 +1,8 @@
 package me.koogy.acdepub.objects;
 
-import java.util.List;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
-import me.koogy.acdepub.ParaHandler;
+import me.koogy.acdepub.ChapterHandler;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -26,10 +25,9 @@ public class GenericChapter {
 
     private String numbering;
     private String title;
-    private List<String> paras; // the payload
+    private String content; // the payload
     private String id;
     private int type;   // type of chapter
-    private String content;
 
     public GenericChapter() {
         log.debug("Constructor");
@@ -51,13 +49,13 @@ public class GenericChapter {
         this.numbering = numbering;
     }
 
-    @XmlAnyElement(ParaHandler.class)
-    public List<String> getParas() {
-        return paras;
+    @XmlAnyElement(ChapterHandler.class)
+    public String getContent() {
+        return content;
     }
 
-    public void setParas(List<String> paras) {
-        this.paras = paras;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public int getType() {
@@ -81,15 +79,6 @@ public class GenericChapter {
         return (type == GenericChapter.CHAPTER || type == GenericChapter.PART_CHAPTER);
     }
     
-    @XmlElement
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("Chapter:{");
@@ -99,8 +88,8 @@ public class GenericChapter {
         s.append(", ");
         s.append("Id:{").append(id).append("}");
         s.append(", ");
-        if (paras != null) {
-            s.append("Paras x " + paras.size());
+        if (content != null) {
+            s.append("Content: " + content.length());
         }
         s.append("}");
         return s.toString();

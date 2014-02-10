@@ -1,7 +1,8 @@
 package me.koogy.acdepub.objects;
 
 import java.util.ArrayList;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAnyElement;
+import me.koogy.acdepub.ChapterHandler;
 
 /**
  * Book can have many parts (or none)
@@ -10,19 +11,11 @@ import javax.xml.bind.annotation.XmlElement;
  * @author adean
  */
 public class Part {
-    String title;
+    Info info;
     String numbering;
     String id;
-    ArrayList<GenericChapter> chapters;
+    ArrayList<Chapter> chapters;
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    
     public String getNumbering() {
         return numbering;
     }
@@ -39,21 +32,21 @@ public class Part {
         this.id = id;
     }
     
-    @XmlElement(name = "chapter")
-    public ArrayList<GenericChapter> getChapters() {
+    @XmlAnyElement(ChapterHandler.class)
+    public ArrayList<Chapter> getChapters() {
         return chapters;
     }
 
-    public void setChapters(ArrayList<GenericChapter> chapters) {
+    public void setChapters(ArrayList<Chapter> chapters) {
         this.chapters = chapters;
     }
     
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("Part:{");
-        s.append("Numbering:{").append(numbering).append("}");
+        s.append("Info:{").append(info).append("}");
         s.append(", ");
-        s.append("Title:{").append(title).append("}");
+        s.append("Numbering:{").append(numbering).append("}");
         s.append(", ");
         s.append("Id:{").append(id).append("}");
         s.append(", ");

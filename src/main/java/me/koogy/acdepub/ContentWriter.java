@@ -7,6 +7,7 @@ import java.io.PrintStream;
 import java.util.UUID;
 import me.koogy.acdepub.objects.Book;
 import me.koogy.acdepub.objects.GenericChapter;
+import me.koogy.acdepub.objects.Info;
 import me.koogy.acdepub.objects.Part;
 
 /**
@@ -15,7 +16,8 @@ import me.koogy.acdepub.objects.Part;
 public class ContentWriter {
     
     public static void write(File dir, Book book, UUID uid) {
-
+        Info info = book.getInfo();
+        
         PrintStream p = null;
         try {
             File file = new File(dir, "content.opf");
@@ -24,12 +26,12 @@ public class ContentWriter {
             p.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             p.println("<package version=\"2.0\" xmlns=\"http://www.idpf.org/2007/opf\" unique-identifier=\"BookId\">");
             p.println("  <metadata xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:opf=\"http://www.idpf.org/2007/opf\">");
-            p.println("    <dc:title>" + book.getTitle() + "</dc:title>");
+            p.println("    <dc:title>" + info.getTitle() + "</dc:title>");
             p.println("    <dc:language>en_GB</dc:language>");
             p.println("    <dc:identifier id=\"BookId\">urn:uuid:" + uid + "</dc:identifier>");
-            p.println("    <dc:creator opf:role=\"aut\">" + book.getAuthor() + "</dc:creator>");
-            if (book.getDate() != null) {
-                p.println("    <dc:date>" + book.getDate() + "</dc:date>");
+            p.println("    <dc:creator opf:role=\"aut\">" + info.getAuthor() + "</dc:creator>");
+            if (info.getDate() != null) {
+                p.println("    <dc:date>" + info.getDate() + "</dc:date>");
             }
             p.println("    <meta name=\"cover\" content=\"cover-image\"/>");
             p.println("  </metadata>");

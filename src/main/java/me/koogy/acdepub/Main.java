@@ -1,10 +1,13 @@
 package me.koogy.acdepub;
 
 import java.io.File;
-import java.io.OutputStreamWriter;
+import java.io.FileReader;
 import java.util.UUID;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import me.koogy.acdepub.objects.AcdParser;
 import me.koogy.acdepub.objects.Book;
 import me.koogy.acdepub.objects.GenericChapter;
 import me.koogy.acdepub.objects.Options;
@@ -25,7 +28,7 @@ public class Main {
     
     private static Logger log = LogManager.getLogger(Main.class);
 
-    private static final String BOOK_XML = "/home/adean/Documents/eBooks/balzac/03/1456/balzac03.xml";
+    private static final String BOOK_XML = "/home/adean/Documents/eBooks/balzac/04/1374/balzac04.xml";
     private static final String PREFACE_ID_FORMAT           = "pre%03d";
     private static final String CHAPTER_ID_FORMAT           = "ch%03d";
     private static final String PART_ID_FORMAT              = "pt%02d";
@@ -57,7 +60,8 @@ public class Main {
         UUID uid = UUID.randomUUID();
         
         try {
-            Book book = parse(filename);
+            Book book = AcdParser.parseBook(filename);
+            log.debug("Book[" + book + "]");
             
             // generate numbers and filenames
             numberParts(book);
@@ -104,17 +108,21 @@ public class Main {
     // jaxb version (out of memory)
     static Book parseJaxb(String filename) {
         Book book = null;
-//      JAXBContext context = JAXBContext.newInstance(Book.class);
-//      Unmarshaller um = context.createUnmarshaller();
-//      // read book from xml
-//      book = (Book) um.unmarshal(new FileReader(filename));
+        try {
+            JAXBContext context = JAXBContext.newInstance(Book.class);
+            Unmarshaller um = context.createUnmarshaller();
+            // read book from xml
+            book = (Book)um.unmarshal(new FileReader(filename));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return book;
     }
     
     // dom version
-    static Book parse(String filename) {
+    static Book parseDom(String filename) {
         Book book = new Book();
-        System.out.println("Options: " + book.getOptions());
+        System.out.println("Options: " + book.getInfo().getOptions());
         try {
             File file = new File(filename);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -128,7 +136,7 @@ public class Main {
     }
     
     static void numberParts(Book book) {
-        Options options = book.getOptions();
+        Options options = book.getInfo().getOptions();
         int count;
         
         // preamble - no numbering

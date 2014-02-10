@@ -84,19 +84,19 @@ public class Options {
         String name = nameNode.getTextContent();
         String value = valueNode.getTextContent();
         if (name.equalsIgnoreCase(CHAPTER_TITLES_PROPERTY)) {
-            book.getOptions().setChapterTitles(Boolean.parseBoolean(value));
+            book.getInfo().getOptions().setChapterTitles(Boolean.parseBoolean(value));
         }
         if (name.equalsIgnoreCase(CHAPTER_TITLE_TEXT_PROPERTY)) {
-            book.getOptions().setChapterTitleText(value);
+            book.getInfo().getOptions().setChapterTitleText(value);
         }
         if (name.equalsIgnoreCase(CHAPTER_NUMBER_STYLE_PROPERTY)) {
-            book.getOptions().setChapterNumberStyle(value);
+            book.getInfo().getOptions().setChapterNumberStyle(value);
         }
         if (name.equalsIgnoreCase(PART_TITLE_TEXT_PROPERTY)) {
-            book.getOptions().setPartTitleText(value);
+            book.getInfo().getOptions().setPartTitleText(value);
         }
         if (name.equalsIgnoreCase(PART_NUMBER_STYLE_PROPERTY)) {
-            book.getOptions().setPartNumberStyle(value);
+            book.getInfo().getOptions().setPartNumberStyle(value);
         }
     }
 

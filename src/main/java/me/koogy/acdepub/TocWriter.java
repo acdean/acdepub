@@ -7,6 +7,8 @@ import java.io.PrintStream;
 import java.util.UUID;
 import me.koogy.acdepub.objects.Book;
 import me.koogy.acdepub.objects.GenericChapter;
+import me.koogy.acdepub.objects.Info;
+import me.koogy.acdepub.objects.Options;
 import me.koogy.acdepub.objects.Part;
 
 /**
@@ -17,6 +19,8 @@ import me.koogy.acdepub.objects.Part;
 public class TocWriter {
 
     public static void write(File dir, Book book, UUID uid) {
+        Info info = book.getInfo();
+        Options options = info.getOptions();
 
         PrintStream p = null;
         try {
@@ -33,14 +37,14 @@ public class TocWriter {
             p.println("    <meta name=\"cover\" content=\"cover-image\"/>");
             p.println("  </head>");
             p.println("  <docTitle>");
-            p.println("    <text>" + book.getTitle() + "</text>");
+            p.println("    <text>" + info.getTitle() + "</text>");
             p.println("  </docTitle>");
             
             p.println("  <navMap>");
             int count = 1;
             navPoint(p, "Title Page", "title_page", count++);
             // chapters
-            if (book.getChapters() != null && book.getOptions().getChapterTitles()) {
+            if (book.getChapters() != null && options.getChapterTitles()) {
                 for (GenericChapter chap : book.getChapters()) {
                     if (chap.getTitle() != null) {
                         navPoint(p, chap.getTitle(), chap.getId(), count);
@@ -53,9 +57,9 @@ public class TocWriter {
             // parts / chapters
             if (book.getParts() != null) {
                 for (Part part : book.getParts()) {
-                    navPoint(p, part.getTitle(), part.getId(), count);
+                    navPoint(p, info.getTitle(), part.getId(), count);
                     count++;
-                    if (part.getChapters() != null && book.getOptions().getChapterTitles()) {
+                    if (part.getChapters() != null && options.getChapterTitles()) {
                         for (GenericChapter chap : part.getChapters()) {
                             // don't bother with untitled chapters
                             if (chap.getTitle() != null) {
