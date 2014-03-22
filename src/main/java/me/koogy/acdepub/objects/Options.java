@@ -13,11 +13,13 @@ public class Options {
 
     private static Logger log = LogManager.getLogger(Options.class);
 
-    public static String PART_TITLE_TEXT_PROPERTY = "part.title_text";
-    public static String PART_NUMBER_STYLE_PROPERTY = "part.number_style";
-    public static String CHAPTER_TITLES_PROPERTY = "chapter.titles";
-    public static String CHAPTER_TITLE_TEXT_PROPERTY = "chapter.title_text";
-    public static String CHAPTER_NUMBER_STYLE_PROPERTY = "chapter.number_style";
+    public static String PART_TITLE_TEXT_PROPERTY       = "part.title_text";
+    public static String PART_NUMBER_STYLE_PROPERTY     = "part.number_style";
+    public static String CHAPTER_TITLES_PROPERTY        = "chapter.titles";
+    public static String CHAPTER_TITLE_TEXT_PROPERTY    = "chapter.title_text";
+    public static String CHAPTER_NUMBER_STYLE_PROPERTY  = "chapter.number_style";
+
+    public static String CHAPTER_TITLE_TEXT_NONE        = "none";
 
     String partTitleText = null;
     String partNumberStyle = null;
@@ -84,30 +86,59 @@ public class Options {
         String name = nameNode.getTextContent();
         String value = valueNode.getTextContent();
         if (name.equalsIgnoreCase(CHAPTER_TITLES_PROPERTY)) {
-            book.getInfo().getOptions().setChapterTitles(Boolean.parseBoolean(value));
+            book.getOptions().setChapterTitles(Boolean.parseBoolean(value));
         }
         if (name.equalsIgnoreCase(CHAPTER_TITLE_TEXT_PROPERTY)) {
-            book.getInfo().getOptions().setChapterTitleText(value);
+            book.getOptions().setChapterTitleText(value);
         }
         if (name.equalsIgnoreCase(CHAPTER_NUMBER_STYLE_PROPERTY)) {
-            book.getInfo().getOptions().setChapterNumberStyle(value);
+            book.getOptions().setChapterNumberStyle(value);
         }
         if (name.equalsIgnoreCase(PART_TITLE_TEXT_PROPERTY)) {
-            book.getInfo().getOptions().setPartTitleText(value);
+            book.getOptions().setPartTitleText(value);
         }
         if (name.equalsIgnoreCase(PART_NUMBER_STYLE_PROPERTY)) {
-            book.getInfo().getOptions().setPartNumberStyle(value);
+            book.getOptions().setPartNumberStyle(value);
         }
     }
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder("(");
+        StringBuilder str = new StringBuilder("{");
         str.append("chapter.titles[").append(getChapterTitles()).append("] ");
         str.append("chapter.titleText[").append(getChapterTitleText()).append("] ");
         str.append("chapter.numberStyle[").append(getChapterNumberStyle()).append("] ");
         str.append("part.titleText[").append(getPartTitleText()).append("] ");
-        str.append("part.numberStyle[").append(getPartNumberStyle()).append("])");
+        str.append("part.numberStyle[").append(getPartNumberStyle()).append("]}");
         return str.toString();
+    }
+    
+    public Options copy() {
+        Options options = new Options();
+        options.setChapterNumberStyle(getChapterNumberStyle());
+        options.setChapterTitleText(getChapterTitleText());
+        options.setChapterTitles(getChapterTitles());
+        options.setPartNumberStyle(getPartNumberStyle());
+        options.setPartTitleText(getPartTitleText());
+        return options;
+    }
+
+    public void merge(Options second) {
+        if (getChapterNumberStyle() == null) {
+            setChapterNumberStyle(second.getChapterNumberStyle());
+        }
+        if (getChapterTitleText() == null) {
+            setChapterTitleText(second.getChapterTitleText());
+        }
+        // boolean?
+//        if (getChapterTitles() == null) {
+//            setChapterTitles(second.getChapterTitles());
+//        }
+        if (getPartNumberStyle() == null) {
+            setPartNumberStyle(second.getPartNumberStyle());
+        }
+        if (getPartTitleText() == null) {
+            setPartTitleText(second.getPartTitleText());
+        }
     }
 }

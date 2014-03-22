@@ -33,14 +33,18 @@ public class ContentWriter {
             if (info.getDate() != null) {
                 p.println("    <dc:date>" + info.getDate() + "</dc:date>");
             }
-            p.println("    <meta name=\"cover\" content=\"cover-image\"/>");
+            if (info.hasCover()) {
+                p.println("    <meta name=\"cover\" content=\"cover-image\"/>");
+            }
             p.println("  </metadata>");
             p.println("  <manifest>");
             item(p, "ncx", "toc.ncx", "application/x-dtbncx+xml");
             item(p, "style", "stylesheet.css", "text/css");
-            item(p, "cover", "cover.xhtml", "application/xhtml+xml");
+            if (info.hasCover()) {
+                item(p, "cover", "cover.xhtml", "application/xhtml+xml");
+                item(p, "cover-image", "cover-image.jpg", "image/jpeg");
+            }
             item(p, "title_page", "title_page.xhtml", "application/xhtml+xml");
-            item(p, "cover-image", "cover-image.jpg", "image/jpeg");
 
             // manifest chapter items
             // p.println("<item id=\"ch1\" href=\"ch1.xhtml\" media-type=\"application/xhtml+xml\"/>");
@@ -73,7 +77,9 @@ public class ContentWriter {
 
             // spine
             p.println("  <spine toc=\"ncx\">");
-            p.println("    <itemref idref=\"cover\" linear=\"no\"/>");
+            if (info.hasCover()) {
+                p.println("    <itemref idref=\"cover\" linear=\"no\"/>");
+            }
             p.println("    <itemref idref=\"title_page\"/>");
 
             // spine chapter items

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import me.koogy.acdepub.objects.Book;
 import me.koogy.acdepub.objects.Info;
 import me.koogy.acdepub.objects.Options;
 import me.koogy.acdepub.objects.Part;
@@ -15,38 +14,41 @@ import me.koogy.acdepub.objects.Part;
  */
 public class PartWriter {
     
-    public static void write(File dir, Book book, Part part) {
-        Info info = book.getInfo();
-        Options options = info.getOptions();
+    public static void write(File dir, Part part) {
+        Info info = part.getInfo();
+        Options options = part.getOptions();
+
         PrintStream p = null;
         try {
             File file = new File(dir, part.getId() + ".xhtml");
             p = new PrintStream(new FileOutputStream(file));
 
-            p.print("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
-            p.print("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">");
-            p.print("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
+            WriterUtils.writeHead(p, info.getTitle());
+            WriterUtils.startTitlePage(p);
 
-            p.print("<head>");
-            p.print("<title>" + info.getTitle() + "</title>");
-            p.print("<link rel=\"stylesheet\" type=\"text/css\" href=\"stylesheet.css\"/>");
-            p.print("</head>");
-
-            p.print("<body>");
-            p.print("<h1>");
+            p.println("<h1 class=\"partTitlePage\">");
             if (part.getNumbering() != null) {
-                p.print("<span class=\"partNumber\">Part " + part.getNumbering() + "</span>");
+                p.println(part.getNumbering());
                 if (info.getTitle() != null) {
-                    p.print("<br/>");
+                    p.println("<br/>");
                 }
             }
             if (info.getTitle() != null) {
-                p.print("<span class=\"partTitle\">" + info.getTitle() + "</span>");
+                p.println(info.getTitle());
             }
             p.println("</h1>");
-            p.print("</body>");
+            if (info.getSubtitle() != null) {
+                p.println("<h1 class=\"partSubtitle\">" + info.getSubtitle() + "</h1>");
+            }
+            if (info.getAuthor() != null) {
+                p.println("<h2 class=\"partAuthor\">" + info.getAuthor() + "</h2>");
+            }
+            if (info.getDate() != null) {
+                p.println("<h3 class=\"partDate\">" + info.getDate() + "</h3>");
+            }
 
-            p.print("</html>");
+            WriterUtils.endTitlePage(p);
+            p.println("</html>");
 
         } catch (IOException e) {
             e.printStackTrace();

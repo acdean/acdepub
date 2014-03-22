@@ -20,7 +20,7 @@ public class TocWriter {
 
     public static void write(File dir, Book book, UUID uid) {
         Info info = book.getInfo();
-        Options options = info.getOptions();
+        Options options = book.getOptions();
 
         PrintStream p = null;
         try {
@@ -34,7 +34,9 @@ public class TocWriter {
             p.println("    <meta name=\"dtb:depth\" content=\"1\"/>");
             p.println("    <meta name=\"dtb:totalPageCount\" content=\"0\"/>");
             p.println("    <meta name=\"dtb:maxPageNumber\" content=\"0\"/>");
-            p.println("    <meta name=\"cover\" content=\"cover-image\"/>");
+            if (info.hasCover()) {
+                p.println("    <meta name=\"cover\" content=\"cover-image\"/>");
+            }
             p.println("  </head>");
             p.println("  <docTitle>");
             p.println("    <text>" + info.getTitle() + "</text>");
@@ -42,7 +44,7 @@ public class TocWriter {
             
             p.println("  <navMap>");
             int count = 1;
-            navPoint(p, "Title Page", "title_page", count++);
+            navPoint(p, info.getTitle(), "title_page", count++);
             // chapters
             if (book.getChapters() != null && options.getChapterTitles()) {
                 for (GenericChapter chap : book.getChapters()) {
@@ -57,7 +59,8 @@ public class TocWriter {
             // parts / chapters
             if (book.getParts() != null) {
                 for (Part part : book.getParts()) {
-                    navPoint(p, info.getTitle(), part.getId(), count);
+                    Info partInfo = part.getInfo();
+                    navPoint(p, partInfo.getTitle(), part.getId(), count);
                     count++;
                     if (part.getChapters() != null && options.getChapterTitles()) {
                         for (GenericChapter chap : part.getChapters()) {

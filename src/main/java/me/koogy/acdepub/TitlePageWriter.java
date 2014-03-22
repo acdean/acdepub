@@ -20,15 +20,10 @@ public class TitlePageWriter {
         try {
             File file = new File(dir, "title_page.xhtml");
             p = new PrintStream(new FileOutputStream(file));
-        
-            p.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            p.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">");
-            p.println("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
-            p.println("<head>");
-            p.println("<title>" + info.getTitle() + "</title>");
-            p.println("<link href=\"stylesheet.css\" type=\"text/css\" rel=\"stylesheet\"/>");
-            p.println("</head>");
-            p.println("<body>");
+
+            WriterUtils.writeHead(p, info.getTitle());
+            WriterUtils.startTitlePage(p);
+            
             p.println("<h1 class=\"title\">" + info.getTitle() + "</h1>");
             if (info.getSubtitle() != null) {
                 p.println("<h1 class=\"subtitle\">" + info.getSubtitle() + "</h1>");
@@ -37,7 +32,8 @@ public class TitlePageWriter {
             if (info.getDate() != null) {
                 p.println("<h3 class=\"date\">" + info.getDate() + "</h3>");
             }
-            p.println("</body>");
+
+            WriterUtils.endTitlePage(p);
             p.println("</html>");
 
         } catch (IOException e) {

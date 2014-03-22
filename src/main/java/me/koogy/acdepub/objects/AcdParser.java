@@ -17,6 +17,8 @@ import org.apache.log4j.Logger;
  */
 public class AcdParser {
 
+    private static final String HR_TEXT = "-oOo-";
+
     private static Logger log = LogManager.getLogger(Parser.class);
 
     public static Book parseBook(String filename) {
@@ -43,6 +45,7 @@ public class AcdParser {
             str = str.replaceAll("\\n", "");
             
             book.setInfo(parseInfo(str));
+            book.setOptions(parseOptions(str));
             parsePrefix(book, str);
             parseParts(book, str);
             if (book.parts == null) {
@@ -58,20 +61,28 @@ public class AcdParser {
 
     // a book or a part has info
     private static Info parseInfo(String xml) {
-        log.info("ParsePrefix");
+        if (xml == null) {
+            return null;
+        }
+        log.info("ParseInfo");
+        Info info = null;
         String infoXml = extractContents(xml, Tag.INFO);
         System.out.println("[" + infoXml + "]");
-        Info info = new Info();
-        info.setTitle(extractContents(infoXml, Tag.TITLE));
-        info.setAuthor(extractContents(infoXml, Tag.AUTHOR));
-        info.setDate(extractContents(infoXml, Tag.DATE));
-        Options options = parseOptions(infoXml);
-        info.setOptions(options);
+        if (infoXml != null) {
+            info = new Info();
+            info.setTitle(extractContents(infoXml, Tag.TITLE));
+            info.setSubtitle(extractContents(infoXml, Tag.SUBTITLE));
+            info.setAuthor(extractContents(infoXml, Tag.AUTHOR));
+            info.setDate(extractContents(infoXml, Tag.DATE));
+        }
         return info;
     }
 
     private static Options parseOptions(String infoXml) {
         log.info("ParseOptions");
+        if (infoXml == null) {
+            return null;
+        }
         Options options = new Options();
         List<String> optionStrings = extractAllContents(infoXml, Tag.OPTION);
         for (String str : optionStrings) {
@@ -82,10 +93,10 @@ public class AcdParser {
                 options.setChapterNumberStyle(value);
             }
             if (name.equalsIgnoreCase(Options.CHAPTER_TITLES_PROPERTY)) {
-                options.setChapterTitleText(value);
+                options.setChapterTitles(Boolean.parseBoolean(value));
             }
             if (name.equalsIgnoreCase(Options.CHAPTER_TITLE_TEXT_PROPERTY)) {
-                options.setChapterTitles(Boolean.parseBoolean(value));
+                options.setChapterTitleText(value);
             }
             if (name.equalsIgnoreCase(Options.PART_NUMBER_STYLE_PROPERTY)) {
                 options.setPartNumberStyle(value);
@@ -110,7 +121,11 @@ public class AcdParser {
             book.setParts(new ArrayList<Part>());
             for (String partXml : parts) {
                 Part part = new Part();
+                // get info, merge in book info
                 Info info = parseInfo(partXml);
+                info.merge(book.getInfo());
+                part.setInfo(info);
+                part.setOptions(parseOptions(partXml));
                 List<String> chapters = extractAllContents(partXml, Tag.CHAPTER);
                 part.setChapters(new ArrayList<Chapter>());
                 for (String chapterXml : chapters) {
@@ -147,13 +162,14 @@ public class AcdParser {
     }
 
     // chapter has a title tag as first element, rest is verbatim body
-    private static GenericChapter parseChapter(String xml, int type) {
+    private static Chapter parseChapter(String xml, int type) {
         log.info("ParseChapter");
-        GenericChapter chapter = new GenericChapter();
+        Chapter chapter = new Chapter();
         chapter.setTitle(extractContents(xml, Tag.TITLE));
         // remove title
         xml = xml.replaceFirst("<" + Tag.TITLE + ">.*</" + Tag.TITLE + ">", "");
         xml = xml.replaceAll("</p>", "</p>\n");
+        xml = xml.replaceAll("<hr/>", "<div class=\"hr\">" + HR_TEXT + "</div>");
         // everything else is content
         chapter.setContent(xml);
         chapter.setType(type);

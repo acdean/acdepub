@@ -33,23 +33,20 @@
 package me.koogy.acdepub.objects;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author adean
  */
-@XmlRootElement(name = "book")
 public class Book {
     Info info;
+    Options options;
     List<GenericChapter> prefaces;
     List<Part> parts;           // one of parts or chapters, not both
     List<GenericChapter> chapters;
     List<GenericChapter> appendices;
     String uuid;
 
-    @XmlElement(name = "info")
     public Info getInfo() {
         return info;
     }
@@ -58,8 +55,14 @@ public class Book {
         this.info = info;
     }
 
-    @XmlElement(name = "prefix")
-    //@XmlAnyElement(PrefixHandler.class)
+    public Options getOptions() {
+        return options;
+    }
+
+    public void setOptions(Options options) {
+        this.options = options;
+    }
+
     public List<GenericChapter> getPrefaces() {
         return prefaces;
     }
@@ -68,8 +71,6 @@ public class Book {
         this.prefaces = prefaces;
     }
 
-//    @XmlAnyElement(ChapterHandler.class)
-    @XmlElement(name = "chapter")
     public List<GenericChapter> getChapters() {
         return chapters;
     }
@@ -78,7 +79,6 @@ public class Book {
         this.chapters = chapters;
     }
 
-    @XmlElement(name = "part")
     public List<Part> getParts() {
         return parts;
     }
@@ -87,8 +87,6 @@ public class Book {
         this.parts = parts;
     }
 
-    @XmlElement(name = "appendix")
-//    @XmlAnyElement(AppendixHandler.class)
     public List<GenericChapter> getAppendices() {
         return appendices;
     }

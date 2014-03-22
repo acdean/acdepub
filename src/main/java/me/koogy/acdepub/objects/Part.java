@@ -2,7 +2,6 @@ package me.koogy.acdepub.objects;
 
 import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlAnyElement;
-import me.koogy.acdepub.ChapterHandler;
 
 /**
  * Book can have many parts (or none)
@@ -15,6 +14,7 @@ public class Part {
     String numbering;
     String id;
     ArrayList<Chapter> chapters;
+    Options options;
 
     public String getNumbering() {
         return numbering;
@@ -31,8 +31,7 @@ public class Part {
     public void setId(String id) {
         this.id = id;
     }
-    
-    @XmlAnyElement(ChapterHandler.class)
+
     public ArrayList<Chapter> getChapters() {
         return chapters;
     }
@@ -40,7 +39,23 @@ public class Part {
     public void setChapters(ArrayList<Chapter> chapters) {
         this.chapters = chapters;
     }
-    
+
+    public Info getInfo() {
+        return info;
+    }
+
+    public void setInfo(Info info) {
+        this.info = info;
+    }
+
+    public Options getOptions() {
+        return options;
+    }
+
+    public void setOptions(Options options) {
+        this.options = options;
+    }
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("Part:{");

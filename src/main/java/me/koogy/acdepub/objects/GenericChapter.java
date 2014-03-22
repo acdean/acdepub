@@ -1,8 +1,5 @@
 package me.koogy.acdepub.objects;
 
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlElement;
-import me.koogy.acdepub.ChapterHandler;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -49,7 +46,6 @@ public class GenericChapter {
         this.numbering = numbering;
     }
 
-    @XmlAnyElement(ChapterHandler.class)
     public String getContent() {
         return content;
     }
@@ -66,7 +62,6 @@ public class GenericChapter {
         this.type = type;
     }
 
-    @XmlElement
     public String getTitle() {
         return title;
     }
