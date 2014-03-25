@@ -7,6 +7,8 @@ import org.w3c.dom.Node;
 
 /**
  * Options
+ * Defaults are returned by getters if value is null - allows for merging.
+ * 
  * @author adean
  */
 public class Options {
@@ -18,6 +20,7 @@ public class Options {
     public static String CHAPTER_TITLES_PROPERTY        = "chapter.titles";
     public static String CHAPTER_TITLE_TEXT_PROPERTY    = "chapter.title_text";
     public static String CHAPTER_NUMBER_STYLE_PROPERTY  = "chapter.number_style";
+    public static String CHAPTER_NUMBER_IN_TOC_PROPERTY = "chapter.number_in_toc";  // part chapters in toc?
 
     public static String CHAPTER_TITLE_TEXT_NONE        = "none";
 
@@ -25,27 +28,67 @@ public class Options {
     String partNumberStyle = null;
     String chapterTitleText = null;
     String chapterNumberStyle = null;
-    boolean chapterTitles = true;
+    String chapterTitles = null;
+    String chapterNumberInToc = null;
     
     public Options() {
-        partTitleText = System.getProperty(PART_TITLE_TEXT_PROPERTY, "Part");
-        partNumberStyle = System.getProperty(PART_NUMBER_STYLE_PROPERTY, "1");
-        chapterTitleText = System.getProperty(CHAPTER_TITLE_TEXT_PROPERTY, "Chapter");
-        chapterNumberStyle = System.getProperty(CHAPTER_NUMBER_STYLE_PROPERTY, "I");
+        partTitleText = System.getProperty(PART_TITLE_TEXT_PROPERTY);
+        partNumberStyle = System.getProperty(PART_NUMBER_STYLE_PROPERTY);
+        chapterTitleText = System.getProperty(CHAPTER_TITLE_TEXT_PROPERTY);
+        chapterNumberStyle = System.getProperty(CHAPTER_NUMBER_STYLE_PROPERTY);
         // whether any chapter number is printed - defaults to true
-        chapterTitles = System.getProperty(CHAPTER_TITLES_PROPERTY, "true").equalsIgnoreCase("true");
+        chapterTitles = System.getProperty(CHAPTER_TITLES_PROPERTY);
+        // does the chapter number appear in the toc - defaults to false
+        // (as a second level entry if PartChapter)
+        chapterNumberInToc = System.getProperty(CHAPTER_NUMBER_IN_TOC_PROPERTY);
     }
     
-    public boolean getChapterTitles() {
-        return chapterTitles;
+    public Boolean getChapterTitles() {
+        if (chapterTitles != null) {
+            return chapterTitles.equalsIgnoreCase("true");
+        }
+        // default
+        return true;
     }
 
-    public void setChapterTitles(boolean chapterTitles) {
+    public void setChapterTitles(Boolean chapterTitles) {
+        if (chapterTitles == null) {
+            this.chapterTitles = null;
+        } else {
+            // convert to string
+            this.chapterTitles = "" + chapterTitles;
+        }
+    }
+    public void setChapterTitles(String chapterTitles) {
         this.chapterTitles = chapterTitles;
     }
 
+    public Boolean getChapterNumberInToc() {
+        if (chapterNumberInToc != null) {
+            return chapterNumberInToc.equalsIgnoreCase("true");
+        }
+        // default
+        return false;
+    }
+
+    public void setChapterNumberInToc(Boolean chapterNumberInToc) {
+        if (chapterNumberInToc == null) {
+            this.chapterNumberInToc = null;
+        } else {
+            // convert to String
+            this.chapterNumberInToc = "" + chapterNumberInToc;
+        }
+    }
+    public void setChapterNumberInToc(String chapterNumberInToc) {
+        this.chapterNumberInToc = chapterNumberInToc;
+    }
+
     public String getChapterTitleText() {
-        return chapterTitleText;
+        if (chapterTitleText != null) {
+            return chapterTitleText;
+        }
+        // default
+        return "Chapter";
     }
 
     public void setChapterTitleText(String chapterTitleText) {
@@ -53,7 +96,11 @@ public class Options {
     }
 
     public String getChapterNumberStyle() {
-        return chapterNumberStyle;
+        if (chapterNumberStyle != null) {
+            return chapterNumberStyle;
+        }
+        // default
+        return "I";
     }
 
     public void setChapterNumberStyle(String chapterNumberStyle) {
@@ -61,7 +108,11 @@ public class Options {
     }
 
     public String getPartTitleText() {
-        return partTitleText;
+        if (partTitleText != null) {
+            return partTitleText;
+        }
+        // default
+        return "Part";
     }
 
     public void setPartTitleText(String partTitleText) {
@@ -69,7 +120,11 @@ public class Options {
     }
 
     public String getPartNumberStyle() {
-        return partNumberStyle;
+        if (partNumberStyle != null) {
+            return partNumberStyle;
+        }
+        // default
+        return "One";
     }
 
     public void setPartNumberStyle(String partNumberStyle) {
@@ -100,6 +155,9 @@ public class Options {
         if (name.equalsIgnoreCase(PART_NUMBER_STYLE_PROPERTY)) {
             book.getOptions().setPartNumberStyle(value);
         }
+        if (name.equalsIgnoreCase(CHAPTER_NUMBER_IN_TOC_PROPERTY)) {
+            book.getOptions().setChapterNumberInToc(Boolean.parseBoolean(value));
+        }
     }
 
     @Override
@@ -109,36 +167,42 @@ public class Options {
         str.append("chapter.titleText[").append(getChapterTitleText()).append("] ");
         str.append("chapter.numberStyle[").append(getChapterNumberStyle()).append("] ");
         str.append("part.titleText[").append(getPartTitleText()).append("] ");
-        str.append("part.numberStyle[").append(getPartNumberStyle()).append("]}");
+        str.append("part.numberStyle[").append(getPartNumberStyle()).append("] ");
+        str.append("chapter.numberInToc[").append(getChapterNumberInToc()).append("]}");
         return str.toString();
     }
     
+    // copy without defaults
     public Options copy() {
         Options options = new Options();
-        options.setChapterNumberStyle(getChapterNumberStyle());
-        options.setChapterTitleText(getChapterTitleText());
-        options.setChapterTitles(getChapterTitles());
-        options.setPartNumberStyle(getPartNumberStyle());
-        options.setPartTitleText(getPartTitleText());
+        options.setChapterNumberStyle(chapterNumberStyle);
+        options.setChapterTitleText(chapterTitleText);
+        options.setChapterTitles(chapterTitles);
+        options.setPartNumberStyle(partNumberStyle);
+        options.setPartTitleText(partTitleText);
+        options.setChapterNumberInToc(chapterNumberInToc);
         return options;
     }
 
+    // merge without defaults
     public void merge(Options second) {
-        if (getChapterNumberStyle() == null) {
-            setChapterNumberStyle(second.getChapterNumberStyle());
+        if (chapterNumberStyle == null) {
+            setChapterNumberStyle(second.chapterNumberStyle);
         }
-        if (getChapterTitleText() == null) {
-            setChapterTitleText(second.getChapterTitleText());
+        if (chapterTitleText == null) {
+            setChapterTitleText(second.chapterTitleText);
         }
-        // boolean?
-//        if (getChapterTitles() == null) {
-//            setChapterTitles(second.getChapterTitles());
-//        }
-        if (getPartNumberStyle() == null) {
-            setPartNumberStyle(second.getPartNumberStyle());
+        if (chapterTitles == null) {
+            setChapterTitles(second.chapterTitles);
         }
-        if (getPartTitleText() == null) {
-            setPartTitleText(second.getPartTitleText());
+        if (partNumberStyle == null) {
+            setPartNumberStyle(second.partNumberStyle);
+        }
+        if (partTitleText == null) {
+            setPartTitleText(second.partTitleText);
+        }
+        if (chapterNumberInToc == null) {
+            setChapterNumberInToc(second.chapterNumberInToc);
         }
     }
 }

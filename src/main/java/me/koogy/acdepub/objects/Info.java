@@ -81,11 +81,11 @@ public class Info {
         if (getSubtitle() == null) {
             setSubtitle(second.getSubtitle());
         }
-        if (getAuthor() == null) {
-            setAuthor(second.getAuthor());
-        }
-        if (getDate() == null) {
-            setDate(second.getDate());
-        }
+//        if (getAuthor() == null) {
+//            setAuthor(second.getAuthor());
+//        }
+//        if (getDate() == null) {
+//            setDate(second.getDate());
+//        }
     }
 }

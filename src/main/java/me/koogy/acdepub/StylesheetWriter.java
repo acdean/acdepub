@@ -26,7 +26,7 @@ public class StylesheetWriter {
             p.println("h4 {text-align:center; line-height:1em;}");
             p.println("h5 {text-align:center; line-height:1em;}");
             p.println("h6 {text-align:center; line-height:1em;}");
-            p.println("p {text-indent:2em; margin-top:0px; margin-bottom:0px;}");
+            p.println("p {text-indent:30px; margin-top:0px; margin-bottom:0px;}");
             // classes for aligning things
             p.println(".centre {text-align:center}");
             p.println(".center {text-align:center}");
@@ -34,10 +34,10 @@ public class StylesheetWriter {
             p.println(".hr {width:100%; text-align:center; margin-top:10px; margin-bottom:10px;}");
             p.println("img {max-width:100%;}"); // for cover
             // letters and poems
-            p.println(".letter {margin-top:10px; margin-bottom:10px; margin-left:2em; margin-right:2em; font-style:italic;}");
+            p.println(".letter {margin-top:10px; margin-bottom:10px; margin-left:30px; margin-right:30px; font-style:italic;}");
             p.println(".poem {margin-top:10px; margin-bottom:10px; font-size:smaller; font-style:italic;}");
-            p.println(".poem1 {text-indent:2em; margin-top:0px; margin-bottom:0px;}");
-            p.println(".poem2 {text-indent:4em; margin-top:0px; margin-bottom:0px;}");
+            p.println(".poem1 {margin-left:30px; margin-top:0px; margin-bottom:0px;}");
+            p.println(".poem2 {margin-left:60px; margin-top:0px; margin-bottom:0px;}");
             
         } catch (IOException e) {
             e.printStackTrace();

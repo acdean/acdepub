@@ -70,6 +70,7 @@ public class GenericChapter {
         this.title = title;
     }
 
+    // is a normal chapter, not a prefix or appendix
     public boolean isNormalChapter() {
         return (type == GenericChapter.CHAPTER || type == GenericChapter.PART_CHAPTER);
     }

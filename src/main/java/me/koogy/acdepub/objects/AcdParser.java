@@ -44,8 +44,10 @@ public class AcdParser {
             // remove newlines
             str = str.replaceAll("\\n", "");
             
-            book.setInfo(parseInfo(str));
-            book.setOptions(parseOptions(str));
+            String infoXml = extractContents(str, Tag.INFO);
+            log.info("[" + infoXml + "]");
+            book.setInfo(parseInfo(infoXml));
+            book.setOptions(parseOptions(infoXml));
             parsePrefix(book, str);
             parseParts(book, str);
             if (book.parts == null) {
@@ -60,14 +62,12 @@ public class AcdParser {
     }
 
     // a book or a part has info
-    private static Info parseInfo(String xml) {
-        if (xml == null) {
+    private static Info parseInfo(String infoXml) {
+        if (infoXml == null) {
             return null;
         }
         log.info("ParseInfo");
         Info info = null;
-        String infoXml = extractContents(xml, Tag.INFO);
-        System.out.println("[" + infoXml + "]");
         if (infoXml != null) {
             info = new Info();
             info.setTitle(extractContents(infoXml, Tag.TITLE));
@@ -78,6 +78,7 @@ public class AcdParser {
         return info;
     }
 
+    // parse options from info block
     private static Options parseOptions(String infoXml) {
         log.info("ParseOptions");
         if (infoXml == null) {
@@ -121,11 +122,15 @@ public class AcdParser {
             book.setParts(new ArrayList<Part>());
             for (String partXml : parts) {
                 Part part = new Part();
-                // get info, merge in book info
-                Info info = parseInfo(partXml);
+                // part info = book info + part info
+                String infoXml = extractContents(partXml, Tag.INFO);
+                log.info("[" + infoXml + "]");
+                Info info = parseInfo(infoXml);
                 info.merge(book.getInfo());
                 part.setInfo(info);
-                part.setOptions(parseOptions(partXml));
+                Options options = parseOptions(infoXml);
+                options.merge(book.getOptions());
+                part.setOptions(options);                
                 List<String> chapters = extractAllContents(partXml, Tag.CHAPTER);
                 part.setChapters(new ArrayList<Chapter>());
                 for (String chapterXml : chapters) {
