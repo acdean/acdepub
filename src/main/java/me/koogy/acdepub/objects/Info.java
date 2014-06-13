@@ -67,7 +67,7 @@ public class Info {
     public Info copy() {
         Info info = new Info();
         info.setTitle(getTitle());
-        info.setSubtitle(getSubtitle());
+        //info.setSubtitle(getSubtitle());
         info.setAuthor(getAuthor());
         info.setDate(getDate());
         return info;
@@ -78,9 +78,9 @@ public class Info {
         if (getTitle() == null) {
             setTitle(second.getTitle());
         }
-        if (getSubtitle() == null) {
-            setSubtitle(second.getSubtitle());
-        }
+//        if (getSubtitle() == null) {
+//            setSubtitle(second.getSubtitle());
+//        }
 //        if (getAuthor() == null) {
 //            setAuthor(second.getAuthor());
 //        }

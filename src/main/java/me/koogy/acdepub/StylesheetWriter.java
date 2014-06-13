@@ -38,6 +38,7 @@ public class StylesheetWriter {
             p.println(".poem {margin-top:10px; margin-bottom:10px; font-size:smaller; font-style:italic;}");
             p.println(".poem1 {margin-left:30px; margin-top:0px; margin-bottom:0px;}");
             p.println(".poem2 {margin-left:60px; margin-top:0px; margin-bottom:0px;}");
+            p.println(".smallcaps {font-variant: small-caps; font-size: smaller;}");
             
         } catch (IOException e) {
             e.printStackTrace();

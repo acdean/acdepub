@@ -22,7 +22,8 @@ public class Main {
     private static Logger log = LogManager.getLogger(Main.class);
 
     // private static final String BOOK_XML = "/home/adean/Documents/eBooks/balzac/04/1374/balzac04.xml";
-    private static final String BOOK_XML = "/home/adean/Documents/eBooks/algernon/acdepub/four_weird_tales.xml";
+//    private static final String BOOK_XML = "/home/adean/Documents/eBooks/algernon/acdepub/four_weird_tales.xml";
+    private static final String BOOK_XML = "/home/adean/Documents/eBooks/wodehouse/school_stories/07_mike/07_mike.xml";
     private static final String PREFACE_ID_FORMAT           = "pre%03d";
     private static final String CHAPTER_ID_FORMAT           = "ch%03d";
     private static final String PART_ID_FORMAT              = "pt%02d";

@@ -175,6 +175,11 @@ public class AcdParser {
         xml = xml.replaceFirst("<" + Tag.TITLE + ">.*</" + Tag.TITLE + ">", "");
         xml = xml.replaceAll("</p>", "</p>\n");
         xml = xml.replaceAll("<hr/>", "<div class=\"hr\">" + HR_TEXT + "</div>");
+        xml = xml.replaceAll("--", "&mdash;");
+//        xml = xml.replaceAll("\\ue8", "&agrave;");
+//        xml = xml.replaceAll("\\ue9", "&eacute;");
+//        xml = xml.replaceAll("\\uef", "&aring;");
+//        xml = xml.replaceAll("\\uf8", "&ostroke;");
         // everything else is content
         chapter.setContent(xml);
         chapter.setType(type);
