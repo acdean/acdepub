@@ -14,6 +14,8 @@ import me.koogy.acdepub.objects.Part;
 /**
  * toc.ncx
  * 
+ * TODO prefix, appendix, footnotes
+ * 
  * @author adean
  */
 public class TocWriter {

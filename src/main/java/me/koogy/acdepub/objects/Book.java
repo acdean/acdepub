@@ -32,6 +32,7 @@
  */
 package me.koogy.acdepub.objects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +40,12 @@ import java.util.List;
  * @author adean
  */
 public class Book {
+    
+    public static final String FOOTNOTE_ANCHOR_PREFIX       = "fn_"; 
+    public static final String FOOTNOTES_FILENAME           = "footnotes.xhtml"; 
+    public static final String FOOTNOTES_ID                 = "footnotes"; 
+    public static final String FOOTNOTE_LINK_ANCHOR_PREFIX  = "fn_"; 
+    
     Info info;
     Options options;
     List<GenericChapter> prefaces;
@@ -46,6 +53,9 @@ public class Book {
     List<GenericChapter> chapters;
     List<GenericChapter> appendices;
     String uuid;
+    List<GenericChapter> footnotes;
+    int footnoteCounter; // number of footnotes
+    public List<String> footnoteLinks = new ArrayList<String>();   // where the footnote links are
 
     public Info getInfo() {
         return info;
@@ -95,6 +105,14 @@ public class Book {
         this.appendices = appendices;
     }
 
+    public List<GenericChapter> getFootnotes() {
+        return footnotes;
+    }
+
+    public void setFootnotes(List<GenericChapter> footnotes) {
+        this.footnotes = footnotes;
+    }
+
     public String getUuid() {
         return uuid;
     }
@@ -115,6 +133,8 @@ public class Book {
         s.append("Chapters:{").append(chapters).append("}");
         s.append(", ");
         s.append("Appendices:{").append(appendices).append("}");
+        s.append(", ");
+        s.append("Footnotes:{").append(footnotes).append("}");
         s.append("}");
         return s.toString();
     }

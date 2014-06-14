@@ -12,6 +12,8 @@ public class Tag {
     public static final String PARA     = "p";
     public static final String RULER    = "hr";
     public static final String APPENDIX = "appendix";
+    public static final String FOOTNOTES    = "footnotes";
+    public static final String FOOTNOTE = "footnote";
     
     public static final String TITLE    = "title";
     public static final String SUBTITLE = "subtitle";

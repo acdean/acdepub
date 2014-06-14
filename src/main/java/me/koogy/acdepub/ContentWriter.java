@@ -73,6 +73,9 @@ public class ContentWriter {
                     item(p, chap.getId());
                 }
             }
+            if (book.getFootnotes() != null) {
+                item(p, Book.FOOTNOTES_ID, Book.FOOTNOTES_FILENAME, "application/xhtml+xml");
+            }
             p.println("  </manifest>");
 
             // spine
@@ -107,6 +110,9 @@ public class ContentWriter {
                 for (GenericChapter chap : book.getAppendices()) {
                     p.println("<itemref idref=\"" + chap.getId() + "\"/>");
                 }
+            }
+            if (book.getFootnotes() != null) {
+                p.println("    <itemref idref=\"" + Book.FOOTNOTES_ID + "\"/>");
             }
             p.println("  </spine>");
             p.println("</package>");

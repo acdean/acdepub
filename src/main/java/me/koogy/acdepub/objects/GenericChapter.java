@@ -17,6 +17,7 @@ public class GenericChapter {
     public static final int CHAPTER         = 2;
     public static final int PART_CHAPTER    = 3;
     public static final int APPENDIX        = 4;
+    public static final int FOOTNOTE        = 5;
     
     private static Logger log = LogManager.getLogger(GenericChapter.class);
 
@@ -85,7 +86,7 @@ public class GenericChapter {
         s.append("Id:{").append(id).append("}");
         s.append(", ");
         if (content != null) {
-            s.append("Content: " + content.length());
+            s.append("Content: ").append(content.length());
         }
         s.append("}");
         return s.toString();

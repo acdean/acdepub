@@ -11,15 +11,15 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 /**
- * A Noddy parser that does what i want it to do.
+ * A parser that does what i want it to do.
  * 
  * @author adean
  */
 public class AcdParser {
 
-    private static final String HR_TEXT = "-oOo-";
+    private static final String HR_TEXT = "~";
 
-    private static Logger log = LogManager.getLogger(Parser.class);
+    private static Logger log = LogManager.getLogger(AcdParser.class);
 
     public static Book parseBook(String filename) {
         log.info("ParseBook");
@@ -40,20 +40,25 @@ public class AcdParser {
               total += result;
             }
             
-            String str = new String(b, "UTF-8");
+            String xml = new String(b, "UTF-8");
             // remove newlines
-            str = str.replaceAll("\\n", "");
+            xml = xml.replaceAll("\\n", "");
             
-            String infoXml = extractContents(str, Tag.INFO);
+            String infoXml = extractContents(xml, Tag.INFO);
             log.info("[" + infoXml + "]");
             book.setInfo(parseInfo(infoXml));
             book.setOptions(parseOptions(infoXml));
-            parsePrefix(book, str);
-            parseParts(book, str);
+            parsePrefix(book, xml);
+            parseParts(book, xml);
             if (book.parts == null) {
-                parseChapters(book, str);
+                parseChapters(book, xml);
             }
-            parseAppendix(book, str);
+            parseAppendix(book, xml);
+            
+            // parse footnotes if we have found references
+            if (book.footnoteCounter != 0) {
+                parseFootnotes(book, xml);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,7 +117,7 @@ public class AcdParser {
     private static void parsePrefix(Book book, String xml) {
         log.info("ParsePrefix");
         List<String> list = extractAllContents(xml, Tag.PREFIX);
-        book.setPrefaces(parseGenericChapters(list, GenericChapter.PREFIX));
+        book.setPrefaces(parseGenericChapters(book, list, GenericChapter.PREFIX));
     }
 
     private static void parseParts(Book book, String xml) {
@@ -134,7 +139,7 @@ public class AcdParser {
                 List<String> chapters = extractAllContents(partXml, Tag.CHAPTER);
                 part.setChapters(new ArrayList<Chapter>());
                 for (String chapterXml : chapters) {
-                    Chapter chapter = (Chapter)parseChapter(chapterXml, GenericChapter.PART_CHAPTER);
+                    Chapter chapter = (Chapter)parseChapter(book, chapterXml, GenericChapter.PART_CHAPTER);
                     part.getChapters().add(chapter);
                 }
                 book.getParts().add(part);
@@ -142,13 +147,13 @@ public class AcdParser {
         }
     }
 
-    private static List<GenericChapter> parseGenericChapters(List<String> chapterStrings, int type) {
+    private static List<GenericChapter> parseGenericChapters(Book book, List<String> chapterStrings, int type) {
         if (chapterStrings == null || chapterStrings.isEmpty()) {
             return null;
         }
         List<GenericChapter> list = new ArrayList<GenericChapter>();
         for(String str : chapterStrings) {
-            GenericChapter chapter = parseChapter(str, type);
+            GenericChapter chapter = parseChapter(book, str, type);
             list.add(chapter);
         }
         return list;
@@ -157,17 +162,23 @@ public class AcdParser {
     private static void parseChapters(Book book, String xml) {
         log.info("ParseChapters");
         List<String> list = extractAllContents(xml, Tag.CHAPTER);
-        book.setChapters(parseGenericChapters(list, GenericChapter.CHAPTER));
+        book.setChapters(parseGenericChapters(book, list, GenericChapter.CHAPTER));
     }
 
     private static void parseAppendix(Book book, String xml) {
         log.info("ParseAppendix");
         List<String> list = extractAllContents(xml, Tag.APPENDIX);
-        book.setAppendices(parseGenericChapters(list, GenericChapter.APPENDIX));
+        book.setAppendices(parseGenericChapters(book, list, GenericChapter.APPENDIX));
+    }
+
+    private static void parseFootnotes(Book book, String xml) {
+        log.info("ParseFootnotes");
+        List<String> list = extractAllContents(xml, Tag.FOOTNOTE);
+        book.setFootnotes(parseGenericChapters(book, list, GenericChapter.FOOTNOTE));
     }
 
     // chapter has a title tag as first element, rest is verbatim body
-    private static Chapter parseChapter(String xml, int type) {
+    private static Chapter parseChapter(Book book, String xml, int type) {
         log.info("ParseChapter");
         Chapter chapter = new Chapter();
         chapter.setTitle(extractContents(xml, Tag.TITLE));
@@ -176,6 +187,20 @@ public class AcdParser {
         xml = xml.replaceAll("</p>", "</p>\n");
         xml = xml.replaceAll("<hr/>", "<div class=\"hr\">" + HR_TEXT + "</div>");
         xml = xml.replaceAll("--", "&mdash;");
+        // replace all the "note" tags with a link to matching footnote
+        while (xml.indexOf("<note/>") != -1) {
+            book.footnoteCounter++;
+            log.info("Footnote[" + book.footnoteCounter + "]");
+            xml = xml.replaceFirst("<note/>",
+                    "<a name=\"" + Book.FOOTNOTE_LINK_ANCHOR_PREFIX + book.footnoteCounter + "\"/>"
+                    + "<a href=\"" + Book.FOOTNOTES_FILENAME
+                    + "#" + Book.FOOTNOTE_ANCHOR_PREFIX + book.footnoteCounter + "\">"
+                    + "[" + book.footnoteCounter + "]"
+                    + "</a>");
+            // need to store the filename for this link
+            // don't know it until after numbering
+            book.footnoteLinks.add("asdjlasjdl");
+        }
 //        xml = xml.replaceAll("\\ue8", "&agrave;");
 //        xml = xml.replaceAll("\\ue9", "&eacute;");
 //        xml = xml.replaceAll("\\uef", "&aring;");

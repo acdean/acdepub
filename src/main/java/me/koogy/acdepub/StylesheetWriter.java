@@ -18,7 +18,8 @@ public class StylesheetWriter {
             File file = new File(dir, "stylesheet.css");
             p = new PrintStream(new FileOutputStream(file));
             
-            p.println("body.text {background-color:#666666; left-margin:2%, right-margin:2%; text-align:justify;}");
+            p.println("body.text {left-margin:2%, right-margin:2%; top-margin:5%; text-align:justify;}");
+            p.println("body.footnotes {left-margin:2%, right-margin:2%; text-align:justify;}");
             p.println("h1 {text-align:center; line-height:1em;}");
             p.println("h1.subtitle {text-align:center; line-height:1em; font-size:smaller;}");
             p.println("h2 {text-align:center; line-height:1em;}");
@@ -26,7 +27,10 @@ public class StylesheetWriter {
             p.println("h4 {text-align:center; line-height:1em;}");
             p.println("h5 {text-align:center; line-height:1em;}");
             p.println("h6 {text-align:center; line-height:1em;}");
-            p.println("p {text-indent:30px; margin-top:0px; margin-bottom:0px;}");
+            // indent first line of paragraphs
+            p.println("p {text-indent:30px; margin-top:5px; margin-bottom:0px;}");
+            // but don't indent footnotes
+            p.println("div.footnotes p {margin-top:5px; margin-bottom:0px;}");
             // classes for aligning things
             p.println(".centre {text-align:center}");
             p.println(".center {text-align:center}");
