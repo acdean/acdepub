@@ -79,12 +79,13 @@ public class GenericChapter {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("Chapter:{");
-        s.append("Numbering:{").append(numbering).append("}");
-        s.append(", ");
-        s.append("Title:{").append(title).append("}");
-        s.append(", ");
-        s.append("Id:{").append(id).append("}");
-        s.append(", ");
+        if (numbering != null) {
+            s.append("Numbering:{").append(numbering).append("} ");
+        }
+        if (title != null) {
+            s.append("Title:{").append(title).append("} ");
+        }
+        s.append("Id:{").append(id).append("} ");
         if (content != null) {
             s.append("Content: ").append(content.length());
         }

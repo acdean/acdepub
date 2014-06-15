@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import me.koogy.acdepub.Main;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -48,11 +49,15 @@ public class AcdParser {
             log.info("[" + infoXml + "]");
             book.setInfo(parseInfo(infoXml));
             book.setOptions(parseOptions(infoXml));
+            
             parsePrefix(book, xml);
+
             parseParts(book, xml);
+
             if (book.parts == null) {
                 parseChapters(book, xml);
             }
+
             parseAppendix(book, xml);
             
             // parse footnotes if we have found references
@@ -124,9 +129,12 @@ public class AcdParser {
         log.info("ParseParts");
         List<String> parts = extractAllContents(xml, Tag.PART);
         if (parts != null && !parts.isEmpty()) {
+            int partCount = 1;
             book.setParts(new ArrayList<Part>());
             for (String partXml : parts) {
+                int chapterCount = 1;
                 Part part = new Part();
+                part.setId(String.format(Main.PART_ID_FORMAT, partCount));
                 // part info = book info + part info
                 String infoXml = extractContents(partXml, Tag.INFO);
                 log.info("[" + infoXml + "]");
@@ -139,10 +147,15 @@ public class AcdParser {
                 List<String> chapters = extractAllContents(partXml, Tag.CHAPTER);
                 part.setChapters(new ArrayList<Chapter>());
                 for (String chapterXml : chapters) {
-                    Chapter chapter = (Chapter)parseChapter(book, chapterXml, GenericChapter.PART_CHAPTER);
+                    String id = String.format(Main.PART_CHAPTER_ID_FORMAT, partCount, chapterCount);
+                    Chapter chapter = (Chapter)parseChapter(book, chapterXml, GenericChapter.PART_CHAPTER, id);
+                    chapter.setId(id);
+                    chapter.setNumbering(getNumbering(GenericChapter.PART_CHAPTER, options.getChapterTitleText(), options.getChapterNumberStyle(), chapterCount));
                     part.getChapters().add(chapter);
+                    chapterCount++;
                 }
                 book.getParts().add(part);
+                partCount++;
             }
         }
     }
@@ -151,10 +164,16 @@ public class AcdParser {
         if (chapterStrings == null || chapterStrings.isEmpty()) {
             return null;
         }
+        Options options = book.getOptions();
         List<GenericChapter> list = new ArrayList<GenericChapter>();
+        int count = 1;
         for(String str : chapterStrings) {
-            GenericChapter chapter = parseChapter(book, str, type);
+            String id = getId(type, count);
+            GenericChapter chapter = parseChapter(book, str, type, id);
+            chapter.setId(id);
+            chapter.setNumbering(getNumbering(type, options.getChapterTitleText(), options.getChapterNumberStyle(), count));
             list.add(chapter);
+            count++;
         }
         return list;
     }
@@ -178,7 +197,7 @@ public class AcdParser {
     }
 
     // chapter has a title tag as first element, rest is verbatim body
-    private static Chapter parseChapter(Book book, String xml, int type) {
+    private static Chapter parseChapter(Book book, String xml, int type, String id) {
         log.info("ParseChapter");
         Chapter chapter = new Chapter();
         chapter.setTitle(extractContents(xml, Tag.TITLE));
@@ -199,7 +218,7 @@ public class AcdParser {
                     + "</a>");
             // need to store the filename for this link
             // don't know it until after numbering
-            book.footnoteLinks.add("asdjlasjdl");
+            book.footnoteLinks.add(id);
         }
 //        xml = xml.replaceAll("\\ue8", "&agrave;");
 //        xml = xml.replaceAll("\\ue9", "&eacute;");
@@ -211,6 +230,50 @@ public class AcdParser {
         return chapter;
     }
 
+    private static String getId(int type, int count) {
+        String str = null;
+        switch(type) {
+            case Chapter.PREFIX:
+                str = Main.PREFACE_ID_FORMAT;
+                break;
+            case Chapter.PART_CHAPTER:
+                str = Main.PART_CHAPTER_ID_FORMAT;
+                break;
+            case Chapter.CHAPTER:
+                str = Main.CHAPTER_ID_FORMAT;
+                break;
+            case Chapter.APPENDIX:
+                str = Main.APPENDIX_ID_FORMAT;
+                break;
+            case Chapter.FOOTNOTE:
+                str = Book.FOOTNOTES_ID;
+                break;
+        }
+        return String.format(str, count);
+    }
+    
+    private static String getNumbering(int type, String titleText, String numberStyle, int count) {
+        String str = null;
+        switch(type) {
+            case Chapter.PREFIX:
+                // do nothing - title only
+                break;
+            case Chapter.PART_CHAPTER:
+                str = Main.numbering(titleText, numberStyle, count);                
+                break;
+            case Chapter.CHAPTER:
+                str = Main.numbering(titleText, numberStyle, count);
+                break;
+            case Chapter.APPENDIX:
+                // do nothing - title only
+                break;
+            case Chapter.FOOTNOTE:
+                // do nothing - title only
+                break;
+        }
+        return str;
+    }
+    
     // <tag name="value" name2="value2"/> -> hashmap
     public static Map<String, String> extractAttributes(String source) {
         System.out.println("ExtractAttributes: [" + source + "]");

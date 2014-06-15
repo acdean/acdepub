@@ -19,9 +19,9 @@ public class StylesheetWriter {
             p = new PrintStream(new FileOutputStream(file));
             
             p.println("body.text {left-margin:2%, right-margin:2%; top-margin:5%; text-align:justify;}");
-            p.println("body.footnotes {left-margin:2%, right-margin:2%; text-align:justify;}");
             p.println("h1 {text-align:center; line-height:1em;}");
-            p.println("h1.subtitle {text-align:center; line-height:1em; font-size:smaller;}");
+            // h1 is 2em, h2 is 1.5em - http://davidwalsh.name/firefox-internal-rendering-css
+            p.println("h1.subtitle {text-align:center; line-height:1em; font-size:1.5em; font-style:italic;}");
             p.println("h2 {text-align:center; line-height:1em;}");
             p.println("h3 {text-align:center; line-height:1em;}");
             p.println("h4 {text-align:center; line-height:1em;}");
@@ -29,8 +29,6 @@ public class StylesheetWriter {
             p.println("h6 {text-align:center; line-height:1em;}");
             // indent first line of paragraphs
             p.println("p {text-indent:30px; margin-top:5px; margin-bottom:0px;}");
-            // but don't indent footnotes
-            p.println("div.footnotes p {margin-top:5px; margin-bottom:0px;}");
             // classes for aligning things
             p.println(".centre {text-align:center}");
             p.println(".center {text-align:center}");

@@ -26,11 +26,11 @@ public class Main {
 //    private static final String BOOK_XML = "/home/adean/Documents/eBooks/wodehouse/school_stories/07_mike/07_mike.xml";
     private static final String BOOK_XML = "/home/adean/Documents/eBooks/lad_and_lass/lad_and_lass.xml";
     
-    private static final String PREFACE_ID_FORMAT           = "pre%03d";
-    private static final String CHAPTER_ID_FORMAT           = "ch%03d";
-    private static final String PART_ID_FORMAT              = "pt%02d";
-    private static final String PART_CHAPTER_ID_FORMAT      = "ch%02d%03d";
-    private static final String APPENDIX_ID_FORMAT          = "app%03d";
+    public static final String PREFACE_ID_FORMAT           = "pre%03d";
+    public static final String CHAPTER_ID_FORMAT           = "ch%03d";
+    public static final String PART_ID_FORMAT              = "pt%02d";
+    public static final String PART_CHAPTER_ID_FORMAT      = "ch%02d%03d";
+    public static final String APPENDIX_ID_FORMAT          = "app%03d";
 
     public static void main( String[] args ) {
         
@@ -61,8 +61,9 @@ public class Main {
             log.debug("Book[" + book + "]");
             
             // generate numbers and filenames
-            numberParts(book);
-            log.debug("Book[" + book + "]");
+            // NB functionality moving to parser
+//            numberParts(book);
+//            log.debug("Book[" + book + "]");
             
             // write everything
             CoverWriter.write(dir, book);
@@ -141,62 +142,63 @@ public class Main {
 //        }
 //        return book;
 //    }
-    
+
+    // moving this to parser
     static void numberParts(Book book) {
-        Options options = book.getOptions();
-        int count;
-        
-        // preamble - no numbering
-        count = 1;
-        if (book.getPrefaces() != null) {
-            for(GenericChapter chap : book.getPrefaces()) {
-                chap.setId(String.format(PREFACE_ID_FORMAT, count));
-                count++;
-            }
-        }
-
-        // there'll be one of chapters or parts
-
-        // chapters - with numbering
-        if (book.getChapters() != null) {
-            count = 1;
-            for(GenericChapter chap : book.getChapters()) {
-                chap.setId(String.format(CHAPTER_ID_FORMAT, count));
-                chap.setNumbering(numbering(options.getChapterTitleText(), options.getChapterNumberStyle(), count));
-                count++;
-            }
-        }
-        // parts / chapters - with numbering
-        if (book.getParts() != null) {
-            int partCount = 1;
-            for(Part part : book.getParts()) {
-                Options partOptions = part.getOptions();
-                part.setId(String.format(PART_ID_FORMAT, partCount));
-                count = 1;
-                if (part.getChapters() != null) {
-                    for(GenericChapter chap : part.getChapters()) {
-                        chap.setId(String.format(PART_CHAPTER_ID_FORMAT, partCount, count));
-                        chap.setNumbering(numbering(partOptions.getChapterTitleText(), partOptions.getChapterNumberStyle(), count));
-                        count++;
-                    }
-                }
-                partCount++;
-            }
-        }
-
-        // postamble - no numbering
-        if (book.getAppendices() != null) {
-            count = 1;
-            for(GenericChapter chap : book.getAppendices()) {
-                chap.setId(String.format(APPENDIX_ID_FORMAT, count));
-                count++;
-            }
-        }
+//        Options options = book.getOptions();
+//        int count;
+//        
+//        // preamble - no numbering
+//        count = 1;
+//        if (book.getPrefaces() != null) {
+//            for(GenericChapter chap : book.getPrefaces()) {
+//                chap.setId(String.format(PREFACE_ID_FORMAT, count));
+//                count++;
+//            }
+//        }
+//
+//        // there'll be one of chapters or parts
+//
+//        // chapters - with numbering
+//        if (book.getChapters() != null) {
+//            count = 1;
+//            for(GenericChapter chap : book.getChapters()) {
+//                chap.setId(String.format(CHAPTER_ID_FORMAT, count));
+//                chap.setNumbering(numbering(options.getChapterTitleText(), options.getChapterNumberStyle(), count));
+//                count++;
+//            }
+//        }
+//        // parts / chapters - with numbering
+//        if (book.getParts() != null) {
+//            int partCount = 1;
+//            for(Part part : book.getParts()) {
+//                Options partOptions = part.getOptions();
+//                part.setId(String.format(PART_ID_FORMAT, partCount));
+//                count = 1;
+//                if (part.getChapters() != null) {
+//                    for(GenericChapter chap : part.getChapters()) {
+//                        chap.setId(String.format(PART_CHAPTER_ID_FORMAT, partCount, count));
+//                        chap.setNumbering(numbering(partOptions.getChapterTitleText(), partOptions.getChapterNumberStyle(), count));
+//                        count++;
+//                    }
+//                }
+//                partCount++;
+//            }
+//        }
+//
+//        // postamble - no numbering
+//        if (book.getAppendices() != null) {
+//            count = 1;
+//            for(GenericChapter chap : book.getAppendices()) {
+//                chap.setId(String.format(APPENDIX_ID_FORMAT, count));
+//                count++;
+//            }
+//        }
     }
 
     // sets the numbering
     // 'Part III' or 'Three' or null
-    private static String numbering(String name, String style, int i) {
+    public static String numbering(String name, String style, int i) {
         StringBuilder sb = new StringBuilder();
         if (style.equalsIgnoreCase(Options.CHAPTER_TITLE_TEXT_NONE)) {
             return null;

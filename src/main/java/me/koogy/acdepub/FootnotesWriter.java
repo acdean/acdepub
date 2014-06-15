@@ -21,7 +21,7 @@ public class FootnotesWriter {
 
             WriterUtils.writeHead(p, "Footnotes");
             
-            p.println("<body class=\"footnotes\">");
+            p.println("<body class=\"text\">");
 
             for (int i = 0 ; i < book.getFootnotes().size() ; i++) {
                 p.println("<a id=\"" + Book.FOOTNOTE_ANCHOR_PREFIX + (i + 1) + "\"/>");
@@ -30,10 +30,11 @@ public class FootnotesWriter {
                 // this already has newlines (hacky)
                 p.print(book.getFootnotes().get(i).getContent());
                 p.println("<a href=\""
-                        + book.footnoteLinks.get(i)
+                        + book.footnoteLinks.get(i) + ".xhtml"
                         + "#" + Book.FOOTNOTE_LINK_ANCHOR_PREFIX + (i + 1)
                         + "\">[back]</a>");
                 p.println("</div>");
+                p.println("<br/>");
                 p.println("");
             }
             
