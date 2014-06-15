@@ -22,6 +22,8 @@ public class FootnotesWriter {
             WriterUtils.writeHead(p, "Footnotes");
             
             p.println("<body class=\"text\">");
+            
+            p.println("<h1>Footnotes</h1>");
 
             for (int i = 0 ; i < book.getFootnotes().size() ; i++) {
                 p.println("<a id=\"" + Book.FOOTNOTE_ANCHOR_PREFIX + (i + 1) + "\"/>");

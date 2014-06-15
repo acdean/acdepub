@@ -207,15 +207,17 @@ public class AcdParser {
         xml = xml.replaceAll("<hr/>", "<div class=\"hr\">" + HR_TEXT + "</div>");
         xml = xml.replaceAll("--", "&mdash;");
         // replace all the "note" tags with a link to matching footnote
+        // this perhaps should be elsewhere
         while (xml.indexOf("<note/>") != -1) {
             book.footnoteCounter++;
             log.info("Footnote[" + book.footnoteCounter + "]");
             xml = xml.replaceFirst("<note/>",
-                    "<a name=\"" + Book.FOOTNOTE_LINK_ANCHOR_PREFIX + book.footnoteCounter + "\"/>"
+                    " <a id=\"" + Book.FOOTNOTE_LINK_ANCHOR_PREFIX + book.footnoteCounter + "\">"
                     + "<a href=\"" + Book.FOOTNOTES_FILENAME
                     + "#" + Book.FOOTNOTE_ANCHOR_PREFIX + book.footnoteCounter + "\">"
                     + "[" + book.footnoteCounter + "]"
-                    + "</a>");
+                    + "</a>"    //end of link
+                    + "</a>");  // end of anchor
             // need to store the filename for this link
             // don't know it until after numbering
             book.footnoteLinks.add(id);
