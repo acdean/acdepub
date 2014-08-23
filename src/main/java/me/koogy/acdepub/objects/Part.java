@@ -10,6 +10,10 @@ import javax.xml.bind.annotation.XmlAnyElement;
  * @author adean
  */
 public class Part {
+    
+    // part type number, see GenericChapter.FOOTNOTE etc
+    public static final int PART    = 100;
+
     Info info;
     String numbering;
     String id;
@@ -20,7 +24,7 @@ public class Part {
         return numbering;
     }
 
-    public void getNumbering(String numbering) {
+    public void setNumbering(String numbering) {
         this.numbering = numbering;
     }
     

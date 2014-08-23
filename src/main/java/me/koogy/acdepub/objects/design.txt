@@ -1,0 +1,24 @@
+Book Title
+[Subtitle]
+Author
+Date
+
+[[Part ]Number]    or     Title
+[Part Title]              Author
+                          Date
+
+[[Chapter ]Number]        blah blah blah
+[Chapter Title]
+blah blah blah
+
+
+contents
+--------
+Book Title
+Prefix
+[Part n]
+I [Title1]
+II [Title2]
+Appendix
+
+

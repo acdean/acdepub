@@ -27,15 +27,13 @@ public class FootnotesWriter {
 
             for (int i = 0 ; i < book.getFootnotes().size() ; i++) {
                 p.println("<a id=\"" + Book.FOOTNOTE_ANCHOR_PREFIX + (i + 1) + "\"/>");
-                p.println("<div class=\"footnote\">");
-                p.println("<div>[" + (i + 1) + "]</div>");
+                p.println("<p class=\"footnote\">[" + (i + 1) + "] ");
                 // this already has newlines (hacky)
-                p.print(book.getFootnotes().get(i).getContent());
+                p.print(book.getFootnotes().get(i).getContent().replaceFirst("<p>", ""));
                 p.println("<a href=\""
                         + book.footnoteLinks.get(i) + ".xhtml"
                         + "#" + Book.FOOTNOTE_LINK_ANCHOR_PREFIX + (i + 1)
                         + "\">[back]</a>");
-                p.println("</div>");
                 p.println("<br/>");
                 p.println("");
             }

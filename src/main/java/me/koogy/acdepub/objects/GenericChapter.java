@@ -18,6 +18,7 @@ public class GenericChapter {
     public static final int PART_CHAPTER    = 3;
     public static final int APPENDIX        = 4;
     public static final int FOOTNOTE        = 5;
+    // see also Part.PART
     
     private static Logger log = LogManager.getLogger(GenericChapter.class);
 

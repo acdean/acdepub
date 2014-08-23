@@ -23,13 +23,12 @@ public class AcdParser {
     private static Logger log = LogManager.getLogger(AcdParser.class);
 
     public static Book parseBook(String filename) {
-        log.info("ParseBook");
-        Book book = new Book();
+        byte[] b = new byte[0];
         try {
             // slurp file into StringBuffer
             File file = new File(filename);
             InputStream in = new FileInputStream(file);
-            byte[] b  = new byte[(int)(file.length())];
+            b  = new byte[(int)(file.length())];
             int len = b.length;
             int total = 0;
 
@@ -40,7 +39,15 @@ public class AcdParser {
               }
               total += result;
             }
-            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return parseBook(b);
+    }
+    public static Book parseBook(byte[] b) {
+        log.info("ParseBook");
+        Book book = new Book();
+        try {
             String xml = new String(b, "UTF-8");
             // remove newlines
             xml = xml.replaceAll("\\n", "");
@@ -138,12 +145,20 @@ public class AcdParser {
                 // part info = book info + part info
                 String infoXml = extractContents(partXml, Tag.INFO);
                 log.info("[" + infoXml + "]");
-                Info info = parseInfo(infoXml);
-                info.merge(book.getInfo());
+                Info info = null;
+                Options options = null;
+                if (infoXml == null || infoXml.isEmpty()) {
+                    info = new Info();
+                    options = new Options();
+                } else {
+                    info = parseInfo(infoXml);
+                    options = parseOptions(infoXml);
+                }
                 part.setInfo(info);
-                Options options = parseOptions(infoXml);
                 options.merge(book.getOptions());
-                part.setOptions(options);                
+                part.setOptions(options);
+                // part numbering may not appear due to part details for Various Artists books
+                part.setNumbering(getNumbering(Part.PART, options.getPartTitleText(), options.getPartNumberStyle(), partCount));
                 List<String> chapters = extractAllContents(partXml, Tag.CHAPTER);
                 part.setChapters(new ArrayList<Chapter>());
                 for (String chapterXml : chapters) {
@@ -206,6 +221,21 @@ public class AcdParser {
         xml = xml.replaceAll("</p>", "</p>\n");
         xml = xml.replaceAll("<hr/>", "<div class=\"hr\">" + HR_TEXT + "</div>");
         xml = xml.replaceAll("--", "&mdash;");
+        // replace some xml with some xml
+        xml = xml.replaceAll("<poem>", "<div class=\"poem\">");
+        xml = xml.replaceAll("</poem>", "</div>");
+        xml = xml.replaceAll("<poem1>", "<div class=\"poem1\">");
+        xml = xml.replaceAll("</poem1>", "</div>");
+        xml = xml.replaceAll("<poem2>", "<div class=\"poem2\">");
+        xml = xml.replaceAll("</poem2>", "</div>");
+        xml = xml.replaceAll("<letter>", "<div class=\"letter\">");
+        xml = xml.replaceAll("</letter>", "</div>");
+        xml = xml.replaceAll("<centre>", "<div class=\"centre\">");
+        xml = xml.replaceAll("</centre>", "</div>");
+        xml = xml.replaceAll("<center>", "<div class=\"center\">");
+        xml = xml.replaceAll("</center>", "</div>");
+        xml = xml.replaceAll("<right>", "<div class=\"right\">");
+        xml = xml.replaceAll("</right>", "</div>");
         // replace all the "note" tags with a link to matching footnote
         // this perhaps should be elsewhere
         while (xml.indexOf("<note/>") != -1) {
@@ -271,6 +301,9 @@ public class AcdParser {
                 break;
             case Chapter.FOOTNOTE:
                 // do nothing - title only
+                break;
+            case Part.PART:
+                str = Main.numbering(titleText, numberStyle, count);
                 break;
         }
         return str;

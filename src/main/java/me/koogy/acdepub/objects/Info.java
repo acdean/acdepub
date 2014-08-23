@@ -55,37 +55,21 @@ public class Info {
     public String toString() {
         StringBuilder str = new StringBuilder();
         str.append("Info{");
-        str.append("Title[").append(this.getTitle()).append("],");
-        str.append("SubTitle[").append(this.getSubtitle()).append("],");
-        str.append("Author[").append(this.getAuthor()).append("],");
-        str.append("Date[").append(this.getDate()).append("]");
+        str.append("Title[").append(this.getTitle()).append("], ");
+        str.append("SubTitle[").append(this.getSubtitle()).append("], ");
+        str.append("Author[").append(this.getAuthor()).append("], ");
+        str.append("Date[").append(this.getDate()).append("], ");
         str.append("HasCover[").append(this.hasCover()).append("]");
         str.append("}");
         return str.toString();
     }
     
-    public Info copy() {
-        Info info = new Info();
-        info.setTitle(getTitle());
-        //info.setSubtitle(getSubtitle());
-        info.setAuthor(getAuthor());
-        info.setDate(getDate());
-        return info;
-    }
-
-    // copies data from the second info. current values take precedence.
-    public void merge(Info second) {
-        if (getTitle() == null) {
-            setTitle(second.getTitle());
-        }
-//        if (getSubtitle() == null) {
-//            setSubtitle(second.getSubtitle());
-//        }
-//        if (getAuthor() == null) {
-//            setAuthor(second.getAuthor());
-//        }
-//        if (getDate() == null) {
-//            setDate(second.getDate());
-//        }
-    }
+//    public Info copy() {
+//        Info info = new Info();
+//        info.setTitle(getTitle());
+//        //info.setSubtitle(getSubtitle());
+//        info.setAuthor(getAuthor());
+//        info.setDate(getDate());
+//        return info;
+//    }
 }

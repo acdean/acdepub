@@ -61,18 +61,17 @@ public class TocWriter {
             // parts / chapters
             if (book.getParts() != null) {
                 for (Part part : book.getParts()) {
-                    Info partInfo = part.getInfo();
-                    navPoint(p, partInfo.getTitle(), part.getId(), count);
+                    String partLabel = getLabel(part.getInfo().getTitle(), part.getNumbering());
+                    navPointStart(p, partLabel, part.getId(), count);
                     count++;
                     if (part.getChapters() != null && options.getChapterTitles()) {
                         for (GenericChapter chap : part.getChapters()) {
-                            // don't bother with untitled chapters
-                            if (chap.getTitle() != null) {
-                                navPoint(p, chap.getTitle(), chap.getId(), count);
-                                count++;
-                            }
+                            String chapLabel = getLabel(chap.getTitle(), chap.getNumbering());
+                            navPoint(p, chapLabel, chap.getId(), count);
+                            count++;
                         }
                     }
+                    navPointEnd(p);
                 }
             }
             p.println("  </navMap>");
@@ -86,8 +85,19 @@ public class TocWriter {
         }
     }
 
+    // return the high priorty one if it exists, else the low
+    static String getLabel(String high, String low) {
+        return (high != null) ? high : low;
+    }
+
     // NB filenames are all {id}.xhtml
     private static void navPoint(PrintStream p, String title, String filename, int count) {
+        navPointStart(p, title, filename, count);
+        navPointEnd(p);
+    }
+
+    // NB filenames are all {id}.xhtml
+    private static void navPointStart(PrintStream p, String title, String filename, int count) {
         StringBuilder s = new StringBuilder();
         s.append("    <navPoint id=\"navPoint-").append(count).append("\" playOrder=\"").append(count).append("\">\n");
         s.append("      <navLabel>\n");
@@ -95,6 +105,11 @@ public class TocWriter {
         s.append("        <text>").append(title).append("</text>\n");
         s.append("      </navLabel>\n");
         s.append("      <content src=\"").append(filename).append(".xhtml\"/>\n");
+        p.print(s.toString());
+    }
+
+    private static void navPointEnd(PrintStream p) {
+        StringBuilder s = new StringBuilder();
         s.append("    </navPoint>\n");
         p.print(s.toString());
     }
