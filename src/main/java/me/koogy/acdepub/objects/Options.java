@@ -15,52 +15,55 @@ public class Options {
 
     private static Logger log = LogManager.getLogger(Options.class);
 
+    public static String PART_TITLE_ENABLED_PROPERTY    = "part.titles";
     public static String PART_TITLE_TEXT_PROPERTY       = "part.title_text";
     public static String PART_NUMBER_STYLE_PROPERTY     = "part.number_style";
-    public static String CHAPTER_TITLES_PROPERTY        = "chapter.titles";
+    public static String CHAPTER_TITLE_ENABLED_PROPERTY = "chapter.titles";
     public static String CHAPTER_TITLE_TEXT_PROPERTY    = "chapter.title_text";
     public static String CHAPTER_NUMBER_STYLE_PROPERTY  = "chapter.number_style";
     public static String CHAPTER_NUMBER_IN_TOC_PROPERTY = "chapter.number_in_toc";  // part chapters in toc?
 
     public static String CHAPTER_TITLE_TEXT_NONE        = "none";
 
+    String partTitleEnabled = null;
     String partTitleText = null;
     String partNumberStyle = null;
     String chapterTitleText = null;
     String chapterNumberStyle = null;
-    String chapterTitles = null;
+    String chapterTitleEnabled = null;
     String chapterNumberInToc = null;
     
     public Options() {
+        partTitleEnabled = System.getProperty(PART_TITLE_ENABLED_PROPERTY);
         partTitleText = System.getProperty(PART_TITLE_TEXT_PROPERTY);
         partNumberStyle = System.getProperty(PART_NUMBER_STYLE_PROPERTY);
         chapterTitleText = System.getProperty(CHAPTER_TITLE_TEXT_PROPERTY);
         chapterNumberStyle = System.getProperty(CHAPTER_NUMBER_STYLE_PROPERTY);
         // whether any chapter number is printed - defaults to true
-        chapterTitles = System.getProperty(CHAPTER_TITLES_PROPERTY);
+        chapterTitleEnabled = System.getProperty(CHAPTER_TITLE_ENABLED_PROPERTY);
         // does the chapter number appear in the toc - defaults to false
         // (as a second level entry if PartChapter)
         chapterNumberInToc = System.getProperty(CHAPTER_NUMBER_IN_TOC_PROPERTY);
     }
     
-    public Boolean getChapterTitles() {
-        if (chapterTitles != null) {
-            return chapterTitles.equalsIgnoreCase("true");
+    public Boolean isChapterTitleEnabled() {
+        if (chapterTitleEnabled != null) {
+            return chapterTitleEnabled.equalsIgnoreCase("true");
         }
         // default
         return true;
     }
 
-    public void setChapterTitles(Boolean chapterTitles) {
-        if (chapterTitles == null) {
-            this.chapterTitles = null;
+    public void setChapterTitleEnabled(Boolean chapterTitleEnabled) {
+        if (chapterTitleEnabled == null) {
+            this.chapterTitleEnabled = null;
         } else {
             // convert to string
-            this.chapterTitles = "" + chapterTitles;
+            this.chapterTitleEnabled = "" + chapterTitleEnabled;
         }
     }
-    public void setChapterTitles(String chapterTitles) {
-        this.chapterTitles = chapterTitles;
+    public void setChapterTitleEnabled(String chapterTitleEnabled) {
+        this.chapterTitleEnabled = chapterTitleEnabled;
     }
 
     public Boolean getChapterNumberInToc() {
@@ -107,6 +110,26 @@ public class Options {
         this.chapterNumberStyle = chapterNumberStyle;
     }
 
+    public Boolean isPartTitleEnabled() {
+        if (partTitleEnabled != null) {
+            return partTitleEnabled.equalsIgnoreCase("true");
+        }
+        // default
+        return true;
+    }
+
+    public void setPartTitleEnabled(Boolean partTitleEnabled) {
+        if (partTitleEnabled == null) {
+            this.partTitleEnabled = null;
+        } else {
+            // convert to string
+            this.partTitleEnabled = "" + partTitleEnabled;
+        }
+    }
+    public void setPartTitleEnabled(String partTitleEnabled) {
+        this.partTitleEnabled = partTitleEnabled;
+    }
+
     public String getPartTitleText() {
         if (partTitleText != null) {
             return partTitleText;
@@ -140,8 +163,8 @@ public class Options {
         Node valueNode = attr.getNamedItem("value");
         String name = nameNode.getTextContent();
         String value = valueNode.getTextContent();
-        if (name.equalsIgnoreCase(CHAPTER_TITLES_PROPERTY)) {
-            book.getOptions().setChapterTitles(Boolean.parseBoolean(value));
+        if (name.equalsIgnoreCase(CHAPTER_TITLE_ENABLED_PROPERTY)) {
+            book.getOptions().setChapterTitleEnabled(Boolean.parseBoolean(value));
         }
         if (name.equalsIgnoreCase(CHAPTER_TITLE_TEXT_PROPERTY)) {
             book.getOptions().setChapterTitleText(value);
@@ -163,9 +186,10 @@ public class Options {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("{");
-        str.append("chapter.titles[").append(getChapterTitles()).append("] ");
+        str.append("chapter.titles[").append(isChapterTitleEnabled()).append("] ");
         str.append("chapter.titleText[").append(getChapterTitleText()).append("] ");
         str.append("chapter.numberStyle[").append(getChapterNumberStyle()).append("] ");
+        str.append("part.titles[").append(isPartTitleEnabled()).append("] ");
         str.append("part.titleText[").append(getPartTitleText()).append("] ");
         str.append("part.numberStyle[").append(getPartNumberStyle()).append("] ");
         str.append("chapter.numberInToc[").append(getChapterNumberInToc()).append("]}");
@@ -177,9 +201,10 @@ public class Options {
         Options options = new Options();
         options.setChapterNumberStyle(chapterNumberStyle);
         options.setChapterTitleText(chapterTitleText);
-        options.setChapterTitles(chapterTitles);
+        options.setChapterTitleEnabled(chapterTitleEnabled);
         options.setPartNumberStyle(partNumberStyle);
         options.setPartTitleText(partTitleText);
+        options.setPartTitleEnabled(partTitleEnabled);
         options.setChapterNumberInToc(chapterNumberInToc);
         return options;
     }
@@ -192,14 +217,17 @@ public class Options {
         if (chapterTitleText == null) {
             setChapterTitleText(second.chapterTitleText);
         }
-        if (chapterTitles == null) {
-            setChapterTitles(second.chapterTitles);
+        if (chapterTitleEnabled == null) {
+            setChapterTitleEnabled(second.chapterTitleEnabled);
         }
         if (partNumberStyle == null) {
             setPartNumberStyle(second.partNumberStyle);
         }
         if (partTitleText == null) {
             setPartTitleText(second.partTitleText);
+        }
+        if (partTitleEnabled == null) {
+            setPartTitleEnabled(second.partTitleEnabled);
         }
         if (chapterNumberInToc == null) {
             setChapterNumberInToc(second.chapterNumberInToc);

@@ -48,12 +48,12 @@ public class Book {
     
     Info info;
     Options options;
-    List<GenericChapter> prefaces;
+    List<Chapter> prefaces;
     List<Part> parts;           // one of parts or chapters, not both
-    List<GenericChapter> chapters;
-    List<GenericChapter> appendices;
+    List<Chapter> chapters;
+    List<Chapter> appendices;
     String uuid;
-    List<GenericChapter> footnotes;
+    List<Chapter> footnotes;
     int footnoteCounter; // number of footnotes
     public List<String> footnoteLinks = new ArrayList<String>();   // where the footnote links are
 
@@ -73,19 +73,19 @@ public class Book {
         this.options = options;
     }
 
-    public List<GenericChapter> getPrefaces() {
+    public List<Chapter> getPrefaces() {
         return prefaces;
     }
 
-    public void setPrefaces(List<GenericChapter> prefaces) {
+    public void setPrefaces(List<Chapter> prefaces) {
         this.prefaces = prefaces;
     }
 
-    public List<GenericChapter> getChapters() {
+    public List<Chapter> getChapters() {
         return chapters;
     }
 
-    public void setChapters(List<GenericChapter> chapters) {
+    public void setChapters(List<Chapter> chapters) {
         this.chapters = chapters;
     }
 
@@ -97,19 +97,19 @@ public class Book {
         this.parts = parts;
     }
 
-    public List<GenericChapter> getAppendices() {
+    public List<Chapter> getAppendices() {
         return appendices;
     }
 
-    public void setAppendices(List<GenericChapter> appendices) {
+    public void setAppendices(List<Chapter> appendices) {
         this.appendices = appendices;
     }
 
-    public List<GenericChapter> getFootnotes() {
+    public List<Chapter> getFootnotes() {
         return footnotes;
     }
 
-    public void setFootnotes(List<GenericChapter> footnotes) {
+    public void setFootnotes(List<Chapter> footnotes) {
         this.footnotes = footnotes;
     }
 

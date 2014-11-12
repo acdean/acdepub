@@ -110,8 +110,8 @@ public class AcdParser {
             if (name.equalsIgnoreCase(Options.CHAPTER_NUMBER_STYLE_PROPERTY)) {
                 options.setChapterNumberStyle(value);
             }
-            if (name.equalsIgnoreCase(Options.CHAPTER_TITLES_PROPERTY)) {
-                options.setChapterTitles(Boolean.parseBoolean(value));
+            if (name.equalsIgnoreCase(Options.CHAPTER_TITLE_ENABLED_PROPERTY)) {
+                options.setChapterTitleEnabled(Boolean.parseBoolean(value));
             }
             if (name.equalsIgnoreCase(Options.CHAPTER_TITLE_TEXT_PROPERTY)) {
                 options.setChapterTitleText(value);
@@ -122,6 +122,9 @@ public class AcdParser {
             if (name.equalsIgnoreCase(Options.PART_TITLE_TEXT_PROPERTY)) {
                 options.setPartTitleText(value);
             }
+            if (name.equalsIgnoreCase(Options.PART_TITLE_ENABLED_PROPERTY)) {
+                options.setPartTitleEnabled(Boolean.parseBoolean(value));
+            }
         }
         return options;
     }
@@ -129,7 +132,7 @@ public class AcdParser {
     private static void parsePrefix(Book book, String xml) {
         log.info("ParsePrefix");
         List<String> list = extractAllContents(xml, Tag.PREFIX);
-        book.setPrefaces(parseGenericChapters(book, list, GenericChapter.PREFIX));
+        book.setPrefaces(parseChapters(book, list, Chapter.PREFIX));
     }
 
     private static void parseParts(Book book, String xml) {
@@ -163,9 +166,9 @@ public class AcdParser {
                 part.setChapters(new ArrayList<Chapter>());
                 for (String chapterXml : chapters) {
                     String id = String.format(Main.PART_CHAPTER_ID_FORMAT, partCount, chapterCount);
-                    Chapter chapter = (Chapter)parseChapter(book, chapterXml, GenericChapter.PART_CHAPTER, id);
+                    Chapter chapter = (Chapter)parseChapter(book, chapterXml, Chapter.PART_CHAPTER, id);
                     chapter.setId(id);
-                    chapter.setNumbering(getNumbering(GenericChapter.PART_CHAPTER, options.getChapterTitleText(), options.getChapterNumberStyle(), chapterCount));
+                    chapter.setNumbering(getNumbering(Chapter.PART_CHAPTER, options.getChapterTitleText(), options.getChapterNumberStyle(), chapterCount));
                     part.getChapters().add(chapter);
                     chapterCount++;
                 }
@@ -175,16 +178,16 @@ public class AcdParser {
         }
     }
 
-    private static List<GenericChapter> parseGenericChapters(Book book, List<String> chapterStrings, int type) {
+    private static List<Chapter> parseChapters(Book book, List<String> chapterStrings, int type) {
         if (chapterStrings == null || chapterStrings.isEmpty()) {
             return null;
         }
         Options options = book.getOptions();
-        List<GenericChapter> list = new ArrayList<GenericChapter>();
+        List<Chapter> list = new ArrayList<Chapter>();
         int count = 1;
         for(String str : chapterStrings) {
             String id = getId(type, count);
-            GenericChapter chapter = parseChapter(book, str, type, id);
+            Chapter chapter = parseChapter(book, str, type, id);
             chapter.setId(id);
             chapter.setNumbering(getNumbering(type, options.getChapterTitleText(), options.getChapterNumberStyle(), count));
             list.add(chapter);
@@ -196,19 +199,19 @@ public class AcdParser {
     private static void parseChapters(Book book, String xml) {
         log.info("ParseChapters");
         List<String> list = extractAllContents(xml, Tag.CHAPTER);
-        book.setChapters(parseGenericChapters(book, list, GenericChapter.CHAPTER));
+        book.setChapters(parseChapters(book, list, Chapter.CHAPTER));
     }
 
     private static void parseAppendix(Book book, String xml) {
         log.info("ParseAppendix");
         List<String> list = extractAllContents(xml, Tag.APPENDIX);
-        book.setAppendices(parseGenericChapters(book, list, GenericChapter.APPENDIX));
+        book.setAppendices(parseChapters(book, list, Chapter.APPENDIX));
     }
 
     private static void parseFootnotes(Book book, String xml) {
         log.info("ParseFootnotes");
         List<String> list = extractAllContents(xml, Tag.FOOTNOTE);
-        book.setFootnotes(parseGenericChapters(book, list, GenericChapter.FOOTNOTE));
+        book.setFootnotes(parseChapters(book, list, Chapter.FOOTNOTE));
     }
 
     // chapter has a title tag as first element, rest is verbatim body
@@ -220,6 +223,10 @@ public class AcdParser {
         xml = xml.replaceFirst("<" + Tag.TITLE + ">.*</" + Tag.TITLE + ">", "");
         xml = xml.replaceAll("</p>", "</p>\n");
         xml = xml.replaceAll("<hr/>", "<div class=\"hr\">" + HR_TEXT + "</div>");
+        // break is like hr but empty
+        xml = xml.replaceAll("<break/>", "<div class=\"hr\">&nbsp;</div>");
+        // remove single line comments (they clash with mdash below)
+        xml = xml.replaceAll("<!--.*-->", "");
         xml = xml.replaceAll("--", "&mdash;");
         // replace some xml with some xml
         xml = xml.replaceAll("<poem>", "<div class=\"poem\">");
@@ -228,6 +235,8 @@ public class AcdParser {
         xml = xml.replaceAll("</poem1>", "</div>");
         xml = xml.replaceAll("<poem2>", "<div class=\"poem2\">");
         xml = xml.replaceAll("</poem2>", "</div>");
+        xml = xml.replaceAll("<poem3>", "<div class=\"poem3\">");
+        xml = xml.replaceAll("</poem3>", "</div>");
         xml = xml.replaceAll("<letter>", "<div class=\"letter\">");
         xml = xml.replaceAll("</letter>", "</div>");
         xml = xml.replaceAll("<centre>", "<div class=\"centre\">");
@@ -236,6 +245,13 @@ public class AcdParser {
         xml = xml.replaceAll("</center>", "</div>");
         xml = xml.replaceAll("<right>", "<div class=\"right\">");
         xml = xml.replaceAll("</right>", "</div>");
+        // inter-chapter numbered sections
+        xml = xml.replaceAll("<section>", "<h3>");
+        xml = xml.replaceAll("</section>", "</h3>");
+        // inline styles
+        xml = xml.replaceAll("<smallcaps>", "<span class=\"smallcaps\">");
+        xml = xml.replaceAll("</smallcaps>", "</span>");
+
         // replace all the "note" tags with a link to matching footnote
         // this perhaps should be elsewhere
         while (xml.indexOf("<note/>") != -1) {
@@ -252,10 +268,6 @@ public class AcdParser {
             // don't know it until after numbering
             book.footnoteLinks.add(id);
         }
-//        xml = xml.replaceAll("\\ue8", "&agrave;");
-//        xml = xml.replaceAll("\\ue9", "&eacute;");
-//        xml = xml.replaceAll("\\uef", "&aring;");
-//        xml = xml.replaceAll("\\uf8", "&ostroke;");
         // everything else is content
         chapter.setContent(xml);
         chapter.setType(type);

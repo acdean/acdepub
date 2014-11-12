@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.UUID;
 import me.koogy.acdepub.objects.Book;
-import me.koogy.acdepub.objects.GenericChapter;
+import me.koogy.acdepub.objects.Chapter;
 import me.koogy.acdepub.objects.Info;
 import me.koogy.acdepub.objects.Part;
 
@@ -49,12 +49,12 @@ public class ContentWriter {
             // manifest chapter items
             // p.println("<item id=\"ch1\" href=\"ch1.xhtml\" media-type=\"application/xhtml+xml\"/>");
             if (book.getPrefaces() != null) {
-                for (GenericChapter chap : book.getPrefaces()) {
+                for (Chapter chap : book.getPrefaces()) {
                     item(p, chap.getId());
                 }
             }
             if (book.getChapters() != null) {
-                for (GenericChapter chap : book.getChapters()) {
+                for (Chapter chap : book.getChapters()) {
                     item(p, chap.getId());
                 }
             }
@@ -62,14 +62,14 @@ public class ContentWriter {
                 for (Part part : book.getParts()) {
                     item(p, part.getId());
                     if (part.getChapters() != null) {
-                        for (GenericChapter chap : part.getChapters()) {
+                        for (Chapter chap : part.getChapters()) {
                             item(p, chap.getId());
                         }
                     }
                 }
             }
             if (book.getAppendices() != null) {
-                for (GenericChapter chap : book.getAppendices()) {
+                for (Chapter chap : book.getAppendices()) {
                     item(p, chap.getId());
                 }
             }
@@ -87,12 +87,12 @@ public class ContentWriter {
 
             // spine chapter items
             if (book.getPrefaces() != null) {
-                for (GenericChapter chap : book.getPrefaces()) {
+                for (Chapter chap : book.getPrefaces()) {
                     p.println("    <itemref idref=\"" + chap.getId() + "\"/>");
                 }
             }
             if (book.getChapters() != null) {
-                for (GenericChapter chap : book.getChapters()) {
+                for (Chapter chap : book.getChapters()) {
                     p.println("    <itemref idref=\"" + chap.getId() + "\"/>");
                 }
             }
@@ -100,14 +100,14 @@ public class ContentWriter {
                 for (Part part : book.getParts()) {
                     p.println("    <itemref idref=\"" + part.getId() + "\"/>");
                     if (part.getChapters() != null) {
-                        for (GenericChapter chap : part.getChapters()) {
+                        for (Chapter chap : part.getChapters()) {
                             p.println("    <itemref idref=\"" + chap.getId() + "\"/>");
                         }
                     }
                 }
             }
             if (book.getAppendices() != null) {
-                for (GenericChapter chap : book.getAppendices()) {
+                for (Chapter chap : book.getAppendices()) {
                     p.println("<itemref idref=\"" + chap.getId() + "\"/>");
                 }
             }

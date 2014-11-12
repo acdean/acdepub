@@ -23,7 +23,7 @@ public class FootnotesWriter {
             
             p.println("<body class=\"text\">");
             
-            p.println("<h1>Footnotes</h1>");
+            p.println("<h2>Footnotes</h2>");
 
             for (int i = 0 ; i < book.getFootnotes().size() ; i++) {
                 p.println("<a id=\"" + Book.FOOTNOTE_ANCHOR_PREFIX + (i + 1) + "\"/>");

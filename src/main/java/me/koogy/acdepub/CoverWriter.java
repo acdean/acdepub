@@ -60,7 +60,7 @@ public class CoverWriter {
 
             WriterUtils.writeHead(p, info.getTitle());
 
-            p.println("<body>");
+            p.println("<body class=\"image\">");
             p.println("<div id=\"cover-image\">");
             p.println("<img src=\"cover-image.jpg\" alt=\"" + info.getTitle() + "\" />");
             p.println("</div>");

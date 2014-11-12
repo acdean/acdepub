@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.UUID;
 import me.koogy.acdepub.objects.Book;
-import me.koogy.acdepub.objects.GenericChapter;
+import me.koogy.acdepub.objects.Chapter;
 import me.koogy.acdepub.objects.Info;
 import me.koogy.acdepub.objects.Options;
 import me.koogy.acdepub.objects.Part;
@@ -48,8 +48,8 @@ public class TocWriter {
             int count = 1;
             navPoint(p, info.getTitle(), "title_page", count++);
             // chapters
-            if (book.getChapters() != null && options.getChapterTitles()) {
-                for (GenericChapter chap : book.getChapters()) {
+            if (book.getChapters() != null && options.isChapterTitleEnabled()) {
+                for (Chapter chap : book.getChapters()) {
                     if (chap.getTitle() != null) {
                         navPoint(p, chap.getTitle(), chap.getId(), count);
                     } else {
@@ -64,8 +64,8 @@ public class TocWriter {
                     String partLabel = getLabel(part.getInfo().getTitle(), part.getNumbering());
                     navPointStart(p, partLabel, part.getId(), count);
                     count++;
-                    if (part.getChapters() != null && options.getChapterTitles()) {
-                        for (GenericChapter chap : part.getChapters()) {
+                    if (part.getChapters() != null && options.isChapterTitleEnabled()) {
+                        for (Chapter chap : part.getChapters()) {
                             String chapLabel = getLabel(chap.getTitle(), chap.getNumbering());
                             navPoint(p, chapLabel, chap.getId(), count);
                             count++;

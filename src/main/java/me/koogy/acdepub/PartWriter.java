@@ -27,7 +27,8 @@ public class PartWriter {
             WriterUtils.startTitlePage(p);
 
             p.println("<h1 class=\"partTitlePage\">");
-            if (part.getNumbering() != null) {
+            
+            if (part.getNumbering() != null && options.isPartTitleEnabled()) {
                 p.println(part.getNumbering());
                 if (info.getTitle() != null) {
                     p.println("<br/>");

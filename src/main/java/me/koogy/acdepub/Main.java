@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.UUID;
 import me.koogy.acdepub.objects.AcdParser;
 import me.koogy.acdepub.objects.Book;
-import me.koogy.acdepub.objects.GenericChapter;
+import me.koogy.acdepub.objects.Chapter;
 import me.koogy.acdepub.objects.Options;
 import me.koogy.acdepub.objects.Part;
 import org.apache.log4j.ConsoleAppender;
@@ -22,10 +22,10 @@ public class Main {
     private static Logger log = LogManager.getLogger(Main.class);
 
     // private static final String BOOK_XML = "/home/adean/Documents/eBooks/balzac/04/1374/balzac04.xml";
-//    private static final String BOOK_XML = "/home/adean/Documents/eBooks/algernon/acdepub/four_weird_tales.xml";
-//    private static final String BOOK_XML = "/home/adean/Documents/eBooks/wodehouse/school_stories/07_mike/07_mike.xml";
-    private static final String BOOK_XML = "/home/adean/Documents/eBooks/lad_and_lass/lad_and_lass.xml";
-    
+    // private static final String BOOK_XML = "/home/adean/Documents/eBooks/algernon/acdepub/four_weird_tales.xml";
+    // private static final String BOOK_XML = "/home/adean/Documents/eBooks/wodehouse/school_stories/07_mike/07_mike.xml";
+    // private static final String BOOK_XML = "/home/adean/Documents/eBooks/lad_and_lass/lad_and_lass.xml";
+    private static final String BOOK_XML = "/home/adean/Documents/eBooks/moonstone/155/moonstone.xml";
     public static final String PREFACE_ID_FORMAT           = "pre%03d";
     public static final String CHAPTER_ID_FORMAT           = "ch%03d";
     public static final String PART_ID_FORMAT              = "pt%02d";
@@ -59,12 +59,7 @@ public class Main {
         try {
             Book book = AcdParser.parseBook(filename);
             log.debug("Book[" + book + "]");
-            
-            // generate numbers and filenames
-            // NB functionality moving to parser
-//            numberParts(book);
-//            log.debug("Book[" + book + "]");
-            
+
             // write everything
             CoverWriter.write(dir, book);
             ContentWriter.write(dir, book, uid);
@@ -76,26 +71,26 @@ public class Main {
 
             // Chapters
             if (book.getPrefaces() != null) {
-                for (GenericChapter preface : book.getPrefaces()) {
+                for (Chapter preface : book.getPrefaces()) {
                     ChapterWriter.write(dir, book.getInfo(), book.getOptions(), preface);
                 }
             }
             if (book.getChapters() != null) {
-                for (GenericChapter chapter : book.getChapters()) {
-                    ChapterWriter.write(dir, book.getInfo(), book.getOptions(), chapter);
+                for (Chapter chapter : book.getChapters()) {
+                    ChapterWriter.write(dir, book.getInfo(), book.getOptions(), chapter, book.getChapters().size());
                 }
             }
             if (book.getParts() != null) {
                 for (Part part : book.getParts()) {
                     PartWriter.write(dir, part);
-                    for (GenericChapter chapter : part.getChapters()) {
+                    for (Chapter chapter : part.getChapters()) {
                         // NB part info
-                        ChapterWriter.write(dir, part.getInfo(), part.getOptions(), chapter);
+                        ChapterWriter.write(dir, part.getInfo(), part.getOptions(), chapter, part.getChapters().size());
                     }
                 }
             }
             if (book.getAppendices() != null) {
-                for (GenericChapter appendix : book.getAppendices()) {
+                for (Chapter appendix : book.getAppendices()) {
                     ChapterWriter.write(dir, book.getInfo(), book.getOptions(), appendix);
                 }
             }
@@ -111,89 +106,6 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    // jaxb version (out of memory)
-//    static Book parseJaxb(String filename) {
-//        Book book = null;
-//        try {
-//            JAXBContext context = JAXBContext.newInstance(Book.class);
-//            Unmarshaller um = context.createUnmarshaller();
-//            // read book from xml
-//            book = (Book)um.unmarshal(new FileReader(filename));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return book;
-//    }
-    
-    // dom version
-//    static Book parseDom(String filename) {
-//        Book book = new Book();
-//        System.out.println("Options: " + book.getOptions());
-//        try {
-//            File file = new File(filename);
-//            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-//            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-//            Document doc = dBuilder.parse(file);
-//            Parser.parseBook(book, doc);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return book;
-//    }
-
-    // moving this to parser
-    static void numberParts(Book book) {
-//        Options options = book.getOptions();
-//        int count;
-//        
-//        // preamble - no numbering
-//        count = 1;
-//        if (book.getPrefaces() != null) {
-//            for(GenericChapter chap : book.getPrefaces()) {
-//                chap.setId(String.format(PREFACE_ID_FORMAT, count));
-//                count++;
-//            }
-//        }
-//
-//        // there'll be one of chapters or parts
-//
-//        // chapters - with numbering
-//        if (book.getChapters() != null) {
-//            count = 1;
-//            for(GenericChapter chap : book.getChapters()) {
-//                chap.setId(String.format(CHAPTER_ID_FORMAT, count));
-//                chap.setNumbering(numbering(options.getChapterTitleText(), options.getChapterNumberStyle(), count));
-//                count++;
-//            }
-//        }
-//        // parts / chapters - with numbering
-//        if (book.getParts() != null) {
-//            int partCount = 1;
-//            for(Part part : book.getParts()) {
-//                Options partOptions = part.getOptions();
-//                part.setId(String.format(PART_ID_FORMAT, partCount));
-//                count = 1;
-//                if (part.getChapters() != null) {
-//                    for(GenericChapter chap : part.getChapters()) {
-//                        chap.setId(String.format(PART_CHAPTER_ID_FORMAT, partCount, count));
-//                        chap.setNumbering(numbering(partOptions.getChapterTitleText(), partOptions.getChapterNumberStyle(), count));
-//                        count++;
-//                    }
-//                }
-//                partCount++;
-//            }
-//        }
-//
-//        // postamble - no numbering
-//        if (book.getAppendices() != null) {
-//            count = 1;
-//            for(GenericChapter chap : book.getAppendices()) {
-//                chap.setId(String.format(APPENDIX_ID_FORMAT, count));
-//                count++;
-//            }
-//        }
     }
 
     // sets the numbering
