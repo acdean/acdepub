@@ -28,26 +28,31 @@ public class ChapterWriter {
             
             p.println("<body class=\"text\">");
             // appendixes, prefixes or things where chapter titles option is set use chapter names / numbers
-            if (!chapter.isNormalChapter() || options.isChapterTitleEnabled()) {
+            p.println("<!-- chapter: " + chapter + " -->");
+            p.println("<!-- chapterTitleEnabled: " + options.isChapterTitleEnabled() + " -->");
+            p.println("<!-- count: " + count + " -->");
+            if (chapter.isNormalChapter() && count == 1) {
+                // only chapter in part - use book title as chapter title
+                p.println("<h2>");
+                p.println("<span class=\"chapterTitle\">" + info.getTitle() + "</span>");
+                if (chapter.getTitle() != null) {
+                    // this is rare? single chapter with title (gets two chapterTitle spans)
+                    p.println("<br/>");
+                    p.println("<span class=\"chapterTitle\">" + chapter.getTitle() + "</span>");
+                }
+                p.println("</h2>");
+            } else if (!chapter.isNormalChapter() || options.isChapterTitleEnabled()) {
                 // Chapter Heading
-                p.print("<h2>");
+                p.println("<h2>");
                 if (chapter.getNumbering() != null) {
-                    p.print("<span class=\"chapterNumber\">" + chapter.getNumbering() + "</span>");
+                    p.println("<span class=\"chapterNumber\">" + chapter.getNumbering() + "</span>");
                     if (chapter.getTitle() != null) {
-                        p.print("<br/>");
+                        p.println("<br/>");
                     }
                 }
                 if (chapter.getTitle() != null) {
-                    p.print("<span class=\"chapterTitle\">" + chapter.getTitle() + "</span>");
+                    p.println("<span class=\"chapterTitle\">" + chapter.getTitle() + "</span>");
                 }
-                p.println("</h2>");
-            }
-            // this is the only chapter in the book / part. use book / part name as title.
-            // TODO not quite working.
-            if (chapter.isNormalChapter() && count == 1) {
-                // no chapters - use book title as chapter title
-                p.print("<h2>");
-                p.print("<span class=\"chapterTitle\">" + info.getTitle() + "</span>");
                 p.println("</h2>");
             }
             

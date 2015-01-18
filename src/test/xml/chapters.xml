@@ -1,0 +1,25 @@
+<book>
+<info>
+<title>Chapters</title>
+<subtitle>subtitle</subtitle>
+<author>author</author>
+<date>date</date>
+</info>
+
+<chapter>
+<title>Chapter 1</title>
+<p>blah blah chapter 1</p>
+</chapter>
+<chapter>
+<title>Chapter 2</title>
+<p>blah blah chapter 2</p>
+</chapter>
+<chapter>
+<title>Chapter 3</title>
+<p>blah blah chapter 3</p>
+</chapter>
+<chapter>
+<title>Chapter 4</title>
+<p>blah blah chapter 4</p>
+</chapter>
+</book>

@@ -22,6 +22,7 @@ public class Options {
     public static String CHAPTER_TITLE_TEXT_PROPERTY    = "chapter.title_text";
     public static String CHAPTER_NUMBER_STYLE_PROPERTY  = "chapter.number_style";
     public static String CHAPTER_NUMBER_IN_TOC_PROPERTY = "chapter.number_in_toc";  // part chapters in toc?
+    public static String CHAPTER_NUMBERS_CONTINUOUS     = "chapter.numbers_continuous";  // chapter numbers continue
 
     public static String CHAPTER_TITLE_TEXT_NONE        = "none";
 
@@ -32,6 +33,7 @@ public class Options {
     String chapterNumberStyle = null;
     String chapterTitleEnabled = null;
     String chapterNumberInToc = null;
+    String chapterNumbersContinuous = null;
     
     public Options() {
         partTitleEnabled = System.getProperty(PART_TITLE_ENABLED_PROPERTY);
@@ -44,6 +46,7 @@ public class Options {
         // does the chapter number appear in the toc - defaults to false
         // (as a second level entry if PartChapter)
         chapterNumberInToc = System.getProperty(CHAPTER_NUMBER_IN_TOC_PROPERTY);
+        chapterNumbersContinuous = System.getProperty(CHAPTER_NUMBERS_CONTINUOUS);
     }
     
     public Boolean isChapterTitleEnabled() {
@@ -154,9 +157,30 @@ public class Options {
         this.partNumberStyle = partNumberStyle;
     }
     
+    public boolean getChapterNumbersContinuous() {
+        if (chapterNumbersContinuous != null) {
+            return chapterNumbersContinuous.equalsIgnoreCase("true");
+        }
+        // default
+        return false;
+    }
+
+    public void setChapterNumbersContinuous(Boolean value) {
+        if (value == null) {
+            this.chapterNumbersContinuous = null;
+        } else {
+            // convert to string
+            this.chapterNumbersContinuous = "" + value;
+        }
+    }
+    public void setChapterNumbersContinuous(String value) {
+        this.chapterNumbersContinuous = value;
+    }
+    
     // options determine rendering style
     // they also have attributes - name, value
     public static void parseOption(Book book, Node node) {
+        log.info("parseOption: IS THIS USED");
         log.info("parseOption");
         NamedNodeMap attr = node.getAttributes();
         Node nameNode = attr.getNamedItem("name");
@@ -181,6 +205,9 @@ public class Options {
         if (name.equalsIgnoreCase(CHAPTER_NUMBER_IN_TOC_PROPERTY)) {
             book.getOptions().setChapterNumberInToc(Boolean.parseBoolean(value));
         }
+        if (name.equalsIgnoreCase(CHAPTER_NUMBERS_CONTINUOUS)) {
+            book.getOptions().setChapterNumbersContinuous(Boolean.parseBoolean(value));
+        }
     }
 
     @Override
@@ -192,7 +219,8 @@ public class Options {
         str.append("part.titles[").append(isPartTitleEnabled()).append("] ");
         str.append("part.titleText[").append(getPartTitleText()).append("] ");
         str.append("part.numberStyle[").append(getPartNumberStyle()).append("] ");
-        str.append("chapter.numberInToc[").append(getChapterNumberInToc()).append("]}");
+        str.append("chapter.numberInToc[").append(getChapterNumberInToc()).append("] ");
+        str.append("chapter.numbersContinuous[").append(getChapterNumbersContinuous()).append("]}");
         return str.toString();
     }
     
@@ -206,6 +234,7 @@ public class Options {
         options.setPartTitleText(partTitleText);
         options.setPartTitleEnabled(partTitleEnabled);
         options.setChapterNumberInToc(chapterNumberInToc);
+        options.setChapterNumbersContinuous(chapterNumbersContinuous);
         return options;
     }
 
@@ -231,6 +260,9 @@ public class Options {
         }
         if (chapterNumberInToc == null) {
             setChapterNumberInToc(second.chapterNumberInToc);
+        }
+        if (chapterNumbersContinuous == null) {
+            setChapterNumbersContinuous(second.chapterNumbersContinuous);
         }
     }
 }

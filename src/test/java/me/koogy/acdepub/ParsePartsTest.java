@@ -38,8 +38,8 @@ public class ParsePartsTest extends TestCase {
                     + "Info:{Info{Title[null], SubTitle[null], Author[null], Date[null], HasCover[false]}}, "
                     + "Numbering:{Part One}, Id:{pt01}, "
                     + "Chapters:{"
-                        + "[Chapter:{Numbering:{Chapter I} Id:{ch01001} Content: 29}, "
-                        + "Chapter:{Numbering:{Chapter II} Id:{ch01002} Content: 29}]"
+                        + "[Chapter:{Numbering:{Chapter I} Id:{ch01001} Normal:{true} Content: 29}, "
+                        + "Chapter:{Numbering:{Chapter II} Id:{ch01002} Normal:{true} Content: 29}]"
                     + "}"
                 + "}]";
 
@@ -82,8 +82,8 @@ public class ParsePartsTest extends TestCase {
                     + "Info:{Info{Title[Part One], SubTitle[Subtitle One], Author[null], Date[null], HasCover[false]}}, "
                     + "Numbering:{Part One}, Id:{pt01}, "
                     + "Chapters:{"
-                        + "[Chapter:{Numbering:{Chapter I} Title:{Chapter Title 1} Id:{ch01001} Content: 81}, "
-                        + "Chapter:{Numbering:{Chapter II} Title:{Chapter Title 2} Id:{ch01002} Content: 42}]"
+                        + "[Chapter:{Numbering:{Chapter I} Title:{Chapter Title 1} Id:{ch01001} Normal:{true} Content: 81}, "
+                        + "Chapter:{Numbering:{Chapter II} Title:{Chapter Title 2} Id:{ch01002} Normal:{true} Content: 42}]"
                     + "}"
                 + "}]";
 
@@ -130,11 +130,11 @@ public class ParsePartsTest extends TestCase {
         String expected = "[Part:{"
                     + "Info:{Info{Title[Title 1], SubTitle[Subtitle 1], Author[Author 1], Date[2001], HasCover[false]}}, "
                     + "Numbering:{PART ONE}, Id:{pt01}, "
-                    + "Chapters:{[Chapter:{Numbering:{Chapter I} Id:{ch01001} Content: 24}]}}, "
+                    + "Chapters:{[Chapter:{Numbering:{Chapter I} Id:{ch01001} Normal:{true} Content: 24}]}}, "
                 + "Part:{"
                     + "Info:{Info{Title[Title 2], SubTitle[Subtitle 2], Author[Author 2], Date[null], HasCover[false]}}, "
                     + "Numbering:{PART TWO}, Id:{pt02}, "
-                    + "Chapters:{[Chapter:{Numbering:{Chapter I} Id:{ch02001} Content: 24}]}}"
+                    + "Chapters:{[Chapter:{Numbering:{Chapter I} Id:{ch02001} Normal:{true} Content: 24}]}}"
                 + "]";
         
         parseBook(s, expected);

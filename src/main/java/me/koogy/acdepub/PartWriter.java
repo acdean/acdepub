@@ -39,13 +39,13 @@ public class PartWriter {
             }
             p.println("</h1>");
             if (info.getSubtitle() != null) {
-                p.println("<h1 class=\"partSubtitle\">" + info.getSubtitle() + "</h1>");
+                p.println("<h1 class=\"subtitle\">" + info.getSubtitle() + "</h1>");
             }
             if (info.getAuthor() != null) {
-                p.println("<h2 class=\"partAuthor\">" + info.getAuthor() + "</h2>");
+                p.println("<h2 class=\"author\">" + info.getAuthor() + "</h2>");
             }
             if (info.getDate() != null) {
-                p.println("<h3 class=\"partDate\">" + info.getDate() + "</h3>");
+                p.println("<h3 class=\"date\">" + info.getDate() + "</h3>");
             }
 
             WriterUtils.endTitlePage(p);

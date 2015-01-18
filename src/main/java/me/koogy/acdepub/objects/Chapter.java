@@ -78,6 +78,7 @@ public class Chapter {
             s.append("Title:{").append(title).append("} ");
         }
         s.append("Id:{").append(id).append("} ");
+        s.append("Normal:{").append(isNormalChapter()).append("} ");
         if (content != null) {
             s.append("Content: ").append(content.length());
         }

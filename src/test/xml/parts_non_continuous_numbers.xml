@@ -1,0 +1,41 @@
+<book>
+<info>
+<title>Parts With Continuous Numbers</title>
+<subtitle>subtitle</subtitle>
+<author>author</author>
+<date>date</date>
+<option name="part.title_text" value="PartTitleText"/>
+<option name="part.number_style" value="i"/>
+<option name="chapter.title_text" value="ChapterTitleText"/>
+<option name="chapter.number_style" value="i"/>
+<option name="chapter.numbers_continuous" value="false"/>
+</info>
+
+<part>
+<info>
+<title>PartTitle1</title>
+</info>
+<chapter>
+<title>ChapterTitle1</title>
+<p>blah blah part 1 chapter 1</p>
+</chapter>
+<chapter>
+<title>ChapterTitle2</title>
+<p>blah blah part 1 chapter 2</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>PartTitle2</title>
+</info>
+<chapter>
+<title>ChapterTitle3</title>
+<p>blah blah part 2 chapter 3</p>
+</chapter>
+<chapter>
+<title>ChapterTitle4</title>
+<p>blah blah part 2 chapter 4</p>
+</chapter>
+</part>
+</book>

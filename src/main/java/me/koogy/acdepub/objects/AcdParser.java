@@ -125,7 +125,11 @@ public class AcdParser {
             if (name.equalsIgnoreCase(Options.PART_TITLE_ENABLED_PROPERTY)) {
                 options.setPartTitleEnabled(Boolean.parseBoolean(value));
             }
+            if (name.equalsIgnoreCase(Options.CHAPTER_NUMBERS_CONTINUOUS)) {
+                options.setChapterNumbersContinuous(Boolean.parseBoolean(value));
+            }
         }
+        log.info("Options[" + options + "]");
         return options;
     }
 
@@ -140,9 +144,9 @@ public class AcdParser {
         List<String> parts = extractAllContents(xml, Tag.PART);
         if (parts != null && !parts.isEmpty()) {
             int partCount = 1;
+            int chapterCount = 1;
             book.setParts(new ArrayList<Part>());
             for (String partXml : parts) {
-                int chapterCount = 1;
                 Part part = new Part();
                 part.setId(String.format(Main.PART_ID_FORMAT, partCount));
                 // part info = book info + part info
@@ -164,6 +168,10 @@ public class AcdParser {
                 part.setNumbering(getNumbering(Part.PART, options.getPartTitleText(), options.getPartNumberStyle(), partCount));
                 List<String> chapters = extractAllContents(partXml, Tag.CHAPTER);
                 part.setChapters(new ArrayList<Chapter>());
+                if (!options.getChapterNumbersContinuous()) {
+                    // reset chapter count per part
+                    chapterCount = 1;
+                }
                 for (String chapterXml : chapters) {
                     String id = String.format(Main.PART_CHAPTER_ID_FORMAT, partCount, chapterCount);
                     Chapter chapter = (Chapter)parseChapter(book, chapterXml, Chapter.PART_CHAPTER, id);
@@ -246,11 +254,13 @@ public class AcdParser {
         xml = xml.replaceAll("<right>", "<div class=\"right\">");
         xml = xml.replaceAll("</right>", "</div>");
         // inter-chapter numbered sections
-        xml = xml.replaceAll("<section>", "<h3>");
-        xml = xml.replaceAll("</section>", "</h3>");
+        xml = xml.replaceAll("<section>", "\n<h3>");
+        xml = xml.replaceAll("</section>", "</h3>\n");
         // inline styles
         xml = xml.replaceAll("<smallcaps>", "<span class=\"smallcaps\">");
         xml = xml.replaceAll("</smallcaps>", "</span>");
+        xml = xml.replaceAll("<sc>", "<span class=\"smallcaps\">");
+        xml = xml.replaceAll("</sc>", "</span>");
 
         // replace all the "note" tags with a link to matching footnote
         // this perhaps should be elsewhere
@@ -262,7 +272,7 @@ public class AcdParser {
                     + "<a href=\"" + Book.FOOTNOTES_FILENAME
                     + "#" + Book.FOOTNOTE_ANCHOR_PREFIX + book.footnoteCounter + "\">"
                     + "[" + book.footnoteCounter + "]"
-                    + "</a>"    //end of link
+                    + "</a>"    // end of link
                     + "</a>");  // end of anchor
             // need to store the filename for this link
             // don't know it until after numbering

@@ -64,7 +64,7 @@ public class TocWriter {
                     String partLabel = getLabel(part.getInfo().getTitle(), part.getNumbering());
                     navPointStart(p, partLabel, part.getId(), count);
                     count++;
-                    if (part.getChapters() != null && options.isChapterTitleEnabled()) {
+                    if (part.getChapters() != null && options.isChapterTitleEnabled() && options.getChapterNumberInToc()) {
                         for (Chapter chap : part.getChapters()) {
                             String chapLabel = getLabel(chap.getTitle(), chap.getNumbering());
                             navPoint(p, chapLabel, chap.getId(), count);
