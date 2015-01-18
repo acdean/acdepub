@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import me.koogy.acdepub.Main;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -362,6 +364,14 @@ public class AcdParser {
         source = source.substring(fromIndex);
 
         String str = null;
+        
+        // check for attributes first
+        Pattern pattern = Pattern.compile(".* " + name + "=\"([^\"]*)\".*");
+        Matcher matcher = pattern.matcher(source);
+        if (matcher.matches()) {
+            return matcher.group(1);
+        }
+        
         // can't search for <name> because of attributes
         int start = source.indexOf("<" + name);
         if (start == -1) {

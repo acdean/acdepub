@@ -140,6 +140,52 @@ public class ParsePartsTest extends TestCase {
         parseBook(s, expected);
     }
 
+    // attributes
+    // title etc of part 1 are done as attributes rather than info. should be identical result to above.
+    public void testParsePartAttributes() {
+        System.out.println("\ntestParseParts2");
+        // book without part info
+        String s = "<xml>"
+                + "<book>"
+                + "<info>"
+                +   "<title>Title</title>"
+                +   "<subtitle>Subtitle</subtitle>"
+                +   "<author>Various</author>"
+                +   "<date>1970</date>"
+                +   "<option name=\"part.title_text\" value=\"PART\"/>"
+                +   "<option name=\"part.number_style\" value=\"ONE\"/>"
+                + "</info>"
+                + "<part>"
+                +   "<info title=\"Title 1\" subtitle=\"Subtitle 1\" author=\"Author 1\" date=\"2001\"/>"
+                +   "<chapter>"
+                +     "<p>Part 1 Chapter 1</p>"
+                +   "</chapter>"
+                + "</part>"
+                + "<part>"
+                + "<info>"
+                +   "<title>Title 2</title>"
+                +   "<subtitle>Subtitle 2</subtitle>"
+                +   "<author>Author 2</author>"
+                    // no date
+                + "</info>"
+                +   "<chapter>"
+                +     "<p>Part 2 Chapter 1</p>"
+                +   "</chapter>"
+                + "</part>"
+                + "</book>";
+        String expected = "[Part:{"
+                    + "Info:{Info{Title[Title 1], SubTitle[Subtitle 1], Author[Author 1], Date[2001], HasCover[false]}}, "
+                    + "Numbering:{PART ONE}, Id:{pt01}, "
+                    + "Chapters:{[Chapter:{Numbering:{Chapter I} Id:{ch01001} Normal:{true} Content: 24}]}}, "
+                + "Part:{"
+                    + "Info:{Info{Title[Title 2], SubTitle[Subtitle 2], Author[Author 2], Date[null], HasCover[false]}}, "
+                    + "Numbering:{PART TWO}, Id:{pt02}, "
+                    + "Chapters:{[Chapter:{Numbering:{Chapter I} Id:{ch02001} Normal:{true} Content: 24}]}}"
+                + "]";
+        
+        parseBook(s, expected);
+    }
+
     // too much
     void parseBook(String input, Book expected) {
         Book actual = AcdParser.parseBook(input.getBytes());
