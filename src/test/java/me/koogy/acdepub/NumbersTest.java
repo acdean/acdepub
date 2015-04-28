@@ -1,5 +1,6 @@
 package me.koogy.acdepub;
 
+import junit.framework.Assert;
 import junit.framework.TestCase;
 
 /**
@@ -67,6 +68,116 @@ public class NumbersTest extends TestCase {
         for (int i = 0 ; i < 30 ; i++) {
             String result = Numbers.number("A", i);
             System.out.println("ALPHA[" + i + "]: [" + result + "]");
+        }
+    }
+    
+    public void testOrdinals() {
+        String[] result = {
+            null,
+            "First",
+            "Second",
+            "Third",
+            "Fourth",
+            "Fifth",
+            "Sixth",
+            "Seventh",
+            "Eighth",
+            "Ninth",
+            "Tenth",
+            "Eleventh",
+            "Twelfth",
+            "Thirteenth",
+            "Fourteenth",
+            "Fifteenth",
+            "Sixteenth",
+            "Seventeenth",
+            "Eighteenth",
+            "Nineteenth",
+            "Twentieth",
+            "Twenty-First",
+            "Twenty-Second",
+            "Twenty-Third",
+            "Twenty-Fourth",
+            "Twenty-Fifth",
+            "Twenty-Sixth",
+            "Twenty-Seventh",
+            "Twenty-Eighth",
+            "Twenty-Ninth",
+            "Thirtieth",
+            "Thirty-First",
+            "Thirty-Second",
+            "Thirty-Third",
+            "Thirty-Fourth",
+            "Thirty-Fifth",
+            "Thirty-Sixth",
+            "Thirty-Seventh",
+            "Thirty-Eighth",
+            "Thirty-Ninth",
+            "Fortieth",
+            "Forty-First",
+            "Forty-Second",
+            "Forty-Third",
+            "Forty-Fourth",
+            "Forty-Fifth",
+            "Forty-Sixth",
+            "Forty-Seventh",
+            "Forty-Eighth",
+            "Forty-Ninth",
+            "Fiftieth",
+            "Fifty-First",
+            "Fifty-Second",
+            "Fifty-Third",
+            "Fifty-Fourth",
+            "Fifty-Fifth",
+            "Fifty-Sixth",
+            "Fifty-Seventh",
+            "Fifty-Eighth",
+            "Fifty-Ninth",
+            "Sixtieth",
+            "Sixty-First",
+            "Sixty-Second",
+            "Sixty-Third",
+            "Sixty-Fourth",
+            "Sixty-Fifth",
+            "Sixty-Sixth",
+            "Sixty-Seventh",
+            "Sixty-Eighth",
+            "Sixty-Ninth",
+            "Seventieth",
+            "Seventy-First",
+            "Seventy-Second",
+            "Seventy-Third",
+            "Seventy-Fourth",
+            "Seventy-Fifth",
+            "Seventy-Sixth",
+            "Seventy-Seventh",
+            "Seventy-Eighth",
+            "Seventy-Ninth",
+            "Eightieth",
+            "Eighty-First",
+            "Eighty-Second",
+            "Eighty-Third",
+            "Eighty-Fourth",
+            "Eighty-Fifth",
+            "Eighty-Sixth",
+            "Eighty-Seventh",
+            "Eighty-Eighth",
+            "Eighty-Ninth",
+            "Ninetieth",
+            "Ninety-First",
+            "Ninety-Second",
+            "Ninety-Third",
+            "Ninety-Fourth",
+            "Ninety-Fifth",
+            "Ninety-Sixth",
+            "Ninety-Seventh",
+            "Ninety-Eighth",
+            "Ninety-Ninth"
+        };
+        for (int i = 1 ; i < 100 ; i++) {
+            String s = Numbers.number("First", i);
+            System.out.println(s);
+            Assert.assertEquals(result[i], s);
         }
     }
 }

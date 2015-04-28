@@ -30,6 +30,15 @@ public class Numbers {
         if (style.equals("A")) {
             return alpha(i).toUpperCase();
         }
+        if (style.equals("First")) {
+            return ordinal(i);
+        }
+        if (style.equals("FIRST")) {
+            return ordinal(i).toUpperCase();
+        }
+        if (style.equals("first")) {
+            return ordinal(i).toLowerCase();
+        }
         return null;
     }
     
@@ -115,6 +124,66 @@ public class Numbers {
         }
         return null;
     }
+    
+    // first, second etc. up to 100.
+    public static String ordinal(int i) {
+        if (i < 10) {
+            return ordinalUnits(i);
+        }
+        switch(i) {
+            case 10: return "Tenth";
+            case 11: return "Eleventh";
+            case 12: return "Twelfth";
+            case 13: return "Thirteenth";
+            case 15: return "Fifteenth";
+            case 18: return "Eighteenth";
+        }
+        if (i >= 14 && i < 20) {
+            return units(i % 10) + "teenth";
+        }
+        int tens = i / 10;
+        String tenString = ordinalTens(tens);
+        if (i % 10 == 0) {
+            return tenString.replace("ty", "tieth");
+        } else {
+            return tenString + "-" + ordinalUnits(i % 10);
+        }
+    }
+    
+    private static String ordinalUnits(int i) {
+        switch(i) {
+            case 0: return null;
+            case 1: return "First";
+            case 2: return "Second";
+            case 3: return "Third";
+            case 4: return "Fourth";
+            case 5: return "Fifth";
+            case 6: return "Sixth";
+            case 7: return "Seventh";
+            case 8: return "Eighth";
+            case 9: return "Ninth";
+        }
+        // can't get here
+        return null;
+    } 
+
+    // The 10s part of Twenty-Fifth etc
+    private static String ordinalTens(int i) {
+        switch(i) {
+            case 0: return "";
+            case 1: return "";
+            case 2: return "Twenty";
+            case 3: return "Thirty";
+            case 4: return "Forty";
+            case 5: return "Fifty";
+            case 6: return "Sixty";
+            case 7: return "Seventy";
+            case 8: return "Eighty";
+            case 9: return "Ninety";
+        }
+        // can't get here
+        return null;
+    } 
 
     public static String digits(int i) {
         return new Integer(i).toString();

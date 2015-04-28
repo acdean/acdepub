@@ -109,26 +109,22 @@ public class AcdParser {
             Map<String, String> map = extractAttributes(str);
             String name = map.get("name");
             String value = map.get("value");
-            if (name.equalsIgnoreCase(Options.CHAPTER_NUMBER_STYLE_PROPERTY)) {
-                options.setChapterNumberStyle(value);
-            }
-            if (name.equalsIgnoreCase(Options.CHAPTER_TITLE_ENABLED_PROPERTY)) {
-                options.setChapterTitleEnabled(Boolean.parseBoolean(value));
-            }
-            if (name.equalsIgnoreCase(Options.CHAPTER_TITLE_TEXT_PROPERTY)) {
-                options.setChapterTitleText(value);
-            }
-            if (name.equalsIgnoreCase(Options.PART_NUMBER_STYLE_PROPERTY)) {
-                options.setPartNumberStyle(value);
-            }
-            if (name.equalsIgnoreCase(Options.PART_TITLE_TEXT_PROPERTY)) {
-                options.setPartTitleText(value);
-            }
-            if (name.equalsIgnoreCase(Options.PART_TITLE_ENABLED_PROPERTY)) {
-                options.setPartTitleEnabled(Boolean.parseBoolean(value));
-            }
             if (name.equalsIgnoreCase(Options.CHAPTER_NUMBERS_CONTINUOUS)) {
                 options.setChapterNumbersContinuous(Boolean.parseBoolean(value));
+            } else if (name.equalsIgnoreCase(Options.CHAPTER_NUMBER_IN_TOC_PROPERTY)) {
+                options.setChapterNumberInToc(Boolean.parseBoolean(value));
+            } else if (name.equalsIgnoreCase(Options.CHAPTER_NUMBER_STYLE_PROPERTY)) {
+                options.setChapterNumberStyle(value);
+            } else if (name.equalsIgnoreCase(Options.CHAPTER_TITLE_ENABLED_PROPERTY)) {
+                options.setChapterTitleEnabled(Boolean.parseBoolean(value));
+            } else if (name.equalsIgnoreCase(Options.CHAPTER_TITLE_TEXT_PROPERTY)) {
+                options.setChapterTitleText(value);
+            } else if (name.equalsIgnoreCase(Options.PART_NUMBER_STYLE_PROPERTY)) {
+                options.setPartNumberStyle(value);
+            } else if (name.equalsIgnoreCase(Options.PART_TITLE_ENABLED_PROPERTY)) {
+                options.setPartTitleEnabled(Boolean.parseBoolean(value));
+            } else if (name.equalsIgnoreCase(Options.PART_TITLE_TEXT_PROPERTY)) {
+                options.setPartTitleText(value);
             }
         }
         log.info("Options[" + options + "]");
@@ -384,7 +380,8 @@ public class AcdParser {
         int end = source.indexOf("</" + name + ">");
         if (end == -1) {
             // is this a <tag />?
-            if (source.matches(".*<" + name + "[^>]*/>.*")) {
+            String m = ".*<" + name + "[^>]*/>.*";  // dos line endings break this
+            if (source.matches(m)) {
                 end = source.indexOf("/>");
                 str = source.substring(start, end + 2);
                 return str;
