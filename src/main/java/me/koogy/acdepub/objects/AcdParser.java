@@ -235,6 +235,14 @@ public class AcdParser {
         xml = xml.replaceAll("<!--.*-->", "");
         xml = xml.replaceAll("--", "&mdash;");
         // replace some xml with some xml
+        xml = xml.replaceAll("<p0>", "<p class=\"p0\">");
+        xml = xml.replaceAll("</p0>", "</p>");
+        xml = xml.replaceAll("<p1>", "<p class=\"p1\">");
+        xml = xml.replaceAll("</p1>", "</p>");
+        xml = xml.replaceAll("<p2>", "<p class=\"p2\">");
+        xml = xml.replaceAll("</p2>", "</p>");
+        xml = xml.replaceAll("<p3>", "<p class=\"p3\">");
+        xml = xml.replaceAll("</p3>", "</p>");
         xml = xml.replaceAll("<poem>", "<div class=\"poem\">");
         xml = xml.replaceAll("</poem>", "</div>");
         xml = xml.replaceAll("<poem1>", "<div class=\"poem1\">");
@@ -259,6 +267,8 @@ public class AcdParser {
         xml = xml.replaceAll("</smallcaps>", "</span>");
         xml = xml.replaceAll("<sc>", "<span class=\"smallcaps\">");
         xml = xml.replaceAll("</sc>", "</span>");
+        xml = xml.replaceAll("<fixed>", "<pre>");
+        xml = xml.replaceAll("</fixed>", "</pre>");
 
         // replace all the "note" tags with a link to matching footnote
         // this perhaps should be elsewhere

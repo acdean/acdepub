@@ -47,6 +47,19 @@ public class TocWriter {
             p.println("  <navMap>");
             int count = 1;
             navPoint(p, info.getTitle(), "title_page", count++);
+
+            // prefaces
+            if (book.getPrefaces() != null) {
+                for (Chapter chap : book.getPrefaces()) {
+                    if (chap.getTitle() != null) {
+                        navPoint(p, chap.getTitle(), chap.getId(), count);
+                    } else {
+                        navPoint(p, chap.getNumbering(), chap.getId(), count);
+                    }
+                    count++;
+                }
+            }
+
             // chapters
             if (book.getChapters() != null && options.isChapterTitleEnabled()) {
                 for (Chapter chap : book.getChapters()) {
@@ -74,6 +87,18 @@ public class TocWriter {
                     navPointEnd(p);
                 }
             }
+
+            if (book.getAppendices() != null) {
+                for (Chapter chap : book.getAppendices()) {
+                    if (chap.getTitle() != null) {
+                        navPoint(p, chap.getTitle(), chap.getId(), count);
+                    } else {
+                        navPoint(p, chap.getNumbering(), chap.getId(), count);
+                    }
+                    count++;
+                }
+            }
+
             p.println("  </navMap>");
             p.println("</ncx>");
         } catch (IOException e) {
