@@ -228,9 +228,9 @@ public class AcdParser {
         // remove title
         xml = xml.replaceFirst("<" + Tag.TITLE + ">.*</" + Tag.TITLE + ">", "");
         xml = xml.replaceAll("</p>", "</p>\n");
-        xml = xml.replaceAll("<hr/>", "<div class=\"hr\">" + HR_TEXT + "</div>");
+        xml = xml.replaceAll("<hr/>", "<div class=\"hr\">" + HR_TEXT + "</div>\n");
         // break is like hr but empty
-        xml = xml.replaceAll("<break/>", "<div class=\"hr\">&nbsp;</div>");
+        xml = xml.replaceAll("<break/>", "<div class=\"hr\">&nbsp;</div>\n");
         // remove single line comments (they clash with mdash below)
         xml = xml.replaceAll("<!--.*-->", "");
         xml = xml.replaceAll("--", "&mdash;");
