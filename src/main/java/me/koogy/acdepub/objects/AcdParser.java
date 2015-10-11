@@ -400,6 +400,8 @@ public class AcdParser {
             }
         }
         str = source.substring(close + 1, end);
+        // fix mdashes in titles etc
+        str = str.replaceAll("--", "&mdash;");
         return str;
     }
 
