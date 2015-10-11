@@ -28,9 +28,10 @@ public class ChapterWriter {
             
             p.println("<body class=\"text\">");
             // appendixes, prefixes or things where chapter titles option is set use chapter names / numbers
-            p.println("<!-- chapter: " + chapter + " -->");
-            p.println("<!-- chapterTitleEnabled: " + options.isChapterTitleEnabled() + " -->");
-            p.println("<!-- count: " + count + " -->");
+            // https://github.com/acdean/acdepub/issues/3
+            //p.println("<!-- chapter: " + chapter + " -->");
+            //p.println("<!-- chapterTitleEnabled: " + options.isChapterTitleEnabled() + " -->");
+            //p.println("<!-- count: " + count + " -->");
             if (chapter.isNormalChapter() && count == 1) {
                 // only chapter in part - use book title as chapter title
                 p.println("<h2>");
