@@ -233,7 +233,7 @@ public class AcdParser {
         xml = xml.replaceAll("<break/>", "<div class=\"hr\">&nbsp;</div>\n");
         // remove single line comments (they clash with mdash below)
         xml = xml.replaceAll("<!--.*-->", "");
-        xml = xml.replaceAll("--", "&mdash;");
+        xml = xml.replaceAll("--", "—");    // proper mdash
         // replace some xml with some xml
         xml = xml.replaceAll("<p0>", "<p class=\"p0\">");
         xml = xml.replaceAll("</p0>", "</p>");
@@ -401,7 +401,7 @@ public class AcdParser {
         }
         str = source.substring(close + 1, end);
         // fix mdashes in titles etc
-        str = str.replaceAll("--", "&mdash;");
+        str = str.replaceAll("--", "—");    // proper mdash
         return str;
     }
 
