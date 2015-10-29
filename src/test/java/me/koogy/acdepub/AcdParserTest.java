@@ -19,6 +19,15 @@ public class AcdParserTest extends TestCase {
         Assert.assertEquals("value2", map.get("name2"));
     }
     
+    // https://github.com/acdean/acdepub/issues/2
+    public void testAttributesWithSpace() {
+        String input = "<tag name1=\"two words\" name2=\"value2\"/>";
+        
+        Map map = AcdParser.extractAttributes(input);
+        Assert.assertEquals("two words", map.get("name1"));
+        Assert.assertEquals("value2", map.get("name2"));
+    }
+    
     public void testExtractContentsTag() {
         String source = "Preamble <tag>This is a string</tag> postamble";
         String name = "tag";

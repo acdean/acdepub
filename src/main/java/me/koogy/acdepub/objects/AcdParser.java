@@ -340,19 +340,22 @@ public class AcdParser {
     }
     
     // <tag name="value" name2="value2"/> -> hashmap
+    // use regexp? [a-zA-Z0-9]*="[^"]*"
     public static Map<String, String> extractAttributes(String source) {
         System.out.println("ExtractAttributes: [" + source + "]");
         Map<String, String> map = null;
         // strip first word - tag name
         source = source.replaceFirst("<[a-zA-Z]* ", "");
-        source = source.replace("/>", "");
-        String[] strings = source.split(" ");
+        source = source.replace("/>", " ");
+        // string is now [name="value1" name="value2" ]
+        // so we can split on [" ]
+        String[] strings = source.split("\" ");
         if (strings.length != 0) {
             map = new HashMap<String, String>();
             for (String s : strings) {
                 // name="value"
                 String name = s.substring(0, s.indexOf("="));
-                String value = s.substring(s.indexOf("\"") + 1, s.lastIndexOf("\""));
+                String value = s.substring(s.indexOf("\"") + 1);
                 map.put(name, value);
             }
         }
