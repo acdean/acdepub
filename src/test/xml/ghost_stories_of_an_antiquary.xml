@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<book>
+<!-- multiple stories, one author -->
+<info>
+<title>Ghost Stories of an Antiquary</title>
+<subtitle>Volume 1</subtitle>
+<author>M. R. James</author>
+<date>1904</date>
+<option name="part.titles" value="off"/>
+</info>
+
+<prefix>
+<p>These stories are dedicated to all those who at various times have listened to them.</p>
+</prefix>
+
+<prefix>
+<p>If anyone is curious about my local settings, let it be recorded that St Bertrand de Comminges and Viborg are real places...</p>
+</prefix>
+
+<part>
+<info>
+<title>Canon Alberic's Scrap-Book</title>
+</info>
+<chapter>
+<p>St Bertrand de Comminges is a decayed town on the spurs of the Pyrenees, not very far from Toulouse, and still nearer to Bagnères-de-Luchon...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>Lost Hearts</title>
+</info>
+<chapter>
+<p>It was, as far as I can ascertain, in September of the year 1811 that a post-chaise drew up before the door of Aswarby Hall, in the heart of Lincolnshire...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>The Mezzotint</title>
+</info>
+<chapter>
+<p>Some time ago I believe I had the pleasure of telling you the story of an adventure which happened to a friend of mine by the name of Dennistoun, during his pursuit of objects of art for the museum at Cambridge...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>The Ash-Tree</title>
+</info>
+<chapter>
+<p>Everyone who has travelled over Eastern England knows the smaller country-houses with which it is studded--the rather dank little buildings, usually in the Italian style, surrounded with parks of some eighty to a hundred acres...</p>
+</chapter> 
+</part> 
+
+<part> 
+<info> 
+<title>Number 13</title> 
+</info> 
+<chapter> 
+<p>Among the towns of Jutland, Viborg justly holds a high place...</p>
+</chapter> 
+</part> 
+
+<part> 
+<info> 
+<title>Count Magnus</title> 
+</info> 
+<chapter> 
+<p>By what means the papers out of which I have made a connected story came 
+into my hands is the last point which the reader will learn from these 
+pages...</p>
+</chapter> 
+</part> 
+
+<part> 
+<info> 
+<title>'Oh, Whistle, And I'll Come To You, My Lad'</title> 
+</info> 
+<chapter> 
+<p>'I suppose you will be getting away pretty soon, now Full Term is over, Professor,' said a person not in the story to the Professor of Ontography, soon after they had sat down next to each other at a feast in the hospitable hall of St James's College.</p>
+</chapter> 
+</part> 
+
+<part> 
+<info> 
+<title>The Treasure Of Abbot Thomas</title> 
+</info> 
+<chapter> 
+<letter>
+<p>Verum usque in praesentem diem multa garriunt inter se Canonici de abscondito quodam istius Abbatis Thomae thesauro, quem saepe, quanquam ahduc incassum, quaesiverunt Steinfeldenses...</p>
+</letter>
+</chapter> 
+
+<chapter> 
+<p>Mr Gregory, the Rector of Parsbury, had strolled out before breakfast, it 
+being a fine autumn morning, as far as the gate of his carriage-drive, 
+with intent to meet the postman and sniff the cool air...</p>
+</chapter> 
+
+<chapter> 
+<p>This was Mr Somerton's story:</p>
+</chapter> 
+</part> 
+</book> 

@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<book>
+<!-- various stories, each with a different author -->
+<info>
+<title>Best Russian Short Stories</title>
+<author>Various</author>
+<option name="part.titles" value="off"/>
+</info>
+
+<prefix>
+<title>INTRODUCTION</title>
+<p>Conceive the joy of a lover of nature who, leaving the art galleries, wanders out among the trees and wild flowers and birds that the pictures of the galleries have sentimentalised...</p>
+</prefix>
+
+<prefix>
+<p>"Everything is subordinated to two main requirements--humanitarian ideals and fidelity to life. This is the secret of the marvellous simplicity of Russian literary art."--THOMAS SELTZER.</p>
+</prefix>
+
+<part>
+<info>
+<title>THE QUEEN OF SPADES</title>
+<author>ALEXSANDR S. PUSHKIN</author>
+</info>
+<chapter>
+<p>There was a card party at the rooms of Narumov of the Horse Guards...</p>
+</chapter>
+
+<chapter>
+<p>The old Countess A---- was seated in her dressing-room in front of her looking-glass...</p>
+</chapter>
+
+<chapter>
+<p>Lizaveta Ivanovna had scarcely taken off her hat and cloak, when the Countess sent for her and again ordered her to get the carriage ready...</p>
+</chapter>
+
+<chapter>
+<p>Lizaveta Ivanovna was sitting in her room, still in her ball dress, lost in deep thought...</p>
+</chapter>
+
+<chapter>
+<p>Three days after the fatal night, at nine o'clock in the morning, Hermann repaired to the Convent of ----, where the last honours were to be paid to the mortal remains of the old Countess...</p>
+</chapter>
+
+<chapter>
+<p>Two fixed ideas can no more exist together in the moral world than two bodies can occupy one and the same place in the physical world...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>THE CLOAK</title>
+<author>NIKOLAY V. GOGOL</author>
+</info>
+<chapter>
+<p>In the department of----, but it is better not to mention the department...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>THE DISTRICT DOCTOR</title>
+<author>IVAN S. TURGENEV</author>
+</info>
+<chapter>
+<p>One day in autumn on my way back from a remote part of the country I caught cold and fell ill...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>THE CHRISTMAS TREE AND THE WEDDING</title>
+<author>FIODOR M. DOSTOYEVSKY</author>
+</info>
+<chapter>
+<p>The other day I saw a wedding...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>GOD SEES THE TRUTH, BUT WAITS</title>
+<author>LEO N. TOLSTOY</author>
+</info>
+<chapter>
+<p>In the town of Vladimir lived a young merchant named Ivan Dmitrich Aksionov...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>HOW A MUZHIK FED TWO OFFICIALS</title>
+<author>M.Y. SALTYKOV [<i>N.Shchedrin</i>]</author>
+</info>
+<chapter>
+<p>Once upon a time there were two Officials...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>THE SHADES, A PHANTASY</title>
+<author>VLADIMIR G. KORLENKO</author>
+</info>
+<chapter>
+<p>A month and two days had elapsed since the judges, amid the loud acclaim of the Athenian people, had pronounced the death sentence against the philosopher Socrates because he had sought to destroy faith in the gods...</p>
+</chapter>
+
+<chapter>
+<p>During those sad days Xenophon, the general, a pupil of Socrates, was marching with his Ten Thousand in a distant land, amid dangers, seeking a way of return to his beloved fatherland...</p>
+</chapter>
+
+<chapter>
+<p>It seemed as if the unknown gods of eternal night had heard his impious prayer...</p>
+</chapter>
+
+<chapter>
+<p>On a rocky slope sat a man in deep despair...</p>
+</chapter>
+
+<chapter>
+<p>It seemed as if the words of the philosopher had taken effect...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>THE SIGNAL</title>
+<author>VSEVOLOD M. GARSHIN</author>
+</info>
+<chapter>
+<p>Semyon Ivanonv was a track-walker...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>THE DARLING</title>
+<author>ANTON P. CHEKOV</author>
+</info>
+<chapter>
+<p>Olenka, the daughter of the retired collegiate assessor Plemyanikov, was sitting on the back-door steps of her house doing nothing...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>THE BET</title>
+<author>ANTON P. CHEKHOV</author>
+</info>
+<chapter>
+<p>It was a dark autumn night. The old banker was pacing from corner to corner of his study, recalling to his mind the party he gave in the autumn fifteen years before...</p>
+</chapter>
+
+<chapter>
+<p>The banker recalled all this, and thought:</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>VANKA</title>
+<author>ANTON P. CHEKHOV</author>
+</info>
+<chapter>
+<p>Nine-year-old Vanka Zhukov, who had been apprentice to the shoemaker Aliakhin for three months, did not go to bed the night before Christmas...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>HIDE AND SEEK</title>
+<author>FIODOR SOLOGUB</author>
+</info>
+<chapter>
+<p>Everything in Lelechka's nursery was bright, pretty, and cheerful...</p>
+</chapter>
+
+<chapter>
+<p>Nurse Fedosya, sitting in the kitchen that evening, was telling the silent housemaid Darya and the talkative old cook Agathya about the young lady of the house, and how the child loved to play <i>priatki</i> with her mother--"She hides her little face, and cries '<i>tiutiu</i>'!"...</p>
+</chapter>
+
+<chapter>
+<p>Lelechka was asleep, and Serafima Aleksandrovna was sitting in her own room, thinking with joy and tenderness of Lelechka...</p>
+</chapter>
+
+<chapter>
+<p>The next day Serafima Aleksandrovna, absorbed in her joyous cares for Lelechka, had forgotten Fedosya's words of the day before...</p>
+</chapter>
+
+<chapter>
+<p>Lelechka was about to fall asleep. No sooner had she climbed into her little bed, protected by a network on all sides, than her eyes began to close from fatigue...</p>
+</chapter>
+
+<chapter>
+<p>Several days passed...</p>
+</chapter>
+
+<chapter>
+<p>Lelechka was dressed, placed in a little coffin, and carried into the parlour...</p>
+</chapter>
+
+<chapter>
+<p>Sergey Modestovich hurried the funeral...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>DETHRONED</title>
+<author>I.N. POTAPENKO</author>
+</info>
+<chapter>
+<p>"Well?" Captain Zarubkin's wife called out impatiently to her husband, rising from the sofa and turning to face him as he entered...</p>
+</chapter>
+
+<chapter>
+<p>One day Gerasim betook himself to a friend from his village, who lived at the extreme outer edge of Moscow, near Sokolnik...</p>
+</chapter>
+
+<chapter>
+<p>Yegor came back and reported that inside of half an hour he would have to have the horses harnessed, ready to drive his master to town...</p>
+</chapter>
+
+<chapter>
+<p>The next evening Gerasim came again and asked...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>LAZARUS</title>
+<author>LEONID ANDREYEV</author>
+</info>
+<chapter>
+<p>When Lazarus rose from the grave, after three days and nights in the mysterious thraldom of death, and returned alive to his home, it was a long time before any one noticed the evil peculiarities in him that were later to make his very name terrible...</p>
+</chapter>
+
+<chapter>
+<p>Some one recklessly lifted the veil...</p>
+</chapter>
+
+<chapter>
+<p>No one took care of Lazarus, and no friends or kindred remained with him...</p>
+</chapter>
+
+<chapter>
+<p>At that time there lived in Rome a celebrated sculptor by the name of Aurelius...</p>
+</chapter>
+
+<chapter>
+<p>And it came about finally that Lazarus was summoned to Rome by the great Augustus...</p>
+
+<p>They dressed him in gorgeous garments as though it had been ordained that he was to remain a bridegroom to an unknown bride until the very day of his death...</p>
+</chapter>
+
+<chapter>
+<p>Lazarus was untouched by the magnificence of the imperial apartments...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>THE REVOLUTIONIST</title>
+<author>MICHAÏL P. ARTZYBASHEV</author>
+</info>
+<chapter>
+<p>Gabriel Andersen, the teacher, walked to the edge of the school garden, where he paused, undecided what to do...</p>
+</chapter>
+
+<chapter>
+<p>The day was as bright and white, but the spring was already advanced...</p>
+</chapter>
+
+<chapter>
+<p>There were seventeen of them, fifteen soldiers, a subaltern and a young beardless officer...</p>
+</chapter>
+
+<chapter>
+<p>Andersen sat motionless on the steps of the town hall, and thought...</p>
+</chapter>
+</part>
+
+<part>
+<info>
+<title>THE OUTRAGE--A TRUE STORY</title>
+<author>ALEKSANDR I. KUPRIN</author>
+</info>
+<chapter>
+<p>It was five o'clock on a July afternoon...</p>
+</chapter>
+</part>
+</book>

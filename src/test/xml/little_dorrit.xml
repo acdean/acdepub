@@ -1,0 +1,307 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<book>
+<!-- two parts, custom titles -->
+<info>
+<author>Charles Dickens</author>
+<title>Little Dorrit</title>
+<date>1857</date>
+<!-- BOOK THE FIRST -->
+<option name="part.title_text" value="BOOK THE"/>
+<option name="part.number_style" value="FIRST"/>
+<!-- CHAPTER 1 -->
+<option name="chapter.number_style" value="1"/>
+</info>
+
+<prefix>
+<title>PREFACE TO THE 1857 EDITION</title>
+<p>I have been occupied with this story, during many working hours of two years...</p>
+</prefix>
+
+<part>
+<info title="POVERTY"/>
+<chapter>
+<title>Sun and Shadow</title>
+<p>Thirty years ago, Marseilles lay burning in the sun, one day.</p>
+</chapter>
+<chapter>
+<title>Fellow Travellers</title>
+<p>'No more of yesterday's howling over yonder to-day, Sir; is there?'</p>
+</chapter>
+<chapter>
+<title>Home</title>
+<p>It was a Sunday evening in London, gloomy, close, and stale...</p>
+</chapter>
+<chapter>
+<title>Mrs Flintwinch has a Dream</title>
+<p>When Mrs Flintwinch dreamed, she usually dreamed, unlike the son of her old mistress, with her eyes shut...</p>
+</chapter>
+<chapter>
+<title>Family Affairs</title>
+<p>As the city clocks struck nine on Monday morning, Mrs Clennam was wheeled by Jeremiah Flintwinch of the cut-down aspect to her tall cabinet...</p>
+</chapter>
+<chapter>
+<title>The Father of the Marshalsea</title>
+<p>Thirty years ago there stood, a few doors short of the church of Saint George, in the borough of Southwark, on the left-hand side of the way going southward, the Marshalsea Prison...</p>
+</chapter>
+<chapter>
+<title>The Child of the Marshalsea</title>
+<p>The baby whose first draught of air had been tinctured with Doctor Haggage's brandy, was handed down among the generations of collegians, like the tradition of their common parent...</p>
+</chapter>
+<chapter>
+<title>The Lock</title>
+<p>Arthur Clennam stood in the street, waiting to ask some passer-by what place that was...</p>
+</chapter>
+<chapter>
+<title>Little Mother</title>
+<p>The morning light was in no hurry to climb the prison wall and look in at the Snuggery windows; and when it did come, it would have been more welcome if it had come alone, instead of bringing a rush of rain with it...</p>
+</chapter>
+<chapter>
+<title>Containing the whole Science of Government</title>
+<p>The Circumlocution Office was (as everybody knows without being told) the most important Department under Government...</p>
+</chapter>
+<chapter>
+<title>Let Loose</title>
+<p>A late, dull autumn night was closing in upon the river Saone...</p>
+</chapter>
+<chapter>
+<title>Bleeding Heart Yard</title>
+<p>In London itself, though in the old rustic road towards a suburb of note where in the days of William Shakespeare, author and stage-player, there were Royal hunting-seats—howbeit no sport is left there now but for hunters of men—Bleeding Heart Yard was to be found; a place much changed in feature and in fortune, yet with some relish of ancient greatness about it...</p>
+</chapter>
+<chapter>
+<title>Patriarchal</title>
+<p>The mention of Mr Casby again revived in Clennam's memory the smouldering embers of curiosity and interest which Mrs Flintwinch had fanned on the night of his arrival...</p>
+</chapter>
+<chapter>
+<title>Little Dorrit's Party</title>
+<p>Arthur Clennam rose hastily, and saw her standing at the door...</p>
+</chapter>
+<chapter>
+<title>Mrs Flintwinch has another Dream</title>
+<p>The debilitated old house in the city, wrapped in its mantle of soot, and leaning heavily on the crutches that had partaken of its decay and worn out with it, never knew a healthy or a cheerful interval, let what would betide...</p>
+</chapter>
+<chapter>
+<title>Nobody's Weakness</title>
+<p>The time being come for the renewal of his acquaintance with the Meagles family, Clennam, pursuant to contract made between himself and Mr Meagles within the precincts of Bleeding Heart Yard, turned his face on a certain Saturday towards Twickenham, where Mr Meagles had a cottage-residence of his own...</p>
+</chapter>
+<chapter>
+<title>Nobody's Rival</title>
+<p>Before breakfast in the morning, Arthur walked out to look about him...</p>
+</chapter>
+<chapter>
+<title>Little Dorrit's Lover</title>
+<p>Little Dorrit had not attained her twenty-second birthday without finding a lover...</p>
+</chapter>
+<chapter>
+<title>The Father of the Marshalsea in two or three Relations</title>
+<p>The brothers William and Frederick Dorrit, walking up and down the College-yard—of course on the aristocratic or Pump side, for the Father made it a point of his state to be chary of going among his children on the Poor side, except on Sunday mornings, Christmas Days, and other occasions of ceremony, in the observance whereof he was very punctual, and at which times he laid his hand upon the heads of their infants, and blessed those young insolvents with a benignity that was highly edifying—the brothers, walking up and down the College-yard together, were a memorable sight...</p>
+</chapter>
+<chapter>
+<title>Moving in Society</title>
+<p>If Young John Chivery had had the inclination and the power to write a satire on family pride, he would have had no need to go for an avenging illustration out of the family of his beloved. He would have found it amply in that gallant brother and that dainty sister, so steeped in mean experiences, and so loftily conscious of the family name; so ready to beg or borrow from the poorest, to eat of anybody's bread, spend anybody's money, drink from anybody's cup and break it afterwards. To have painted the sordid facts of their lives, and they throughout invoking the death's head apparition of the family gentility to come and scare their benefactors, would have made Young John a satirist of the first water.</p>
+</chapter>
+<chapter>
+<title>Mr Merdle's Complaint</title>
+<p>Upon that establishment of state, the Merdle establishment in Harley Street, Cavendish Square, there was the shadow of no more common wall than the fronts of other establishments of state on the opposite side of the street...</p>
+</chapter>
+<chapter>
+<title>A Puzzle</title>
+<p>Mr Clennam did not increase in favour with the Father of the Marshalsea in the ratio of his increasing visits...</p>
+</chapter>
+<chapter>
+<title>Machinery in Motion</title>
+<p>Mr Meagles bestirred himself with such prompt activity in the matter of the negotiation with Daniel Doyce which Clennam had entrusted to him, that he soon brought it into business train, and called on Clennam at nine o'clock one morning to make his report...</p>
+</chapter>
+<chapter>
+<title>Fortune-Telling</title>
+<p>Little Dorrit received a call that same evening from Mr Plornish, who, having intimated that he wished to speak to her privately, in a series of coughs so very noticeable as to favour the idea that her father, as regarded her seamstress occupation, was an illustration of the axiom that there are no such stone-blind men as those who will not see, obtained an audience with her on the common staircase outside the door...</p>
+</chapter>
+<chapter>
+<title>Conspirators and Others</title>
+<p>The private residence of Mr Pancks was in Pentonville, where he lodged on the second-floor of a professional gentleman in an extremely small way, who had an inner-door within the street door, poised on a spring and starting open with a click like a trap; and who wrote up in the fan-light, RUGG, GENERAL AGENT, ACCOUNTANT, DEBTS RECOVERED...</p>
+</chapter>
+<chapter>
+<title>Nobody's State of Mind</title>
+<p>If Arthur Clennam had not arrived at that wise decision firmly to restrain himself from loving Pet, he would have lived on in a state of much perplexity, involving difficult struggles with his own heart...</p>
+</chapter>
+<chapter>
+<title>Five-and-Twenty</title>
+<p>A frequently recurring doubt, whether Mr Pancks's desire to collect information relative to the Dorrit family could have any possible bearing on the misgivings he had imparted to his mother on his return from his long exile, caused Arthur Clennam much uneasiness at this period...</p>
+</chapter>
+<chapter>
+<title>Nobody's Disappearance</title>
+<p>Not resting satisfied with the endeavours he had made to recover his lost charge, Mr Meagles addressed a letter of remonstrance, breathing nothing but goodwill, not only to her, but to Miss Wade too...</p>
+</chapter>
+<chapter>
+<title>Mrs Flintwinch goes on Dreaming</title>
+<p>The house in the city preserved its heavy dulness through all these transactions, and the invalid within it turned the same unvarying round of life...</p>
+</chapter>
+<chapter>
+<title>The Word of a Gentleman</title>
+<p>When Mr and Mrs Flintwinch panted up to the door of the old house in the twilight, Jeremiah within a second of Affery, the stranger started back...</p>
+</chapter>
+<chapter>
+<title>Spirit</title>
+<p>Anybody may pass, any day, in the thronged thoroughfares of the metropolis, some meagre, wrinkled, yellow old man (who might be supposed to have dropped from the stars, if there were any star in the Heavens dull enough to be suspected of casting off so feeble a spark), creeping along with a scared air, as though bewildered and a little frightened by the noise and bustle...</p>
+</chapter>
+<chapter>
+<title>More Fortune-Telling</title>
+<p>Maggy sat at her work in her great white cap with its quantity of opaque frilling hiding what profile she had (she had none to spare), and her serviceable eye brought to bear upon her occupation, on the window side of the room...</p>
+</chapter>
+<chapter>
+<title>Mrs Merdle's Complaint</title>
+<p>Resigning herself to inevitable fate by making the best of those people, the Miggleses, and submitting her philosophy to the draught upon it, of which she had foreseen the likelihood in her interview with Arthur, Mrs Gowan handsomely resolved not to oppose her son's marriage...</p>
+</chapter>
+<chapter>
+<title>A Shoal of Barnacles</title>
+<p>Mr Henry Gowan and the dog were established frequenters of the cottage, and the day was fixed for the wedding...</p>
+</chapter>
+<chapter>
+<title>What was behind Mr Pancks on Little Dorrit's Hand</title>
+<p>It was at this time that Mr Pancks, in discharge of his compact with Clennam, revealed to him the whole of his gipsy story, and told him Little Dorrit's fortune...</p>
+</chapter>
+<chapter>
+<title>The Marshalsea becomes an Orphan</title>
+<p>And now the day arrived when Mr Dorrit and his family were to leave the prison for ever, and the stones of its much-trodden pavement were to know them no more...</p>
+</chapter>
+</part>
+
+<part>
+<info title="RICHES"/>
+<chapter>
+<title>Fellow Travellers</title>
+<p>In the autumn of the year, Darkness and Night were creeping up to the highest ridges of the Alps...</p>
+</chapter>
+<chapter>
+<title>Mrs General</title>
+<p>It is indispensable to present the accomplished lady who was of sufficient importance in the suite of the Dorrit Family to have a line to herself in the Travellers' Book...</p>
+</chapter>
+<chapter>
+<title>On the Road</title>
+<p>The bright morning sun dazzled the eyes, the snow had ceased, the mists had vanished, the mountain air was so clear and light that the new sensation of breathing it was like the having entered on a new existence...</p>
+</chapter>
+<chapter>
+<title>A Letter from Little Dorrit</title>
+<p>Dear Mr Clennam,...</p>
+</chapter>
+<chapter>
+<title>Something Wrong Somewhere</title>
+<p>The family had been a month or two at Venice, when Mr Dorrit, who was much among Counts and Marquises, and had but scant leisure, set an hour of one day apart, beforehand, for the purpose of holding some conference with Mrs General...</p>
+</chapter>
+<chapter>
+<title>Something Right Somewhere</title>
+<p>To be in the halting state of Mr Henry Gowan; to have left one of two powers in disgust; to want the necessary qualifications for finding promotion with another, and to be loitering moodily about on neutral ground, cursing both; is to be in a situation unwholesome for the mind, which time is not likely to improve...</p>
+</chapter>
+<chapter>
+<title>Mostly, Prunes and Prism</title>
+<p>Mrs General, always on her coach-box keeping the proprieties well together, took pains to form a surface on her very dear young friend, and Mrs General's very dear young friend tried hard to receive it...</p>
+</chapter>
+<chapter>
+<title>The Dowager Mrs Gowan is reminded that 'It Never Does'</title>
+<p>While the waters of Venice and the ruins of Rome were sunning themselves for the pleasure of the Dorrit family, and were daily being sketched out of all earthly proportion, lineament, and likeness, by travelling pencils innumerable, the firm of Doyce and Clennam hammered away in Bleeding Heart Yard, and the vigorous clink of iron upon iron was heard there through the working hours...</p>
+</chapter>
+<chapter>
+<title>Appearance and Disappearance</title>
+<p>'Arthur, my dear boy,' said Mr Meagles, on the evening of the following day, 'Mother and I have been talking this over, and we don't feel comfortable in remaining as we are...</p>
+</chapter>
+<chapter>
+<title>The Dreams of Mrs Flintwinch thicken</title>
+<p>The shady waiting-rooms of the Circumlocution Office, where he passed a good deal of time in company with various troublesome Convicts who were under sentence to be broken alive on that wheel, had afforded Arthur Clennam ample leisure, in three or four successive days, to exhaust the subject of his late glimpse of Miss Wade and Tattycoram...</p>
+</chapter>
+<chapter>
+<title>A Letter from Little Dorrit</title>
+<p>Dear Mr Clennam,...</p>
+</chapter>
+<chapter>
+<title>In which a Great Patriotic Conference is holden</title>
+<p>The famous name of Merdle became, every day, more famous in the land...</p>
+</chapter>
+<chapter>
+<title>The Progress of an Epidemic</title>
+<p>That it is at least as difficult to stay a moral infection as a physical one; that such a disease will spread with the malignity and rapidity of the Plague; that the contagion, when it has once made head, will spare no pursuit or condition, but will lay hold on people in the soundest health, and become developed in the most unlikely constitutions: is a fact as firmly established by experience as that we human creatures breathe an atmosphere...</p>
+</chapter>
+<chapter>
+<title>Taking Advice</title>
+<p>When it became known to the Britons on the shore of the yellow Tiber that their intelligent compatriot, Mr Sparkler, was made one of the Lords of their Circumlocution Office, they took it as a piece of news with which they had no nearer concern than with any other piece of news—any other Accident or Offence—in the English papers...</p>
+</chapter>
+<chapter>
+<title>No just Cause or Impediment why these Two Persons should not be joined together</title>
+<p>Mr Dorrit, on being informed by his elder daughter that she had accepted matrimonial overtures from Mr Sparkler, to whom she had plighted her troth, received the communication at once with great dignity and with a large display of parental pride; his dignity dilating with the widened prospect of advantageous ground from which to make acquaintances, and his parental pride being developed by Miss Fanny's ready sympathy with that great object of his existence...</p>
+</chapter>
+<chapter>
+<title>Getting on</title>
+<p>The newly married pair, on their arrival in Harley Street, Cavendish Square, London, were received by the Chief Butler...</p>
+</chapter>
+<chapter>
+<title>Missing</title>
+<p>The term of Mr Dorrit's visit was within two days of being out, and he was about to dress for another inspection by the Chief Butler (whose victims were always dressed expressly for him), when one of the servants of the hotel presented himself bearing a card...</p>
+</chapter>
+<chapter>
+<title>A Castle in the Air</title>
+<p>Manifold are the cares of wealth and state...</p>
+</chapter>
+<chapter>
+<title>The Storming of the Castle in the Air</title>
+<p>The sun had gone down full four hours, and it was later than most travellers would like it to be for finding themselves outside the walls of Rome, when Mr Dorrit's carriage, still on its last wearisome stage, rattled over the solitary Campagna...</p>
+</chapter>
+<chapter>
+<title>Introduces the next</title>
+<p>The passengers were landing from the packet on the pier at Calais...</p>
+</chapter>
+<chapter>
+<title>The History of a Self-Tormentor</title>
+<p>I have the misfortune of not being a fool...</p>
+</chapter>
+<chapter>
+<title>Who passes by this Road so late?</title>
+<p>Arthur Clennam had made his unavailing expedition to Calais in the midst of a great pressure of business...</p>
+</chapter>
+<chapter>
+<title>Mistress Affery makes a Conditional Promise, respecting her Dreams</title>
+<p>Left alone, with the expressive looks and gestures of Mr Baptist, otherwise Giovanni Baptista Cavalletto, vividly before him, Clennam entered on a weary day...</p>
+</chapter>
+<chapter>
+<title>The Evening of a Long Day</title>
+<p>That illustrious man and great national ornament, Mr Merdle, continued his shining course...</p>
+</chapter>
+<chapter>
+<title>The Chief Butler Resigns the Seals of Office</title>
+<p>The dinner-party was at the great Physician's...</p>
+</chapter>
+<chapter>
+<title>Reaping the Whirlwind</title>
+<p>With a precursory sound of hurried breath and hurried feet, Mr Pancks rushed into Arthur Clennam's Counting-house...</p>
+</chapter>
+<chapter>
+<title>The Pupil of the Marshalsea</title>
+<p>The day was sunny, and the Marshalsea, with the hot noon striking upon it, was unwontedly quiet...</p>
+</chapter>
+<chapter>
+<title>An Appearance in the Marshalsea</title>
+<p>The opinion of the community outside the prison gates bore hard on Clennam as time went on, and he made no friends among the community within...</p>
+</chapter>
+<chapter>
+<title>A Plea in the Marshalsea</title>
+<p>Haggard anxiety and remorse are bad companions to be barred up with...</p>
+</chapter>
+<chapter>
+<title>Closing in</title>
+<p>The last day of the appointed week touched the bars of the Marshalsea gate...</p>
+</chapter>
+<chapter>
+<title>Closed</title>
+<p>The sun had set, and the streets were dim in the dusty twilight, when the figure so long unused to them hurried on its way...</p>
+</chapter>
+<chapter>
+<title>Going</title>
+<p>Arthur continuing to lie very ill in the Marshalsea, and Mr Rugg descrying no break in the legal sky affording a hope of his enlargement, Mr Pancks suffered desperately from self-reproaches...</p>
+</chapter>
+<chapter>
+<title>Going!</title>
+<p>The changes of a fevered room are slow and fluctuating; but the changes of the fevered world are rapid and irrevocable...</p>
+</chapter>
+<chapter>
+<title>Gone</title>
+<p>On a healthy autumn day, the Marshalsea prisoner, weak but otherwise restored, sat listening to a voice that read to him...</p>
+</chapter>
+</part>
+</book>
