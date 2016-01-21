@@ -15,6 +15,7 @@ public class Tag {
     public static final String FOOTNOTES    = "footnotes";
     public static final String FOOTNOTE = "footnote";
     
+    public static final String TOCTITLE = "toctitle";
     public static final String TITLE    = "title";
     public static final String SUBTITLE = "subtitle";
     public static final String AUTHOR   = "author";

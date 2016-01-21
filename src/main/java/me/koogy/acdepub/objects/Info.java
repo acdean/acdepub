@@ -5,14 +5,26 @@ package me.koogy.acdepub.objects;
  */
 public class Info {
 
+    private String tocTitle;
     private String title;
     private String subtitle;
     private String author;
     private String date;
     private boolean hasCover = false;
 
+    public String getTocTitle() {
+        if (tocTitle != null) {
+            return tocTitle;
+        }
+        return getTitle();
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTocTitle(String tocTitle) {
+        this.tocTitle = tocTitle;
     }
 
     public void setTitle(String title) {

@@ -24,7 +24,7 @@ public class ChapterWriter {
             File file = new File(dir, chapter.getId() + ".xhtml");
             p = new PrintStream(new FileOutputStream(file));
 
-            WriterUtils.writeHead(p, info.getTitle());
+            WriterUtils.writeHead(p, info.getTocTitle());
             
             p.println("<body class=\"text\">");
             // appendixes, prefixes or things where chapter titles option is set use chapter names / numbers

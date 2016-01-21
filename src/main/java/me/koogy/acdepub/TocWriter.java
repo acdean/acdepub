@@ -41,12 +41,12 @@ public class TocWriter {
             }
             p.println("  </head>");
             p.println("  <docTitle>");
-            p.println("    <text>" + info.getTitle() + "</text>");
+            p.println("    <text>" + info.getTocTitle() + "</text>");
             p.println("  </docTitle>");
             
             p.println("  <navMap>");
             int count = 1;
-            navPoint(p, info.getTitle(), "title_page", count++);
+            navPoint(p, info.getTocTitle(), "title_page", count++);
 
             // prefaces
             if (book.getPrefaces() != null) {

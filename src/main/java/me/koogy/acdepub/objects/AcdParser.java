@@ -89,6 +89,7 @@ public class AcdParser {
         Info info = null;
         if (infoXml != null) {
             info = new Info();
+            info.setTocTitle(extractContents(infoXml, Tag.TOCTITLE));
             info.setTitle(extractContents(infoXml, Tag.TITLE));
             info.setSubtitle(extractContents(infoXml, Tag.SUBTITLE));
             info.setAuthor(extractContents(infoXml, Tag.AUTHOR));
@@ -217,6 +218,11 @@ public class AcdParser {
     private static void parseFootnotes(Book book, String xml) {
         log.info("ParseFootnotes");
         List<String> list = extractAllContents(xml, Tag.FOOTNOTE);
+        int count = 0;
+        for (String item : list) {
+            log.info("Footnote[" + count + "]: [" + item + "]");
+            count++;
+        }
         book.setFootnotes(parseChapters(book, list, Chapter.FOOTNOTE));
     }
 

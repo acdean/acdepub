@@ -23,7 +23,7 @@ public class PartWriter {
             File file = new File(dir, part.getId() + ".xhtml");
             p = new PrintStream(new FileOutputStream(file));
 
-            WriterUtils.writeHead(p, info.getTitle());
+            WriterUtils.writeHead(p, info.getTocTitle());
             WriterUtils.startTitlePage(p);
 
             p.println("<h1 class=\"partTitlePage\">");

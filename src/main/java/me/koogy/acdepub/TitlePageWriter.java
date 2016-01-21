@@ -21,7 +21,7 @@ public class TitlePageWriter {
             File file = new File(dir, "title_page.xhtml");
             p = new PrintStream(new FileOutputStream(file));
 
-            WriterUtils.writeHead(p, info.getTitle());
+            WriterUtils.writeHead(p, info.getTocTitle());
             WriterUtils.startTitlePage(p);
             
             p.println("<h1 class=\"title\">" + info.getTitle() + "</h1>");

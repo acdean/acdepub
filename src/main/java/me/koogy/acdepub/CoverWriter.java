@@ -58,7 +58,7 @@ public class CoverWriter {
             File file = new File(dir, "cover.xhtml");
             p = new PrintStream(new FileOutputStream(file));
 
-            WriterUtils.writeHead(p, info.getTitle());
+            WriterUtils.writeHead(p, info.getTocTitle());
 
             p.println("<body class=\"image\">");
             p.println("<div id=\"cover-image\">");
