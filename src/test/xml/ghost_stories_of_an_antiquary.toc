@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ncx version="2005-1" xmlns="http://www.daisy.org/z3986/2005/ncx/">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:1e16e8e3-95e3-31b6-97c1-095a73d12709"/>
+    <meta name="dtb:depth" content="1"/>
+    <meta name="dtb:totalPageCount" content="0"/>
+    <meta name="dtb:maxPageNumber" content="0"/>
+  </head>
+  <docTitle>
+    <text>Ghost Stories of an Antiquary</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="navPoint-1" playOrder="1">
+      <navLabel>
+        <text>Ghost Stories of an Antiquary</text>
+      </navLabel>
+      <content src="title_page.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-2" playOrder="2">
+      <navLabel>
+        <text>Preface</text>
+      </navLabel>
+      <content src="pre001.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-3" playOrder="3">
+      <navLabel>
+        <text>Preface</text>
+      </navLabel>
+      <content src="pre002.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-4" playOrder="4">
+      <navLabel>
+        <text>Canon Alberic's Scrap-Book</text>
+      </navLabel>
+      <content src="pt01.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-5" playOrder="5">
+      <navLabel>
+        <text>Lost Hearts</text>
+      </navLabel>
+      <content src="pt02.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-6" playOrder="6">
+      <navLabel>
+        <text>The Mezzotint</text>
+      </navLabel>
+      <content src="pt03.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-7" playOrder="7">
+      <navLabel>
+        <text>The Ash-Tree</text>
+      </navLabel>
+      <content src="pt04.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-8" playOrder="8">
+      <navLabel>
+        <text>Number 13</text>
+      </navLabel>
+      <content src="pt05.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-9" playOrder="9">
+      <navLabel>
+        <text>Count Magnus</text>
+      </navLabel>
+      <content src="pt06.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-10" playOrder="10">
+      <navLabel>
+        <text>'Oh, Whistle, And I'll Come To You, My Lad'</text>
+      </navLabel>
+      <content src="pt07.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-11" playOrder="11">
+      <navLabel>
+        <text>The Treasure Of Abbot Thomas</text>
+      </navLabel>
+      <content src="pt08.xhtml"/>
+    </navPoint>
+  </navMap>
+</ncx>

@@ -1,0 +1,8 @@
+# run acdepub on the .xml files
+# run check_toc against the resulting epubs
+# it'll extract the toc and compare them against the golden files (.toc)
+
+#
+# NB the current toc files may be wrong
+# (no chapter titles in parts for instance)
+#

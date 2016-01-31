@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ncx version="2005-1" xmlns="http://www.daisy.org/z3986/2005/ncx/">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:870fab03-7213-3cc8-aa1a-595066128b14"/>
+    <meta name="dtb:depth" content="1"/>
+    <meta name="dtb:totalPageCount" content="0"/>
+    <meta name="dtb:maxPageNumber" content="0"/>
+  </head>
+  <docTitle>
+    <text>Best Russian Short Stories</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="navPoint-1" playOrder="1">
+      <navLabel>
+        <text>Best Russian Short Stories</text>
+      </navLabel>
+      <content src="title_page.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-2" playOrder="2">
+      <navLabel>
+        <text>INTRODUCTION</text>
+      </navLabel>
+      <content src="pre001.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-3" playOrder="3">
+      <navLabel>
+        <text>null</text>
+      </navLabel>
+      <content src="pre002.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-4" playOrder="4">
+      <navLabel>
+        <text>THE QUEEN OF SPADES</text>
+      </navLabel>
+      <content src="pt01.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-5" playOrder="5">
+      <navLabel>
+        <text>THE CLOAK</text>
+      </navLabel>
+      <content src="pt02.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-6" playOrder="6">
+      <navLabel>
+        <text>THE DISTRICT DOCTOR</text>
+      </navLabel>
+      <content src="pt03.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-7" playOrder="7">
+      <navLabel>
+        <text>THE CHRISTMAS TREE AND THE WEDDING</text>
+      </navLabel>
+      <content src="pt04.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-8" playOrder="8">
+      <navLabel>
+        <text>GOD SEES THE TRUTH, BUT WAITS</text>
+      </navLabel>
+      <content src="pt05.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-9" playOrder="9">
+      <navLabel>
+        <text>HOW A MUZHIK FED TWO OFFICIALS</text>
+      </navLabel>
+      <content src="pt06.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-10" playOrder="10">
+      <navLabel>
+        <text>THE SHADES, A PHANTASY</text>
+      </navLabel>
+      <content src="pt07.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-11" playOrder="11">
+      <navLabel>
+        <text>THE SIGNAL</text>
+      </navLabel>
+      <content src="pt08.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-12" playOrder="12">
+      <navLabel>
+        <text>THE DARLING</text>
+      </navLabel>
+      <content src="pt09.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-13" playOrder="13">
+      <navLabel>
+        <text>THE BET</text>
+      </navLabel>
+      <content src="pt10.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-14" playOrder="14">
+      <navLabel>
+        <text>VANKA</text>
+      </navLabel>
+      <content src="pt11.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-15" playOrder="15">
+      <navLabel>
+        <text>HIDE AND SEEK</text>
+      </navLabel>
+      <content src="pt12.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-16" playOrder="16">
+      <navLabel>
+        <text>DETHRONED</text>
+      </navLabel>
+      <content src="pt13.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-17" playOrder="17">
+      <navLabel>
+        <text>LAZARUS</text>
+      </navLabel>
+      <content src="pt14.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-18" playOrder="18">
+      <navLabel>
+        <text>THE REVOLUTIONIST</text>
+      </navLabel>
+      <content src="pt15.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-19" playOrder="19">
+      <navLabel>
+        <text>THE OUTRAGE—A TRUE STORY</text>
+      </navLabel>
+      <content src="pt16.xhtml"/>
+    </navPoint>
+  </navMap>
+</ncx>

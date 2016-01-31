@@ -1,0 +1,15 @@
+# checks the toc of a generated epub against the golden file version
+# golden file has same name but with .toc instead of .epub
+# usage ./check_toc epub
+
+FILE=$1
+
+rm toc.ncx
+
+# extract toc from epub
+unzip ${FILE} toc.ncx
+
+# compare
+diff toc.ncx ${FILE%.epub}.toc
+
+rm toc.ncx
