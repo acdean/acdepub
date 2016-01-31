@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.UUID;
 import me.koogy.acdepub.objects.Book;
 import me.koogy.acdepub.objects.Chapter;
 import me.koogy.acdepub.objects.Info;
@@ -15,7 +14,7 @@ import me.koogy.acdepub.objects.Part;
  */
 public class ContentWriter {
     
-    public static void write(File dir, Book book, UUID uid) {
+    public static void write(File dir, Book book) {
         Info info = book.getInfo();
         
         PrintStream p = null;
@@ -28,7 +27,7 @@ public class ContentWriter {
             p.println("  <metadata xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:opf=\"http://www.idpf.org/2007/opf\">");
             p.println("    <dc:title>" + info.getTocTitle() + "</dc:title>");
             p.println("    <dc:language>en_GB</dc:language>");
-            p.println("    <dc:identifier id=\"BookId\">urn:uuid:" + uid + "</dc:identifier>");
+            p.println("    <dc:identifier id=\"BookId\">urn:uuid:" + book.getUuid() + "</dc:identifier>");
             p.println("    <dc:creator opf:role=\"aut\">" + info.getAuthor() + "</dc:creator>");
             if (info.getDate() != null) {
                 p.println("    <dc:date>" + info.getDate() + "</dc:date>");

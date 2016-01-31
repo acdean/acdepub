@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.UUID;
 import me.koogy.acdepub.objects.Book;
 import me.koogy.acdepub.objects.Chapter;
 import me.koogy.acdepub.objects.Info;
@@ -20,7 +19,7 @@ import me.koogy.acdepub.objects.Part;
  */
 public class TocWriter {
 
-    public static void write(File dir, Book book, UUID uid) {
+    public static void write(File dir, Book book) {
         Info info = book.getInfo();
         Options options = book.getOptions();
 
@@ -32,7 +31,7 @@ public class TocWriter {
             p.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             p.println("<ncx version=\"2005-1\" xmlns=\"http://www.daisy.org/z3986/2005/ncx/\">");
             p.println("  <head>");
-            p.println("    <meta name=\"dtb:uid\" content=\"urn:uuid:" + uid.toString() + "\"/>");
+            p.println("    <meta name=\"dtb:uid\" content=\"urn:uuid:" + book.getUuid() + "\"/>");
             p.println("    <meta name=\"dtb:depth\" content=\"1\"/>");
             p.println("    <meta name=\"dtb:totalPageCount\" content=\"0\"/>");
             p.println("    <meta name=\"dtb:maxPageNumber\" content=\"0\"/>");

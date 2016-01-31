@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import me.koogy.acdepub.Main;
@@ -58,6 +59,10 @@ public class AcdParser {
             log.info("[" + infoXml + "]");
             book.setInfo(parseInfo(infoXml));
             book.setOptions(parseOptions(infoXml));
+            // UUID, based on unique title
+            String title = book.getInfo().getTocTitle();
+            UUID uuid = UUID.nameUUIDFromBytes(title.getBytes());
+            book.setUuid(uuid.toString());
             
             parsePrefix(book, xml);
 

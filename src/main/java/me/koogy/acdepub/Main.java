@@ -1,7 +1,6 @@
 package me.koogy.acdepub;
 
 import java.io.File;
-import java.util.UUID;
 import me.koogy.acdepub.objects.AcdParser;
 import me.koogy.acdepub.objects.Book;
 import me.koogy.acdepub.objects.Chapter;
@@ -54,7 +53,6 @@ public class Main {
         File metadir = new File(dir, "META-INF");
         metadir.mkdirs();
         System.out.println("Dir: " + dir);
-        UUID uid = UUID.randomUUID();
         
         try {
             Book book = AcdParser.parseBook(filename);
@@ -62,12 +60,12 @@ public class Main {
 
             // write everything
             CoverWriter.write(dir, book);
-            ContentWriter.write(dir, book, uid);
+            ContentWriter.write(dir, book);
             MetaWriter.write(metadir);
             MimetypeWriter.write(dir);
             StylesheetWriter.write(dir);
             TitlePageWriter.write(dir, book);
-            TocWriter.write(dir, book, uid);
+            TocWriter.write(dir, book);
 
             // Chapters
             if (book.getPrefaces() != null) {
