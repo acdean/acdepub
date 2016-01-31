@@ -13,7 +13,7 @@ import me.koogy.acdepub.objects.Part;
 /**
  * toc.ncx
  * 
- * TODO prefix, appendix, footnotes
+ * TODO footnotes?
  * 
  * @author adean
  */
@@ -52,8 +52,11 @@ public class TocWriter {
                 for (Chapter chap : book.getPrefaces()) {
                     if (chap.getTitle() != null) {
                         navPoint(p, chap.getTitle(), chap.getId(), count);
-                    } else {
+                    } else if (chap.getNumbering() != null) {
                         navPoint(p, chap.getNumbering(), chap.getId(), count);
+                    } else {
+                        // default to "Preface"
+                        navPoint(p, "Preface", chap.getId(), count);
                     }
                     count++;
                 }
@@ -91,8 +94,11 @@ public class TocWriter {
                 for (Chapter chap : book.getAppendices()) {
                     if (chap.getTitle() != null) {
                         navPoint(p, chap.getTitle(), chap.getId(), count);
-                    } else {
+                    } else if (chap.getNumbering() != null) {
                         navPoint(p, chap.getNumbering(), chap.getId(), count);
+                    } else {
+                        // default to "Appendix"
+                        navPoint(p, "Appendix", chap.getId(), count);
                     }
                     count++;
                 }
