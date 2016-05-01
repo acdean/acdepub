@@ -67,6 +67,7 @@ public class Info {
     public String toString() {
         StringBuilder str = new StringBuilder();
         str.append("Info{");
+        str.append("TocTitle[").append(this.getTocTitle()).append("], ");
         str.append("Title[").append(this.getTitle()).append("], ");
         str.append("SubTitle[").append(this.getSubtitle()).append("], ");
         str.append("Author[").append(this.getAuthor()).append("], ");

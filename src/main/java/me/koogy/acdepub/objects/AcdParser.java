@@ -56,7 +56,7 @@ public class AcdParser {
             xml = xml.replaceAll("\\n", "");
             
             String infoXml = extractContents(xml, Tag.INFO);
-            log.info("[" + infoXml + "]");
+            log.info("Book Info[" + infoXml + "]");
             book.setInfo(parseInfo(infoXml));
             book.setOptions(parseOptions(infoXml));
             // UUID, based on unique title
@@ -100,6 +100,7 @@ public class AcdParser {
             info.setAuthor(extractContents(infoXml, Tag.AUTHOR));
             info.setDate(extractContents(infoXml, Tag.DATE));
         }
+        log.info("ParseInfo: [" + info + "]");
         return info;
     }
 
@@ -155,7 +156,7 @@ public class AcdParser {
                 part.setId(String.format(Main.PART_ID_FORMAT, partCount));
                 // part info = book info + part info
                 String infoXml = extractContents(partXml, Tag.INFO);
-                log.info("[" + infoXml + "]");
+                log.info("Parts Info[" + infoXml + "]");
                 Info info = null;
                 Options options = null;
                 if (infoXml == null || infoXml.isEmpty()) {

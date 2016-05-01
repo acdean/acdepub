@@ -14,17 +14,21 @@ import me.koogy.acdepub.objects.Options;
  */
 public class ChapterWriter {
     
-    public static void write(File dir, Info info, Options options, Chapter chapter) {
-        write(dir, info, options, chapter, 0);
+    public static void write(File dir, Info bookInfo, Info partInfo, Options options, Chapter chapter) {
+        write(dir, bookInfo, partInfo, options, chapter, 0);
     }
-    public static void write(File dir, Info info, Options options, Chapter chapter, int count) {
+    public static void write(File dir, Info bookInfo, Info partInfo, Options options, Chapter chapter, int count) {
 
         PrintStream p = null;
         try {
             File file = new File(dir, chapter.getId() + ".xhtml");
             p = new PrintStream(new FileOutputStream(file));
 
-            WriterUtils.writeHead(p, info.getTocTitle());
+            if (chapter.getNumbering() == null) {
+                WriterUtils.writeHead(p, bookInfo.getTocTitle());
+            } else {
+                WriterUtils.writeHead(p, bookInfo.getTocTitle() + " - " + chapter.getNumbering());
+            }
             
             p.println("<body class=\"text\">");
             // appendixes, prefixes or things where chapter titles option is set use chapter names / numbers
@@ -35,7 +39,7 @@ public class ChapterWriter {
             if (chapter.isNormalChapter() && count == 1) {
                 // only chapter in part - use book title as chapter title
                 p.println("<h2>");
-                p.println("<span class=\"chapterTitle\">" + info.getTitle() + "</span>");
+                p.println("<span class=\"chapterTitle\">" + bookInfo.getTitle() + "</span>");
                 if (chapter.getTitle() != null) {
                     // this is rare? single chapter with title (gets two chapterTitle spans)
                     p.println("<br/>");

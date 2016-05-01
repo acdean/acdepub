@@ -14,7 +14,7 @@ import me.koogy.acdepub.objects.Part;
  */
 public class PartWriter {
     
-    public static void write(File dir, Part part) {
+    public static void write(File dir, Info bookInfo, Part part) {
         Info info = part.getInfo();
         Options options = part.getOptions();
 
@@ -23,7 +23,11 @@ public class PartWriter {
             File file = new File(dir, part.getId() + ".xhtml");
             p = new PrintStream(new FileOutputStream(file));
 
-            WriterUtils.writeHead(p, info.getTocTitle());
+            if (part.getNumbering() == null) {
+                WriterUtils.writeHead(p, bookInfo.getTocTitle());
+            } else {
+                WriterUtils.writeHead(p, bookInfo.getTocTitle() + " - " + part.getNumbering());
+            }
             WriterUtils.startTitlePage(p);
 
             p.println("<h1 class=\"partTitlePage\">");
