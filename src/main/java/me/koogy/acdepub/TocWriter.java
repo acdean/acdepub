@@ -131,7 +131,7 @@ public class TocWriter {
         StringBuilder s = new StringBuilder();
         s.append("    <navPoint id=\"navPoint-").append(count).append("\" playOrder=\"").append(count).append("\">\n");
         s.append("      <navLabel>\n");
-        // TODO what if chapters have no titles? use "Chapter XXX".
+        // TODO what if chapters have no titles? use "Chapter nnn".
         s.append("        <text>").append(title).append("</text>\n");
         s.append("      </navLabel>\n");
         s.append("      <content src=\"").append(filename).append(".xhtml\"/>\n");

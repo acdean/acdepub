@@ -2,6 +2,7 @@ package me.koogy.acdepub.objects;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,10 +28,11 @@ public class AcdParser {
 
     public static Book parseBook(String filename) {
         byte[] b = new byte[0];
+        InputStream in = null;
         try {
             // slurp file into StringBuffer
             File file = new File(filename);
-            InputStream in = new FileInputStream(file);
+            in = new FileInputStream(file);
             b  = new byte[(int)(file.length())];
             int len = b.length;
             int total = 0;
@@ -44,6 +46,14 @@ public class AcdParser {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return parseBook(b);
     }

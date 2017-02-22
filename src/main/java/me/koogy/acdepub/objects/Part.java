@@ -1,7 +1,6 @@
 package me.koogy.acdepub.objects;
 
 import java.util.ArrayList;
-import javax.xml.bind.annotation.XmlAnyElement;
 
 /**
  * Book can have many parts (or none)

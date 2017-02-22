@@ -14,7 +14,7 @@ public class AcdParserTest extends TestCase {
     public void testAttributes() {
         String input = "<tag name1=\"value1\" name2=\"value2\"/>";
         
-        Map map = AcdParser.extractAttributes(input);
+        Map<String, String> map = AcdParser.extractAttributes(input);
         Assert.assertEquals("value1", map.get("name1"));
         Assert.assertEquals("value2", map.get("name2"));
     }
@@ -23,7 +23,7 @@ public class AcdParserTest extends TestCase {
     public void testAttributesWithSpace() {
         String input = "<tag name1=\"two words\" name2=\"value2\"/>";
         
-        Map map = AcdParser.extractAttributes(input);
+        Map<String, String> map = AcdParser.extractAttributes(input);
         Assert.assertEquals("two words", map.get("name1"));
         Assert.assertEquals("value2", map.get("name2"));
     }

@@ -23,6 +23,10 @@ public class Chapter {
     private String id;
     private int type; // type of chapter
 
+    public Chapter() {
+        log.debug("constructor");
+    }
+
     public String getId() {
         return id;
     }

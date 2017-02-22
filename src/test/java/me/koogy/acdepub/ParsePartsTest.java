@@ -35,7 +35,7 @@ public class ParsePartsTest extends TestCase {
                 + "</book>";
         String expected =
                 "[Part:{"
-                    + "Info:{Info{Title[null], SubTitle[null], Author[null], Date[null], HasCover[false]}}, "
+                    + "Info:{Info{TocTitle[null], Title[null], SubTitle[null], Author[null], Date[null], HasCover[false]}}, "
                     + "Numbering:{Part One}, Id:{pt01}, "
                     + "Chapters:{"
                         + "[Chapter:{Numbering:{Chapter I} Id:{ch01001} Normal:{true} Content: 29}, "
@@ -79,7 +79,7 @@ public class ParsePartsTest extends TestCase {
                 + "</book>";
         String expected =
                 "[Part:{"
-                    + "Info:{Info{Title[Part One], SubTitle[Subtitle One], Author[null], Date[null], HasCover[false]}}, "
+                    + "Info:{Info{TocTitle[Part One], Title[Part One], SubTitle[Subtitle One], Author[null], Date[null], HasCover[false]}}, "
                     + "Numbering:{Part One}, Id:{pt01}, "
                     + "Chapters:{"
                         + "[Chapter:{Numbering:{Chapter I} Title:{Chapter Title 1} Id:{ch01001} Normal:{true} Content: 81}, "
@@ -128,11 +128,11 @@ public class ParsePartsTest extends TestCase {
                 + "</part>"
                 + "</book>";
         String expected = "[Part:{"
-                    + "Info:{Info{Title[Title 1], SubTitle[Subtitle 1], Author[Author 1], Date[2001], HasCover[false]}}, "
+                    + "Info:{Info{TocTitle[Title 1], Title[Title 1], SubTitle[Subtitle 1], Author[Author 1], Date[2001], HasCover[false]}}, "
                     + "Numbering:{PART ONE}, Id:{pt01}, "
                     + "Chapters:{[Chapter:{Numbering:{Chapter I} Id:{ch01001} Normal:{true} Content: 24}]}}, "
                 + "Part:{"
-                    + "Info:{Info{Title[Title 2], SubTitle[Subtitle 2], Author[Author 2], Date[null], HasCover[false]}}, "
+                    + "Info:{Info{TocTitle[Title 2], Title[Title 2], SubTitle[Subtitle 2], Author[Author 2], Date[null], HasCover[false]}}, "
                     + "Numbering:{PART TWO}, Id:{pt02}, "
                     + "Chapters:{[Chapter:{Numbering:{Chapter I} Id:{ch02001} Normal:{true} Content: 24}]}}"
                 + "]";
@@ -150,6 +150,7 @@ public class ParsePartsTest extends TestCase {
                 + "<info>"
                 +   "<title>Title</title>"
                 +   "<subtitle>Subtitle</subtitle>"
+                +   "<toctitle>TocTitle</toctitle>"
                 +   "<author>Various</author>"
                 +   "<date>1970</date>"
                 +   "<option name=\"part.title_text\" value=\"PART\"/>"
@@ -174,11 +175,11 @@ public class ParsePartsTest extends TestCase {
                 + "</part>"
                 + "</book>";
         String expected = "[Part:{"
-                    + "Info:{Info{Title[Title 1], SubTitle[Subtitle 1], Author[Author 1], Date[2001], HasCover[false]}}, "
+                    + "Info:{Info{TocTitle[Title 1], Title[Title 1], SubTitle[Subtitle 1], Author[Author 1], Date[2001], HasCover[false]}}, "
                     + "Numbering:{PART ONE}, Id:{pt01}, "
                     + "Chapters:{[Chapter:{Numbering:{Chapter I} Id:{ch01001} Normal:{true} Content: 24}]}}, "
                 + "Part:{"
-                    + "Info:{Info{Title[Title 2], SubTitle[Subtitle 2], Author[Author 2], Date[null], HasCover[false]}}, "
+                    + "Info:{Info{TocTitle[Title 2], Title[Title 2], SubTitle[Subtitle 2], Author[Author 2], Date[null], HasCover[false]}}, "
                     + "Numbering:{PART TWO}, Id:{pt02}, "
                     + "Chapters:{[Chapter:{Numbering:{Chapter I} Id:{ch02001} Normal:{true} Content: 24}]}}"
                 + "]";
