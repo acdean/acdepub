@@ -1,19 +1,20 @@
 package me.koogy.acdepub;
 
 import java.util.List;
-import junit.framework.Assert;
-import junit.framework.TestCase;
 import me.koogy.acdepub.objects.AcdParser;
 import me.koogy.acdepub.objects.Book;
 import me.koogy.acdepub.objects.Part;
+import org.junit.Test;
+import org.junit.Assert;
 
 /**
  * Parsing books.
  * @author adean
  */
-public class ParsePartsTest extends TestCase {
+public class ParsePartsTest {
 
     // part without info should still parse
+    @Test
     public void testParseParts1() {
         System.out.println("\ntestParseParts1");
         // book without part info
@@ -45,7 +46,8 @@ public class ParsePartsTest extends TestCase {
 
         parseBook(s, expected);
     }
-    
+
+    @Test
     public void testAllBits() {
         System.out.println("\ntestParseParts1");
         // book without part info
@@ -89,8 +91,9 @@ public class ParsePartsTest extends TestCase {
 
         parseBook(s, expected);
     }
-    
+
     // various artists
+    @Test
     public void testParseParts2() {
         System.out.println("\ntestParseParts2");
         // book without part info
@@ -142,6 +145,7 @@ public class ParsePartsTest extends TestCase {
 
     // attributes
     // title etc of part 1 are done as attributes rather than info. should be identical result to above.
+    @Test
     public void testParsePartAttributes() {
         System.out.println("\ntestParseParts2");
         // book without part info
@@ -187,7 +191,7 @@ public class ParsePartsTest extends TestCase {
         parseBook(s, expected);
     }
 
-    // too much
+    // utility function, not a test
     void parseBook(String input, Book expected) {
         Book actual = AcdParser.parseBook(input.getBytes());
         System.out.println("Actual: " + actual);
@@ -195,6 +199,7 @@ public class ParsePartsTest extends TestCase {
         Assert.assertEquals(expected, actual);
     }
 
+    // utility funciton
     // check parts only
     void parseBook(String input, String expected) {
         Book book = AcdParser.parseBook(input.getBytes());

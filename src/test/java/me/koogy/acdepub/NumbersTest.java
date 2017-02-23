@@ -1,20 +1,17 @@
 package me.koogy.acdepub;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author adean
  */
-public class NumbersTest extends TestCase {
-    
-    public NumbersTest(String testName) {
-        super(testName);
-    }
-    
+public class NumbersTest {
+
     /**
      * Test of words method, of class Numbers.
      */
+    @Test
     public void testWords1() {
         for (int i = 0 ; i < 131 ; i++) {
             String result = Numbers.number("one", i);
@@ -22,6 +19,7 @@ public class NumbersTest extends TestCase {
         }
     }
 
+    @Test
     public void testWords2() {
         for (int i = 0 ; i < 131 ; i++) {
             String result = Numbers.number("One", i);
@@ -29,6 +27,7 @@ public class NumbersTest extends TestCase {
         }
     }
 
+    @Test
     public void testWords3() {
         for (int i = 0 ; i < 131 ; i++) {
             String result = Numbers.number("ONE", i);
@@ -36,6 +35,7 @@ public class NumbersTest extends TestCase {
         }
     }
 
+    @Test
     public void testDigits() {
         for (int i = 0 ; i < 131 ; i++) {
             String result = Numbers.number("1", i);
@@ -43,6 +43,7 @@ public class NumbersTest extends TestCase {
         }
     }
 
+    @Test
     public void testRoman() {
         for (int i = 0 ; i < 131 ; i++) {
             String result = Numbers.number("i", i);
@@ -50,6 +51,7 @@ public class NumbersTest extends TestCase {
         }
     }
 
+    @Test
     public void testRoman2() {
         for (int i = 0 ; i < 131 ; i++) {
             String result = Numbers.number("I", i);
@@ -57,6 +59,7 @@ public class NumbersTest extends TestCase {
         }
     }
 
+    @Test
     public void testAlpha() {
         for (int i = 0 ; i < 30 ; i++) {
             String result = Numbers.number("a", i);
@@ -64,13 +67,15 @@ public class NumbersTest extends TestCase {
         }
     }
 
+    @Test
     public void testAlpha2() {
         for (int i = 0 ; i < 30 ; i++) {
             String result = Numbers.number("A", i);
             System.out.println("ALPHA[" + i + "]: [" + result + "]");
         }
     }
-    
+
+    @Test
     public void testOrdinals() {
         String[] result = {
             null,
