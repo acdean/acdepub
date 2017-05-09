@@ -18,7 +18,7 @@ public class StylesheetWriter {
             File file = new File(dir, "stylesheet.css");
             p = new PrintStream(new FileOutputStream(file));
             
-            p.println("body.text {margin-left:2%, margin-right:2%; margin-top:5%; text-align:justify;}");
+            p.println("body.text {margin-left:2%; margin-right:2%; margin-top:5%; text-align:justify;}");
             p.println("body.image {margin:0px;}");
             // h1 = book title, part title
             p.println("h1 {text-align:center; line-height:1em;}");
@@ -27,7 +27,7 @@ public class StylesheetWriter {
             // h2 is author and chapter title
             p.println("h2 {text-align:center; line-height:1em;}");
             // used for section title and title / part date
-            p.println("h3 {text-align:center; margin-top:10px, margin-bottom:10px;}");
+            p.println("h3 {text-align:center; margin-top:10px; margin-bottom:10px;}");
             // unused
             p.println("h4 {text-align:center; line-height:1em;}");
             p.println("h5 {text-align:center; line-height:1em;}");
