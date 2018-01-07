@@ -18,7 +18,7 @@ public class TitlePageWriter {
 
         PrintStream p = null;
         try {
-            File file = new File(dir, "title_page.xhtml");
+            File file = new File(dir, "title_page.html");  // this is an xhtml
             p = new PrintStream(new FileOutputStream(file));
 
             WriterUtils.writeHead(p, info.getTocTitle());

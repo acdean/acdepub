@@ -28,10 +28,10 @@ public class TocWriter {
             File file = new File(dir, "toc.ncx");
             p = new PrintStream(new FileOutputStream(file));
 
-            p.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            p.println("<ncx version=\"2005-1\" xmlns=\"http://www.daisy.org/z3986/2005/ncx/\">");
+            p.println("<?xml version='1.0' encoding='utf-8'?>");
+            p.println("<ncx xmlns=\"http://www.daisy.org/z3986/2005/ncx/\" version=\"2005-1\" xml:lang=\"eng\">");
             p.println("  <head>");
-            p.println("    <meta name=\"dtb:uid\" content=\"urn:uuid:" + book.getUuid() + "\"/>");
+            p.println("    <meta name=\"dtb:uid\" content=\"" + book.getUuid() + "\"/>");
             p.println("    <meta name=\"dtb:depth\" content=\"1\"/>");
             p.println("    <meta name=\"dtb:totalPageCount\" content=\"0\"/>");
             p.println("    <meta name=\"dtb:maxPageNumber\" content=\"0\"/>");
@@ -43,6 +43,7 @@ public class TocWriter {
             p.println("    <text>" + info.getTocTitle() + "</text>");
             p.println("  </docTitle>");
             
+            // navmap
             p.println("  <navMap>");
             int count = 1;
             navPoint(p, info.getTocTitle(), "title_page", count++);
@@ -120,21 +121,21 @@ public class TocWriter {
         return (high != null) ? high : low;
     }
 
-    // NB filenames are all {id}.xhtml
+    // NB filenames are all {id}.html
     private static void navPoint(PrintStream p, String title, String filename, int count) {
         navPointStart(p, title, filename, count);
         navPointEnd(p);
     }
 
-    // NB filenames are all {id}.xhtml
+    // NB filenames are all {id}.html
     private static void navPointStart(PrintStream p, String title, String filename, int count) {
         StringBuilder s = new StringBuilder();
-        s.append("    <navPoint id=\"navPoint-").append(count).append("\" playOrder=\"").append(count).append("\">\n");
+        s.append("    <navPoint class=\"chapter\" id=\"navPoint-").append(count).append("\" playOrder=\"").append(count).append("\">\n");
         s.append("      <navLabel>\n");
         // TODO what if chapters have no titles? use "Chapter nnn".
         s.append("        <text>").append(title).append("</text>\n");
         s.append("      </navLabel>\n");
-        s.append("      <content src=\"").append(filename).append(".xhtml\"/>\n");
+        s.append("      <content src=\"").append(filename).append(".html\"/>\n");
         p.print(s.toString());
     }
 

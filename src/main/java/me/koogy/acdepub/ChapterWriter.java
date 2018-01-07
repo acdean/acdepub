@@ -30,7 +30,7 @@ public class ChapterWriter {
         
         PrintStream p = null;
         try {
-            File file = new File(dir, chapter.getId() + ".xhtml");
+            File file = new File(dir, chapter.getId() + ".html");
             p = new PrintStream(new FileOutputStream(file));
 
             if (chapter.getNumbering() == null) {

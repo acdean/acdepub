@@ -55,7 +55,7 @@ public class CoverWriter {
         // generate cover wrapper
         PrintStream p = null;
         try {
-            File file = new File(dir, "cover.xhtml");
+            File file = new File(dir, "cover.html");
             p = new PrintStream(new FileOutputStream(file));
 
             WriterUtils.writeHead(p, info.getTocTitle());

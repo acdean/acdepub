@@ -42,7 +42,7 @@ import java.util.List;
 public class Book {
     
     public static final String FOOTNOTE_ANCHOR_PREFIX       = "fn_"; 
-    public static final String FOOTNOTES_FILENAME           = "footnotes.xhtml"; 
+    public static final String FOOTNOTES_FILENAME           = "footnotes.html"; 
     public static final String FOOTNOTES_ID                 = "footnotes"; 
     public static final String FOOTNOTE_LINK_ANCHOR_PREFIX  = "fn_"; 
     

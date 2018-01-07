@@ -20,7 +20,7 @@ public class PartWriter {
 
         PrintStream p = null;
         try {
-            File file = new File(dir, part.getId() + ".xhtml");
+            File file = new File(dir, part.getId() + ".html");
             p = new PrintStream(new FileOutputStream(file));
 
             if (part.getNumbering() == null) {

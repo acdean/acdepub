@@ -22,12 +22,13 @@ public class ContentWriter {
             File file = new File(dir, "content.opf");
             p = new PrintStream(new FileOutputStream(file));
             
-            p.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            p.println("<package version=\"2.0\" xmlns=\"http://www.idpf.org/2007/opf\" unique-identifier=\"BookId\">");
-            p.println("  <metadata xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:opf=\"http://www.idpf.org/2007/opf\">");
+            // redone these using The Martian
+            p.println("<?xml version='1.0' encoding='utf-8'?>");
+            p.println("<package xmlns=\"http://www.idpf.org/2007/opf\" unique-identifier=\"book_id\" version=\"2.0\">");
+            p.println("  <metadata xmlns:opf=\"http://www.idpf.org/2007/opf\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:dcterms=\"http://purl.org/dc/terms/\">");
             p.println("    <dc:title>" + info.getTocTitle() + "</dc:title>");
-            p.println("    <dc:language>en_GB</dc:language>");
-            p.println("    <dc:identifier id=\"BookId\">urn:uuid:" + book.getUuid() + "</dc:identifier>");
+            p.println("    <dc:language>en</dc:language>");
+            p.println("    <dc:identifier id=\"book_id\" opf:scheme=\"uuid\">" + book.getUuid() + "</dc:identifier>");
             p.println("    <dc:creator opf:role=\"aut\">" + info.getAuthor() + "</dc:creator>");
             if (info.getDate() != null) {
                 p.println("    <dc:date>" + info.getDate() + "</dc:date>");
@@ -36,17 +37,19 @@ public class ContentWriter {
                 p.println("    <meta name=\"cover\" content=\"cover-image\"/>");
             }
             p.println("  </metadata>");
+
+            // manifest
             p.println("  <manifest>");
             item(p, "ncx", "toc.ncx", "application/x-dtbncx+xml");
-            item(p, "style", "stylesheet.css", "text/css");
+            item(p, "css", "stylesheet.css", "text/css"); 
             if (info.hasCover()) {
-                item(p, "cover", "cover.xhtml", "application/xhtml+xml");
+                item(p, "cover", "cover.html", "application/xhtml+xml");
                 item(p, "cover-image", "cover-image.jpg", "image/jpeg");
             }
-            item(p, "title_page", "title_page.xhtml", "application/xhtml+xml");
+            item(p, "title_page", "title_page.html", "application/xhtml+xml");
 
             // manifest chapter items
-            // p.println("<item id=\"ch1\" href=\"ch1.xhtml\" media-type=\"application/xhtml+xml\"/>");
+            // p.println("<item id=\"ch1\" href=\"ch1.html\" media-type=\"application/xhtml+xml\"/>");
             if (book.getPrefaces() != null) {
                 for (Chapter chap : book.getPrefaces()) {
                     item(p, chap.getId());
@@ -125,7 +128,7 @@ public class ContentWriter {
     }
     
     private static void item(PrintStream p, String id) {
-        item(p, id, id + ".xhtml", "application/xhtml+xml");
+        item(p, id, id + ".html", "application/xhtml+xml");
     }
     private static void item(PrintStream p, String id, String href, String mediaType) {
         p.format("    <item id=\"%s\" href=\"%s\" media-type=\"%s\"/>\n", id, href, mediaType);

@@ -31,7 +31,7 @@ public class FootnotesWriter {
                 // this already has newlines (hacky)
                 p.print(book.getFootnotes().get(i).getContent().replaceFirst("<p>", ""));
                 p.println("<a href=\""
-                        + book.footnoteLinks.get(i) + ".xhtml"
+                        + book.footnoteLinks.get(i) + ".html"
                         + "#" + Book.FOOTNOTE_LINK_ANCHOR_PREFIX + (i + 1)
                         + "\">[back]</a>");
                 p.println("<br/>");
