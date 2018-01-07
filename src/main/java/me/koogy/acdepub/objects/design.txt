@@ -22,3 +22,10 @@ II [Title2]
 Appendix
 
 
+this all needs a rethink tbh. don't explicitly copy values from book to part to 
+chapter (or vice versa) but code something that works out what goes where.
+
+maybe have options for what gets printed for titles etc
+part.title="Chapter %PART_NUMBER%<br/>%PART_TITLE%"
+
+support for more attributes

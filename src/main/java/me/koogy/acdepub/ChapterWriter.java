@@ -7,6 +7,8 @@ import java.io.PrintStream;
 import me.koogy.acdepub.objects.Chapter;
 import me.koogy.acdepub.objects.Info;
 import me.koogy.acdepub.objects.Options;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 /**
  * Outputs a chapter file
@@ -14,11 +16,18 @@ import me.koogy.acdepub.objects.Options;
  */
 public class ChapterWriter {
     
+    private static Logger log = LogManager.getLogger(ChapterWriter.class);
+
     public static void write(File dir, Info bookInfo, Info partInfo, Options options, Chapter chapter) {
         write(dir, bookInfo, partInfo, options, chapter, 0);
     }
     public static void write(File dir, Info bookInfo, Info partInfo, Options options, Chapter chapter, int count) {
 
+        log.debug("==================");
+        log.debug("BookInfo [" + bookInfo + "]");
+        log.debug("PartInfo [" + partInfo + "]");
+        log.debug("Chapter [" + chapter + "]");
+        
         PrintStream p = null;
         try {
             File file = new File(dir, chapter.getId() + ".xhtml");
@@ -27,7 +36,12 @@ public class ChapterWriter {
             if (chapter.getNumbering() == null) {
                 WriterUtils.writeHead(p, bookInfo.getTocTitle());
             } else {
-                WriterUtils.writeHead(p, bookInfo.getTocTitle() + " - " + chapter.getNumbering());
+                // this is probably wrong, but invisible
+                if (chapter.isNormalChapter() && count == 1) {
+                    WriterUtils.writeHead(p, bookInfo.getTocTitle()); // todo
+                } else {
+                    WriterUtils.writeHead(p, bookInfo.getTocTitle() + " - " + chapter.getNumbering());
+                }
             }
             
             p.println("<body class=\"text\">");
@@ -37,9 +51,9 @@ public class ChapterWriter {
             //p.println("<!-- chapterTitleEnabled: " + options.isChapterTitleEnabled() + " -->");
             //p.println("<!-- count: " + count + " -->");
             if (chapter.isNormalChapter() && count == 1) {
-                // only chapter in part - use book title as chapter title
+                // only chapter in part - use part title as chapter title
                 p.println("<h2>");
-                p.println("<span class=\"chapterTitle\">" + bookInfo.getTitle() + "</span>");
+                p.println("<span class=\"chapterTitle\">" + partInfo.getTitle() + "</span>");
                 if (chapter.getTitle() != null) {
                     // this is rare? single chapter with title (gets two chapterTitle spans)
                     p.println("<br/>");

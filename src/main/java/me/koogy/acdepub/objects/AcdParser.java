@@ -123,6 +123,7 @@ public class AcdParser {
         Options options = new Options();
         List<String> optionStrings = extractAllContents(infoXml, Tag.OPTION);
         for (String str : optionStrings) {
+            log.info("Option: " + str);
             Map<String, String> map = extractAttributes(str);
             String name = map.get("name");
             String value = map.get("value");
@@ -433,6 +434,7 @@ public class AcdParser {
     // get the contents of the ALL instances of the named tag within string
     // NB <tag will match <tags
     public static List<String> extractAllContents(String source, String name) {
+        log.debug("ExtractAllContents: Source: [" + source + "] Name: [" + name + "]");
         // this strips off the start
         String[] strings = source.split("<" + name);
         if (strings == null || strings.length == 0) {

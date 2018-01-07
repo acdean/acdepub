@@ -23,7 +23,8 @@ public class Main {
     // private static final String BOOK_XML = "/home/adean/Documents/eBooks/algernon/acdepub/four_weird_tales.xml";
     // private static final String BOOK_XML = "/home/adean/Documents/eBooks/wodehouse/school_stories/07_mike/07_mike.xml";
     // private static final String BOOK_XML = "/home/adean/Documents/eBooks/lad_and_lass/lad_and_lass.xml";
-    private static final String BOOK_XML = "/home/adean17/Documents/eBooks/observer_100/036_golden_bowl/036_golden_bowl_vol_1.xml";
+//    private static final String BOOK_XML = "/home/adean18/Documents/eBooks/hardy/a_changed_man.xml";
+    private static final String BOOK_XML = "/home/adean18/Documents/eBooks/dickens/hard_times/hard_times.xml";
     public static final String PREFACE_ID_FORMAT           = "pre%03d";
     public static final String CHAPTER_ID_FORMAT           = "ch%03d";
     public static final String PART_ID_FORMAT              = "pt%02d";
