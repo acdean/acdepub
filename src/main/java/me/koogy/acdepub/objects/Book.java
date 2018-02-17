@@ -126,6 +126,8 @@ public class Book {
         StringBuilder s = new StringBuilder("Book:{");
         s.append("Info:{").append(info).append("}");
         s.append(", ");
+        s.append("Options:{").append(options).append("}");
+        s.append(", ");
         s.append("Prefaces:{").append(prefaces).append("}");
         s.append(", ");
         s.append("Parts:{").append(parts).append("}");

@@ -252,8 +252,8 @@ public class AcdParser {
         xml = xml.replaceFirst("<" + Tag.TITLE + ">.*</" + Tag.TITLE + ">", "");
         xml = xml.replaceAll("</p>", "</p>\n");
         xml = xml.replaceAll("<hr/>", "<div class=\"hr\">" + HR_TEXT + "</div>\n");
-        // break is like hr but empty
-        xml = xml.replaceAll("<break/>", "<div class=\"hr\">&nbsp;</div>\n");
+        // break is a blank line
+        xml = xml.replaceAll("<break/>", "<br/><br/>\n");
         // remove single line comments (they clash with mdash below)
         xml = xml.replaceAll("<!--.*-->", "");
         xml = xml.replaceAll("--", "—");    // proper mdash
@@ -434,7 +434,7 @@ public class AcdParser {
     // get the contents of the ALL instances of the named tag within string
     // NB <tag will match <tags
     public static List<String> extractAllContents(String source, String name) {
-        log.debug("ExtractAllContents: Source: [" + source + "] Name: [" + name + "]");
+        //log.debug("ExtractAllContents: Source: [" + source + "] Name: [" + name + "]");
         // this strips off the start
         String[] strings = source.split("<" + name);
         if (strings == null || strings.length == 0) {
