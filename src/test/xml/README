@@ -67,3 +67,20 @@ The Mudfog and other Sketches
 The Romantic
 Book I - Charlotte Redhead
 Book II - John Roden Conway
+
+valid combinations of things
+
+    Part                        Chapter
+Ex  No  Author  Title   Sub     No  Title
+00  -   -       -       -       -           // no parts, only one chapter
+01  -   -       -       -       i   -       // no parts, only chapters
+02  -   -       -       -       i   CT      // no parts, chapter subtitles are just paragraphs or section blocks
+
+03  1   -       PT      -       i   -       // parts with chapters
+04  1   -       PT      -       i   CT      // parts with titled chapters
+05  1   A       PT      -       -   -       // multi-author books with one chapter
+06  1   A       PT      -       i   -       // multi-author books have part authors
+07  1   A       PT      -       i   CT
+08  1   A       PT      PS      i   -
+09  1   A       PT      PS      i   CT
+

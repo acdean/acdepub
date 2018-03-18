@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<book>
+<info>
+<author>Author A</author>
+<toctitle>Example 04</toctitle>
+<title>Multiple Parts with Titles and Chapters with Titles</title>
+<date>2018</date>
+</info>
+
+<part>
+<info title="Part Title One"/>
+
+<chapter>
+<title>Chapter Title 1</title>
+<p>First Chapter</p>
+</chapter>
+
+<chapter>
+<title>Chapter Title 2</title>
+<p>Second Chapter</p>
+</chapter>
+</part>
+
+<part>
+<info title="Part Title Two"/>
+
+<chapter>
+<title>Chapter Title 3</title>
+<p>Third Chapter</p>
+</chapter>
+
+<chapter>
+<title>Chapter Title 4</title>
+<p>Fourth Chapter</p>
+</chapter>
+</part>
+
+</book>

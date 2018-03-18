@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<book>
+<info>
+<author>Various Authors</author>
+<toctitle>Example 05</toctitle>
+<title>Multiple Authors with Titles and Chapters with Titles</title>
+<date>2018</date>
+</info>
+
+<part>
+<info>
+<author>Author B</author>
+<title>"Story One"</title>
+</info>
+
+<chapter>
+<p>Single Chapter</p>
+</chapter>
+
+<part>
+<info>
+<author>Author C</author>
+<title>"Story Two"</title>
+</info>
+
+<chapter>
+<p>Story Two Chapter One</p>
+</chapter>
+
+<chapter>
+<p>Story Two Chapter Two</p>
+</chapter>
+
+</part>
+
+</book>

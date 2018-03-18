@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<book>
+<info>
+<author>Various Authors</author>
+<toctitle>Example 09</toctitle>
+<title>Multiple Part with Authors with Titles and Subtitles and Chapters with Titles</title>
+<date>2018</date>
+</info>
+
+<!-- story zero -->
+<part>
+<info>
+<author>Author B</author>
+<title>Story Zero</title>
+</info>
+
+<chapter>
+<p>Single Chapter without Title</p>
+</chapter>
+</part>
+
+<!-- story one -->
+<part>
+<info>
+<author>Author C</author>
+<title>Story One</title>
+</info>
+
+<chapter>
+<title>Chapter Title One</title>
+<p>Single Chapter with Title</p>
+</chapter>
+</part>
+
+<!-- story two -->
+<part>
+<info>
+<author>Author D</author>
+<title>Story Two</title>
+<subtitle>Subtitle Two</subtitle>
+</info>
+
+<chapter>
+<p>Story Two Chapter One</p>
+</chapter>
+
+<chapter>
+<p>Story Two Chapter Two</p>
+</chapter>
+</part>
+
+<!-- story three -->
+<part>
+<info>
+<author>Author E</author>
+<title>Story Three</title>
+<subtitle>Subtitle Three</subtitle>
+</info>
+
+<chapter>
+<title>Story Three Title One</title>
+<p>Story Three Chapter One</p>
+</chapter>
+
+<chapter>
+<title>Story Three Title Two</title>
+<p>Story Three Chapter Two</p>
+</chapter>
+</part>
+
+</book>

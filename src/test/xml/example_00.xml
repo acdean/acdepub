@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<book>
+<info>
+<author>Author A</author>
+<toctitle>Example 00</toctitle>
+<title>Single Chapter</title>
+<date>2018</date>
+</info>
+
+<chapter>
+<p>Only one chapter - should not be numbered or named</p>
+</chapter>
+
+</book>
