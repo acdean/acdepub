@@ -63,30 +63,26 @@ public class TocWriter {
                 }
             }
 
-            // chapters
-            if (book.getChapters() != null && options.isChapterTitleEnabled()) {
-                for (Chapter chap : book.getChapters()) {
-                    if (chap.getTitle() != null) {
-                        navPoint(p, chap.getTitle(), chap.getId(), count);
-                    } else {
-                        navPoint(p, chap.getNumbering(), chap.getId(), count);
-                    }
-                    count++;
-                }
-            }
             // parts / chapters
-            if (book.getParts() != null) {
-                for (Part part : book.getParts()) {
+            for (Part part : book.getParts()) {
+                if (book.hasParts()) {
+                    // outer nav point
                     String partLabel = getLabel(part.getInfo().getTitle(), part.getNumbering());
                     navPointStart(p, partLabel, part.getId(), count);
                     count++;
-                    if (part.getChapters() != null && options.isChapterTitleEnabled() && options.getChapterNumberInToc()) {
-                        for (Chapter chap : part.getChapters()) {
+                }
+                if (part.getChapters() != null && options.isChapterTitleEnabled() && options.getChapterNumberInToc()) {
+                    for (Chapter chap : part.getChapters()) {
+                        if (part.hasChapters()) {
+                            // more than one chapter
                             String chapLabel = getLabel(chap.getTitle(), chap.getNumbering());
                             navPoint(p, chapLabel, chap.getId(), count);
                             count++;
                         }
                     }
+                }
+                if (book.hasParts()) {
+                    // outer nav point
                     navPointEnd(p);
                 }
             }

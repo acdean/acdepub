@@ -43,6 +43,11 @@ public class Part {
         this.chapters = chapters;
     }
 
+    // do we have multiple chapters?
+    public boolean hasChapters() {
+        return chapters.size() != 1;
+    }
+
     public Info getInfo() {
         return info;
     }

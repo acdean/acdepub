@@ -3,32 +3,14 @@
  * 
  * book
  *   preamble
- *   chapter 1
- *   chapter 2
- *   ...
- *   postamble
- * 
- * OR
- * 
- * book
- *   preamble
  *   part 1
  *     chapter 1...
- *   part 2
+ *     chapter 2...
+ *   [part 2
  *     chapter 1...
- *   ...
+ *   ...]
  *   postamble
  * 
- * OR
- * 
- * book
- *   preamble
- *   story
- *     chapter 1...
- *   story
- *     chapter 1...
- *   ...
- *   postamble
  */
 package me.koogy.acdepub.objects;
 
@@ -36,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author adean
  */
 public class Book {
@@ -49,8 +30,7 @@ public class Book {
     Info info;
     Options options;
     List<Chapter> prefaces;
-    List<Part> parts;           // one of parts or chapters, not both
-    List<Chapter> chapters;
+    List<Part> parts; // always at least one part, this is where the chapters are
     List<Chapter> appendices;
     String uuid;
     List<Chapter> footnotes;
@@ -81,14 +61,6 @@ public class Book {
         this.prefaces = prefaces;
     }
 
-    public List<Chapter> getChapters() {
-        return chapters;
-    }
-
-    public void setChapters(List<Chapter> chapters) {
-        this.chapters = chapters;
-    }
-
     public List<Part> getParts() {
         return parts;
     }
@@ -97,6 +69,11 @@ public class Book {
         this.parts = parts;
     }
 
+    // returns trus is this book has (real) parts
+    public boolean hasParts() {
+        return parts.size() != 1;
+    }
+    
     public List<Chapter> getAppendices() {
         return appendices;
     }
@@ -131,8 +108,6 @@ public class Book {
         s.append("Prefaces:{").append(prefaces).append("}");
         s.append(", ");
         s.append("Parts:{").append(parts).append("}");
-        s.append(", ");
-        s.append("Chapters:{").append(chapters).append("}");
         s.append(", ");
         s.append("Appendices:{").append(appendices).append("}");
         s.append(", ");

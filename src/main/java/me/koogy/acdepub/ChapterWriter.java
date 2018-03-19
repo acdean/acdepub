@@ -51,15 +51,13 @@ public class ChapterWriter {
             //p.println("<!-- chapterTitleEnabled: " + options.isChapterTitleEnabled() + " -->");
             //p.println("<!-- count: " + count + " -->");
             if (chapter.isNormalChapter() && count == 1) {
-                // only chapter in part - use part title as chapter title
-                p.println("<h2>");
-                p.println("<span class=\"chapterTitle\">" + partInfo.getTitle() + "</span>");
+                // only chapter in part, don't number it
                 if (chapter.getTitle() != null) {
-                    // this is rare? single chapter with title (gets two chapterTitle spans)
-                    p.println("<br/>");
+                    // but do use the title if there is one (example?)
+                    p.println("<h2>");
                     p.println("<span class=\"chapterTitle\">" + chapter.getTitle() + "</span>");
+                    p.println("</h2>");
                 }
-                p.println("</h2>");
             } else if (!chapter.isNormalChapter() || options.isChapterTitleEnabled()) {
                 // Chapter Heading
                 p.println("<h2>");

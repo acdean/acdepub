@@ -17,14 +17,16 @@ import org.apache.log4j.PatternLayout;
  */
 public class Main {
     
-    private static Logger log = LogManager.getLogger(Main.class);
+    private static final Logger log = LogManager.getLogger(Main.class);
 
     // private static final String BOOK_XML = "/home/adean/Documents/eBooks/balzac/04/1374/balzac04.xml";
     // private static final String BOOK_XML = "/home/adean/Documents/eBooks/algernon/acdepub/four_weird_tales.xml";
     // private static final String BOOK_XML = "/home/adean/Documents/eBooks/wodehouse/school_stories/07_mike/07_mike.xml";
     // private static final String BOOK_XML = "/home/adean/Documents/eBooks/lad_and_lass/lad_and_lass.xml";
 //    private static final String BOOK_XML = "/home/adean18/Documents/eBooks/hardy/a_changed_man.xml";
-    private static final String BOOK_XML = "/home/adean18/Documents/eBooks/dickens/hard_times/hard_times.xml";
+//    private static final String BOOK_XML = "/home/adean18/Documents/eBooks/dickens/hard_times/hard_times.xml";
+//    private static final String BOOK_XML = "/home/adean18/dev/NetBeansProjects/acdepub/src/test/xml/example_04.xml";
+    private static final String BOOK_XML = "/home/adean18/Documents/eBooks/dickens/chuzzlewit/martin.xml";
     public static final String PREFACE_ID_FORMAT           = "pre%03d";
     public static final String CHAPTER_ID_FORMAT           = "ch%03d";
     public static final String PART_ID_FORMAT              = "pt%02d";
@@ -67,28 +69,23 @@ public class Main {
             TitlePageWriter.write(dir, book);
             TocWriter.write(dir, book);
 
-            // Chapters
+            // Prefixes
             if (book.getPrefaces() != null) {
                 for (Chapter preface : book.getPrefaces()) {
                     ChapterWriter.write(dir, book.getInfo(), null, book.getOptions(), preface);
                 }
             }
-            if (book.getChapters() != null) {
-                // this book has no parts, only chapters
-                for (Chapter chapter : book.getChapters()) {
-                    ChapterWriter.write(dir, book.getInfo(), null, book.getOptions(), chapter, book.getChapters().size());
-                }
-            }
-            if (book.getParts() != null) {
-                // this book has parts containing chapters
-                for (Part part : book.getParts()) {
+            // now all books have parts
+            for (Part part : book.getParts()) {
+                if (book.hasParts()) {
                     PartWriter.write(dir, book.getInfo(), part);
-                    for (Chapter chapter : part.getChapters()) {
-                        // NB part info
-                        ChapterWriter.write(dir, book.getInfo(), part.getInfo(), part.getOptions(), chapter, part.getChapters().size());
-                    }
+                }
+                for (Chapter chapter : part.getChapters()) {
+                    // NB part info
+                    ChapterWriter.write(dir, book.getInfo(), part.getInfo(), part.getOptions(), chapter, part.getChapters().size());
                 }
             }
+            // Appendices
             if (book.getAppendices() != null) {
                 for (Chapter appendix : book.getAppendices()) {
                     ChapterWriter.write(dir, book.getInfo(), null, book.getOptions(), appendix);

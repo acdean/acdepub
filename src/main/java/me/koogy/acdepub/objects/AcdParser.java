@@ -78,10 +78,6 @@ public class AcdParser {
 
             parseParts(book, xml);
 
-            if (book.parts == null) {
-                parseChapters(book, xml);
-            }
-
             parseAppendix(book, xml);
             
             // parse footnotes if we have found references
@@ -158,47 +154,58 @@ public class AcdParser {
     private static void parseParts(Book book, String xml) {
         log.info("ParseParts");
         List<String> parts = extractAllContents(xml, Tag.PART);
-        if (parts != null && !parts.isEmpty()) {
-            int partCount = 1;
-            int chapterCount = 1;
-            book.setParts(new ArrayList<Part>());
-            for (String partXml : parts) {
-                Part part = new Part();
-                part.setId(String.format(Main.PART_ID_FORMAT, partCount));
-                // part info = book info + part info
-                String infoXml = extractContents(partXml, Tag.INFO);
-                log.info("Parts Info[" + infoXml + "]");
-                Info info = null;
-                Options options = null;
-                if (infoXml == null || infoXml.isEmpty()) {
-                    info = new Info();
-                    options = new Options();
-                } else {
-                    info = parseInfo(infoXml);
-                    options = parseOptions(infoXml);
-                }
-                part.setInfo(info);
-                options.merge(book.getOptions());
-                part.setOptions(options);
-                // part numbering may not appear due to part details for Various Artists books
-                part.setNumbering(getNumbering(Part.PART, options.getPartTitleText(), options.getPartNumberStyle(), partCount));
-                List<String> chapters = extractAllContents(partXml, Tag.CHAPTER);
-                part.setChapters(new ArrayList<Chapter>());
-                if (!options.getChapterNumbersContinuous()) {
-                    // reset chapter count per part
-                    chapterCount = 1;
-                }
-                for (String chapterXml : chapters) {
-                    String id = String.format(Main.PART_CHAPTER_ID_FORMAT, partCount, chapterCount);
-                    Chapter chapter = (Chapter)parseChapter(book, chapterXml, Chapter.PART_CHAPTER, id);
-                    chapter.setId(id);
-                    chapter.setNumbering(getNumbering(Chapter.PART_CHAPTER, options.getChapterTitleText(), options.getChapterNumberStyle(), chapterCount));
-                    part.getChapters().add(chapter);
-                    chapterCount++;
-                }
-                book.getParts().add(part);
-                partCount++;
+        if (parts == null || parts.isEmpty()) {
+            parts = new ArrayList<>(1);
+            // single part containing all chapters
+            int index = xml.indexOf("<chapter");
+            parts.add(xml.substring(index));
+        }
+        int partCount = 1;
+        int chapterCount = 1;
+        book.setParts(new ArrayList<Part>());
+        for (String partXml : parts) {
+            Part part = new Part();
+            part.setId(String.format(Main.PART_ID_FORMAT, partCount));
+            // part info = book info + part info
+            String infoXml = extractContents(partXml, Tag.INFO);
+            log.info("Parts Info[" + infoXml + "]");
+            Info info = null;
+            Options options = null;
+            if (infoXml == null || infoXml.isEmpty()) {
+                info = new Info();
+                options = new Options();
+            } else {
+                info = parseInfo(infoXml);
+                options = parseOptions(infoXml);
             }
+            part.setInfo(info);
+            options.merge(book.getOptions());
+            part.setOptions(options);
+            // part numbering may not appear due to part details for Various Artists books
+            part.setNumbering(getNumbering(Part.PART, options.getPartTitleText(), options.getPartNumberStyle(), partCount));
+            List<String> chapters = extractAllContents(partXml, Tag.CHAPTER);
+            part.setChapters(new ArrayList<Chapter>());
+            if (!options.getChapterNumbersContinuous()) {
+                // reset chapter count per part
+                chapterCount = 1;
+            }
+            for (String chapterXml : chapters) {
+                String id;
+                if (parts.size() != 1) {    // can't use hasParts because we haven't added parts to book yet
+                    // proper parts
+                    id = String.format(Main.PART_CHAPTER_ID_FORMAT, partCount, chapterCount);
+                } else {
+                    // no parts
+                    id = String.format(Main.CHAPTER_ID_FORMAT, chapterCount);
+                }
+                Chapter chapter = (Chapter)parseChapter(book, chapterXml, Chapter.PART_CHAPTER, id);
+                chapter.setId(id);
+                chapter.setNumbering(getNumbering(Chapter.PART_CHAPTER, options.getChapterTitleText(), options.getChapterNumberStyle(), chapterCount));
+                part.getChapters().add(chapter);
+                chapterCount++;
+            }
+            book.getParts().add(part);
+            partCount++;
         }
     }
 
@@ -218,12 +225,6 @@ public class AcdParser {
             count++;
         }
         return list;
-    }
-
-    private static void parseChapters(Book book, String xml) {
-        log.info("ParseChapters");
-        List<String> list = extractAllContents(xml, Tag.CHAPTER);
-        book.setChapters(parseChapters(book, list, Chapter.CHAPTER));
     }
 
     private static void parseAppendix(Book book, String xml) {

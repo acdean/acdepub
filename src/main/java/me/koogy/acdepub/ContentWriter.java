@@ -55,11 +55,6 @@ public class ContentWriter {
                     item(p, chap.getId());
                 }
             }
-            if (book.getChapters() != null) {
-                for (Chapter chap : book.getChapters()) {
-                    item(p, chap.getId());
-                }
-            }
             if (book.getParts() != null) {
                 for (Part part : book.getParts()) {
                     item(p, part.getId());
@@ -90,11 +85,6 @@ public class ContentWriter {
             // spine chapter items
             if (book.getPrefaces() != null) {
                 for (Chapter chap : book.getPrefaces()) {
-                    p.println("    <itemref idref=\"" + chap.getId() + "\"/>");
-                }
-            }
-            if (book.getChapters() != null) {
-                for (Chapter chap : book.getChapters()) {
                     p.println("    <itemref idref=\"" + chap.getId() + "\"/>");
                 }
             }

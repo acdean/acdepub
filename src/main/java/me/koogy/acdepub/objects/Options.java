@@ -43,9 +43,12 @@ public class Options {
         chapterNumberStyle = System.getProperty(CHAPTER_NUMBER_STYLE_PROPERTY);
         // whether any chapter number is printed - defaults to true
         chapterTitleEnabled = System.getProperty(CHAPTER_TITLE_ENABLED_PROPERTY);
-        // does the chapter number appear in the toc - defaults to false
+        // does the chapter number appear in the toc - defaults to true
         // (as a second level entry if PartChapter)
         chapterNumberInToc = System.getProperty(CHAPTER_NUMBER_IN_TOC_PROPERTY);
+        if (chapterNumberInToc == null) {
+            chapterNumberInToc = "true";
+        }
         chapterNumbersContinuous = System.getProperty(CHAPTER_NUMBERS_CONTINUOUS);
     }
     
