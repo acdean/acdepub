@@ -23,9 +23,7 @@ public class ChapterWriter {
     }
     public static void write(File dir, Info bookInfo, Info partInfo, Options options, Chapter chapter, int count) {
 
-        log.debug("==================");
-        log.debug("BookInfo [" + bookInfo + "]");
-        log.debug("PartInfo [" + partInfo + "]");
+        log.debug("==== C H A P T E R ====");
         log.debug("Chapter [" + chapter + "]");
         
         PrintStream p = null;

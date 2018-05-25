@@ -8,12 +8,16 @@ import me.koogy.acdepub.objects.Book;
 import me.koogy.acdepub.objects.Chapter;
 import me.koogy.acdepub.objects.Info;
 import me.koogy.acdepub.objects.Part;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 /**
  * @author adean
  */
 public class ContentWriter {
     
+    private static Logger log = LogManager.getLogger(ContentWriter.class);
+
     public static void write(File dir, Book book) {
         Info info = book.getInfo();
         
@@ -57,7 +61,9 @@ public class ContentWriter {
             }
             if (book.getParts() != null) {
                 for (Part part : book.getParts()) {
-                    item(p, part.getId());
+                    if (book.hasParts()) {
+                        item(p, part.getId());
+                    }
                     if (part.getChapters() != null) {
                         for (Chapter chap : part.getChapters()) {
                             item(p, chap.getId());
@@ -90,7 +96,9 @@ public class ContentWriter {
             }
             if (book.getParts() != null) {
                 for (Part part : book.getParts()) {
-                    p.println("    <itemref idref=\"" + part.getId() + "\"/>");
+                    if (book.hasParts()) {
+                        p.println("    <itemref idref=\"" + part.getId() + "\"/>");
+                    }
                     if (part.getChapters() != null) {
                         for (Chapter chap : part.getChapters()) {
                             p.println("    <itemref idref=\"" + chap.getId() + "\"/>");

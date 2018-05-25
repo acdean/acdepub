@@ -7,6 +7,8 @@ import java.io.PrintStream;
 import me.koogy.acdepub.objects.Info;
 import me.koogy.acdepub.objects.Options;
 import me.koogy.acdepub.objects.Part;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 /**
  * Prints a part title page
@@ -14,9 +16,15 @@ import me.koogy.acdepub.objects.Part;
  */
 public class PartWriter {
     
+    private static Logger log = LogManager.getLogger(PartWriter.class);
+
     public static void write(File dir, Info bookInfo, Part part) {
         Info info = part.getInfo();
         Options options = part.getOptions();
+
+        log.debug("BookInfo [" + bookInfo + "]");
+        log.debug("####### P A R T #######");
+        log.debug("PartInfo [" + info + "]");
 
         PrintStream p = null;
         try {
