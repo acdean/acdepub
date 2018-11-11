@@ -62,8 +62,8 @@ public class AcdParser {
         Book book = new Book();
         try {
             String xml = new String(b, "UTF-8");
-            // remove newlines
-            xml = xml.replaceAll("\\n", "");
+            // remove carriage returns and newlines. dos is 0d0a, linux is 0a
+            xml = xml.replaceAll("[\\r\\n]", "");
             
             String infoXml = extractContents(xml, Tag.INFO);
             log.info("Book Info[" + infoXml + "]");

@@ -1,0 +1,16 @@
+<!-- this file has DOS line endings -->
+<?xml version='1.0' encoding='UTF-8'?>
+<book>
+<info>
+<author>Virginia Woolf</author>
+<title>Monday or Tuesday</title>
+<date>1921</date>
+<option name="chapter.titles" value="off"/>
+</info>
+
+<chapter>
+<title>A Haunted House</title>
+<p>Whatever hour you woke there was a door shutting. From room to room they
+went, hand in hand, lifting here, opening there, making sure--a ghostly couple...</p>
+</chapter>
+</book>
