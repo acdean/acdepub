@@ -1,6 +1,8 @@
 package me.koogy.acdepub;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import me.koogy.acdepub.objects.AcdParser;
 import me.koogy.acdepub.objects.Book;
 import me.koogy.acdepub.objects.Chapter;
@@ -49,13 +51,10 @@ public class Main {
         } else {
             filename = args[0];
         }
-        File file = new File(filename);
-        File dir = new File("/tmp/acdepub_" + file.getName().replace(".xml", ""));
-        dir.mkdirs();
+        File dir = makeTempDirectory(filename);
         File metadir = new File(dir, "META-INF");
         metadir.mkdirs();
-        System.out.println("Dir: " + dir);
-        
+
         try {
             Book book = AcdParser.parseBook(filename);
             log.debug("Book[" + book + "]");
@@ -103,6 +102,20 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    static File makeTempDirectory(String filename) {
+        File file = new File(filename);
+        File dir = new File("/tmp/acdepub_" + file.getName().replace(".xml", ""));
+        dir.mkdirs();
+        System.out.println("Dir: " + dir);
+        // clear it out
+        File[] files = dir.listFiles();
+        for (File ls : files) {
+            log.debug("Deleting: " + ls);
+            ls.delete();
+        }
+        return dir;
     }
 
     // sets the numbering
