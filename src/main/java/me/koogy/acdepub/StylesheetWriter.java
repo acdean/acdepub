@@ -39,6 +39,7 @@ public class StylesheetWriter {
             p.println("p.p1 {text-indent:30px;}");
             p.println("p.p2 {text-indent:60px;}");
             p.println("p.p3 {text-indent:90px;}");
+            p.println("p.p4 {text-indent:120px;}");
             p.println("p.footnote {text-indent:0px}");
             // classes for aligning things
             p.println(".centre {text-indent:0px; text-align:center}");
@@ -48,10 +49,12 @@ public class StylesheetWriter {
             p.println("img {max-width:100%;}"); // for cover
             // letters and poems
             p.println(".letter {margin-top:10px; margin-bottom:10px; margin-left:30px; margin-right:30px; font-style:italic;}");
+            p.println(".letter p em {font-weight: bold;}");
             p.println(".poem {margin-top:15px; margin-bottom:15px; font-size:smaller; font-style:italic;}");
             p.println(".poem1 {margin-left:30px; margin-top:0px; margin-bottom:0px;}");
             p.println(".poem2 {margin-left:60px; margin-top:0px; margin-bottom:0px;}");
             p.println(".poem3 {margin-left:90px; margin-top:0px; margin-bottom:0px;}");
+            p.println(".poem4 {margin-left:120px; margin-top:0px; margin-bottom:0px;}");
             p.println(".smallcaps {font-variant: small-caps; font-size: smaller;}");
             p.println("pre {font-family:monospace; font-size: smaller;}");
             
