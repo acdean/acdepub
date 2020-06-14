@@ -4,7 +4,7 @@
 
     <groupId>me.koogy</groupId>
     <artifactId>acdepub</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.5-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <!-- versions -->
@@ -13,6 +13,7 @@
     <!-- 1.2 ... -->
     <!-- 1.3 ... -->
     <!-- 1.4 Rewritten so that there's always a part -->
+    <!-- 1.5 <smallcaps> support -->
 
     <name>acdepub</name>
     <url>http://maven.apache.org</url>

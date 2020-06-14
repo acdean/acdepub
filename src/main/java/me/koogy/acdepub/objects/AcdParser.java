@@ -252,6 +252,9 @@ public class AcdParser {
         chapter.setTitle(extractContents(xml, Tag.TITLE));
         // remove title
         xml = xml.replaceFirst("<" + Tag.TITLE + ">.*</" + Tag.TITLE + ">", "");
+
+        xml = replaceSmallCaps(xml);
+
         xml = xml.replaceAll("</p>", "</p>\n");
         xml = xml.replaceAll("<hr/>", "<div class=\"hr\">" + HR_TEXT + "</div>\n");
         // break is a blank line
@@ -268,26 +271,26 @@ public class AcdParser {
         xml = xml.replaceAll("</p2>", "</p>");
         xml = xml.replaceAll("<p3>", "<p class=\"p3\">");
         xml = xml.replaceAll("</p3>", "</p>");
-        xml = xml.replaceAll("<poem>", "<div class=\"poem\">");
-        xml = xml.replaceAll("</poem>", "</div>");
+        xml = xml.replaceAll("<poem>", "<div class=\"poem\">\n");
+        xml = xml.replaceAll("</poem>", "</div>\n");
         xml = xml.replaceAll("<poem1>", "<div class=\"poem1\">");
-        xml = xml.replaceAll("</poem1>", "</div>");
+        xml = xml.replaceAll("</poem1>", "</div>\n");
         xml = xml.replaceAll("<poem2>", "<div class=\"poem2\">");
-        xml = xml.replaceAll("</poem2>", "</div>");
+        xml = xml.replaceAll("</poem2>", "</div>\n");
         xml = xml.replaceAll("<poem3>", "<div class=\"poem3\">");
-        xml = xml.replaceAll("</poem3>", "</div>");
+        xml = xml.replaceAll("</poem3>", "</div>\n");
         xml = xml.replaceAll("<poem4>", "<div class=\"poem4\">");
-        xml = xml.replaceAll("</poem4>", "</div>");
+        xml = xml.replaceAll("</poem4>", "</div>\n");
         xml = xml.replaceAll("<poem5>", "<div class=\"poem5\">");
-        xml = xml.replaceAll("</poem5>", "</div>");
+        xml = xml.replaceAll("</poem5>", "</div>\n");
         xml = xml.replaceAll("<letter>", "<div class=\"letter\">");
-        xml = xml.replaceAll("</letter>", "</div>");
+        xml = xml.replaceAll("</letter>", "</div>\n");
         xml = xml.replaceAll("<centre>", "<div class=\"centre\">");
-        xml = xml.replaceAll("</centre>", "</div>");
+        xml = xml.replaceAll("</centre>", "</div>\n");
         xml = xml.replaceAll("<center>", "<div class=\"center\">");
-        xml = xml.replaceAll("</center>", "</div>");
+        xml = xml.replaceAll("</center>", "</div>\n");
         xml = xml.replaceAll("<right>", "<div class=\"right\">");
-        xml = xml.replaceAll("</right>", "</div>");
+        xml = xml.replaceAll("</right>", "</div>\n");
         // inter-chapter numbered sections
         xml = xml.replaceAll("<section>", "\n<h3>");
         xml = xml.replaceAll("</section>", "</h3>\n");
@@ -455,5 +458,69 @@ public class AcdParser {
             list.add(contents);
         }
         return list;
+    }
+
+    // replace all the smallcaps
+    public static String replaceSmallCaps(String xml) {
+        Pattern p = Pattern.compile("(<smallcaps>[^<]*</smallcaps>)");
+        Matcher m = p.matcher(xml);
+        StringBuilder output = new StringBuilder();
+        int start = 0;
+        while (m.find()) {
+            String matched = m.group();
+            log.info("Match [" + matched + "]:" + m.start() + ":" + m.end());
+            // copy start string to output
+            output.append(xml.substring(start, m.start()));
+            output.append(toSmallCaps(matched));
+            log.info("Output [" + output + "]");
+            // next start is the current end
+            start = m.end();
+        }
+        if (output.length() != 0) {
+            // copy last bit
+            output.append(xml.substring(start));
+            return output.toString();
+        } else {
+            // nothing happened - just return the input
+            return xml;
+        }
+    }
+
+    /* 
+    ** Kobo rendering engine doesn't really do smallcaps
+    ** so replace with spans of proper class
+    */
+    public static String toSmallCaps(String input) {
+        StringBuffer output = new StringBuffer();
+        // remove start and end tags
+        input = input.replaceFirst("<smallcaps>", "");
+        input = input.replaceFirst("</smallcaps>", "");
+
+        boolean upper = true;
+        for (int i = 0 ; i < input.length() ; i++) {
+            char c = input.charAt(i);
+            if (Character.isUpperCase(c)) {
+                if (!upper) {
+                   // was lower, so end span
+                   output.append("</span>");
+                }
+                upper = true;
+            }
+            if (Character.isLowerCase(c)) {
+                c = Character.toUpperCase(c);
+                if (upper) {
+                    // was upper so start span
+                    output.append("<span class=\"sc\">");
+                }
+                upper = false;
+            }
+            output.append(c);
+        }
+        // done
+        if (!upper) {
+            // close the current span
+            output.append("</span>");
+        }
+        return output.toString();
     }
 }
