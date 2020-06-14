@@ -8,15 +8,15 @@ import me.koogy.acdepub.objects.Book;
 import me.koogy.acdepub.objects.Chapter;
 import me.koogy.acdepub.objects.Info;
 import me.koogy.acdepub.objects.Part;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author adean
  */
 public class ContentWriter {
     
-    private static Logger log = LogManager.getLogger(ContentWriter.class);
+    private static Logger log = LoggerFactory.getLogger(ContentWriter.class);
 
     public static void write(File dir, Book book) {
         Info info = book.getInfo();

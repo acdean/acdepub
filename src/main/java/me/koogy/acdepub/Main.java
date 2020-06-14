@@ -1,25 +1,20 @@
 package me.koogy.acdepub;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import me.koogy.acdepub.objects.AcdParser;
 import me.koogy.acdepub.objects.Book;
 import me.koogy.acdepub.objects.Chapter;
 import me.koogy.acdepub.objects.Options;
 import me.koogy.acdepub.objects.Part;
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Hello world!
  */
 public class Main {
     
-    private static final Logger log = LogManager.getLogger(Main.class);
+    private static final Logger log = LoggerFactory.getLogger(Main.class);
 
     // private static final String BOOK_XML = "/home/adean/Documents/eBooks/balzac/04/1374/balzac04.xml";
     // private static final String BOOK_XML = "/home/adean/Documents/eBooks/algernon/acdepub/four_weird_tales.xml";
@@ -36,12 +31,6 @@ public class Main {
     public static final String APPENDIX_ID_FORMAT          = "app%03d";
 
     public static void main( String[] args ) {
-        
-        // setup logger
-        Logger rootLogger = Logger.getRootLogger();
-        rootLogger.setLevel(Level.DEBUG);
-        PatternLayout layout = new PatternLayout("%d{ABSOLUTE} %-5p %c{1} - %m%n");
-        rootLogger.addAppender(new ConsoleAppender(layout));
 
         String filename;
         if (args.length != 1) {
@@ -108,7 +97,7 @@ public class Main {
         File file = new File(filename);
         File dir = new File("/tmp/acdepub_" + file.getName().replace(".xml", ""));
         dir.mkdirs();
-        System.out.println("Dir: " + dir);
+        log.info("Dir: " + dir);
         // clear it out
         File[] files = dir.listFiles();
         for (File ls : files) {

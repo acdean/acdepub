@@ -1,10 +1,10 @@
 package me.koogy.acdepub;
 
 import me.koogy.acdepub.objects.AcdParser;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /*
 ** SmallCapsTest
@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class SmallCapsTest {
 
-    private static Logger logger = LogManager.getLogger(SmallCapsTest.class);
+    private static Logger logger = LoggerFactory.getLogger(SmallCapsTest.class);
 
 //    "<smallcaps>Adolphus Crosbie.</smallcaps>"
 //    "<smallcaps>Grace Crawley.</smallcaps>"

@@ -7,11 +7,15 @@ import java.util.Arrays;
 import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author adean
  */
 public class ZipWriter {
+
+    private static final Logger log = LoggerFactory.getLogger(ZipWriter.class);
 
     static void write(File dir, String filename) {
         ZipOutputStream zos = null;
@@ -36,7 +40,7 @@ public class ZipWriter {
             for (File f : list) {
                 // ignore the things we've already zipped
                 if (f.isDirectory() || f.getName().equals("mimetype")) {
-                    System.out.println(f.getAbsoluteFile() + " - ignoring");
+                    log.info(f.getAbsoluteFile() + " - ignoring");
                 } else {
                     // zip all the other files
                     writeOne(zos, f.getAbsolutePath());
@@ -52,12 +56,12 @@ public class ZipWriter {
     }
 
     static void writeOne(ZipOutputStream zos, String filename) {
-        System.out.println("WriteOne: " + filename);
+        log.info("WriteOne: " + filename);
         int index = filename.lastIndexOf("/");
         writeOne(zos, filename.substring(index + 1), filename, null);
     }
     static void writeOne(ZipOutputStream zos, String entryName, String filename, Integer size) {
-        System.out.println("WriteOne: " + entryName + " - " + filename);
+        log.info("WriteOne: " + entryName + " - " + filename);
         FileInputStream in = null;
         try {
             // name the file inside the zip file 

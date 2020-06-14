@@ -12,8 +12,8 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import me.koogy.acdepub.Main;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A parser that does what i want it to do.
@@ -24,7 +24,7 @@ public class AcdParser {
 
     private static final String HR_TEXT = "~";
 
-    private static Logger log = LogManager.getLogger(AcdParser.class);
+    private static Logger log = LoggerFactory.getLogger(AcdParser.class);
 
     public static Book parseBook(String filename) {
         byte[] b = new byte[0];
@@ -374,7 +374,7 @@ public class AcdParser {
     // <tag name="value" name2="value2"/> -> hashmap
     // use regexp? [a-zA-Z0-9]*="[^"]*"
     public static Map<String, String> extractAttributes(String source) {
-        System.out.println("ExtractAttributes: [" + source + "]");
+        log.info("ExtractAttributes: [" + source + "]");
         Map<String, String> map = null;
         // strip first word - tag name
         source = source.replaceFirst("<[a-zA-Z]* ", "");

@@ -1,7 +1,7 @@
 package me.koogy.acdepub.objects;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author adean
@@ -16,7 +16,7 @@ public class Chapter {
     public static final int FOOTNOTE = 5;
     // see also Part.PART
 
-    private static Logger log = LogManager.getLogger(Chapter.class);
+    private static Logger log = LoggerFactory.getLogger(Chapter.class);
     private String numbering;
     private String title;
     private String content; // the payload

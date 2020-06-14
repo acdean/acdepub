@@ -1,7 +1,7 @@
 package me.koogy.acdepub.objects;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
@@ -13,7 +13,7 @@ import org.w3c.dom.Node;
  */
 public class Options {
 
-    private static Logger log = LogManager.getLogger(Options.class);
+    private static Logger log = LoggerFactory.getLogger(Options.class);
 
     public static String PART_TITLE_ENABLED_PROPERTY    = "part.titles";
     public static String PART_TITLE_TEXT_PROPERTY       = "part.title_text";

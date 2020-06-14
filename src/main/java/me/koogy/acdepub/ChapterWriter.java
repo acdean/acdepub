@@ -7,8 +7,8 @@ import java.io.PrintStream;
 import me.koogy.acdepub.objects.Chapter;
 import me.koogy.acdepub.objects.Info;
 import me.koogy.acdepub.objects.Options;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Outputs a chapter file
@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
  */
 public class ChapterWriter {
     
-    private static Logger log = LogManager.getLogger(ChapterWriter.class);
+    private static Logger log = LoggerFactory.getLogger(ChapterWriter.class);
 
     public static void write(File dir, Info bookInfo, Info partInfo, Options options, Chapter chapter) {
         write(dir, bookInfo, partInfo, options, chapter, 0);
