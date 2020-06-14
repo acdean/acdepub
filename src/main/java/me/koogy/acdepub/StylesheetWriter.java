@@ -55,6 +55,7 @@ public class StylesheetWriter {
             p.println(".poem2 {margin-left:60px; margin-top:0px; margin-bottom:0px;}");
             p.println(".poem3 {margin-left:90px; margin-top:0px; margin-bottom:0px;}");
             p.println(".poem4 {margin-left:120px; margin-top:0px; margin-bottom:0px;}");
+            p.println(".poem5 {margin-left:150px; margin-top:0px; margin-bottom:0px;}");
             p.println(".smallcaps {font-variant: small-caps; font-size: smaller;}");
             p.println("pre {font-family:monospace; font-size: smaller;}");
             

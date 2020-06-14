@@ -245,8 +245,9 @@ public class AcdParser {
     }
 
     // chapter has a title tag as first element, rest is verbatim body
-    private static Chapter parseChapter(Book book, String xml, int type, String id) {
-        log.info("ParseChapter");
+    // protected to allow testing, otherwise private
+    public static Chapter parseChapter(Book book, String xml, int type, String id) {
+        log.info("ParseChapter [" + xml + "]");
         Chapter chapter = new Chapter();
         chapter.setTitle(extractContents(xml, Tag.TITLE));
         // remove title
@@ -275,6 +276,10 @@ public class AcdParser {
         xml = xml.replaceAll("</poem2>", "</div>");
         xml = xml.replaceAll("<poem3>", "<div class=\"poem3\">");
         xml = xml.replaceAll("</poem3>", "</div>");
+        xml = xml.replaceAll("<poem4>", "<div class=\"poem4\">");
+        xml = xml.replaceAll("</poem4>", "</div>");
+        xml = xml.replaceAll("<poem5>", "<div class=\"poem5\">");
+        xml = xml.replaceAll("</poem5>", "</div>");
         xml = xml.replaceAll("<letter>", "<div class=\"letter\">");
         xml = xml.replaceAll("</letter>", "</div>");
         xml = xml.replaceAll("<centre>", "<div class=\"centre\">");
@@ -303,7 +308,7 @@ public class AcdParser {
                     " <a id=\"" + Book.FOOTNOTE_LINK_ANCHOR_PREFIX + book.footnoteCounter + "\">"
                     + "<a href=\"" + Book.FOOTNOTES_FILENAME
                     + "#" + Book.FOOTNOTE_ANCHOR_PREFIX + book.footnoteCounter + "\">"
-                    + "[" + book.footnoteCounter + "]"
+                    + "[note " + book.footnoteCounter + "]"
                     + "</a>"    // end of link
                     + "</a>");  // end of anchor
             // need to store the filename for this link
