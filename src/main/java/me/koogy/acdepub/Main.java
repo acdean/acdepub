@@ -46,7 +46,7 @@ public class Main {
 
         try {
             Book book = AcdParser.parseBook(filename);
-            log.debug("Book[" + book + "]");
+            log.debug("Book [{}]", book);
 
             // write everything
             CoverWriter.write(dir, book);
@@ -97,11 +97,11 @@ public class Main {
         File file = new File(filename);
         File dir = new File("/tmp/acdepub_" + file.getName().replace(".xml", ""));
         dir.mkdirs();
-        log.info("Dir: " + dir);
+        log.info("Dir [{}]", dir);
         // clear it out
         File[] files = dir.listFiles();
         for (File ls : files) {
-            log.debug("Deleting: " + ls);
+            log.debug("Deleting: {}", ls);
             ls.delete();
         }
         return dir;

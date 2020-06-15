@@ -18,7 +18,7 @@ public class Issue008ChapterTitlesNpeTest {
         log.info("\nIssue008");
 
         Book book = AcdParser.parseBook(inputFilename);
-        log.info("Book: " + book);
+        log.info("Book [{}]", book);
 
         File file = new File(inputFilename);
         File dir = new File("/tmp/acdepub_" + file.getName().replace(".xml", ""));

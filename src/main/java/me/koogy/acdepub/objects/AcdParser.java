@@ -66,7 +66,7 @@ public class AcdParser {
             xml = xml.replaceAll("[\\r\\n]", "");
             
             String infoXml = extractContents(xml, Tag.INFO);
-            log.info("Book Info[" + infoXml + "]");
+            log.info("Book Info[{}]", infoXml);
             book.setInfo(parseInfo(infoXml));
             book.setOptions(parseOptions(infoXml));
             // UUID, based on unique title
@@ -106,7 +106,7 @@ public class AcdParser {
             info.setAuthor(extractContents(infoXml, Tag.AUTHOR));
             info.setDate(extractContents(infoXml, Tag.DATE));
         }
-        log.info("ParseInfo: [" + info + "]");
+        log.info("ParseInfo [{}]", info);
         return info;
     }
 
@@ -119,7 +119,7 @@ public class AcdParser {
         Options options = new Options();
         List<String> optionStrings = extractAllContents(infoXml, Tag.OPTION);
         for (String str : optionStrings) {
-            log.info("Option: " + str);
+            log.info("Option [{}]", str);
             Map<String, String> map = extractAttributes(str);
             String name = map.get("name");
             String value = map.get("value");
@@ -141,7 +141,7 @@ public class AcdParser {
                 options.setPartTitleText(value);
             }
         }
-        log.info("Options[" + options + "]");
+        log.info("Options [{}]", options);
         return options;
     }
 
@@ -168,7 +168,7 @@ public class AcdParser {
             part.setId(String.format(Main.PART_ID_FORMAT, partCount));
             // part info = book info + part info
             String infoXml = extractContents(partXml, Tag.INFO);
-            log.info("Parts Info[" + infoXml + "]");
+            log.info("Parts Info [{}]", infoXml);
             Info info = null;
             Options options = null;
             if (infoXml == null || infoXml.isEmpty()) {
@@ -238,7 +238,7 @@ public class AcdParser {
         List<String> list = extractAllContents(xml, Tag.FOOTNOTE);
         int count = 0;
         for (String item : list) {
-            log.info("Footnote[" + count + "]: [" + item + "]");
+            log.info("Footnote [{}] - [{}]", count, item);
             count++;
         }
         book.setFootnotes(parseChapters(book, list, Chapter.FOOTNOTE));
@@ -247,7 +247,7 @@ public class AcdParser {
     // chapter has a title tag as first element, rest is verbatim body
     // protected to allow testing, otherwise private
     public static Chapter parseChapter(Book book, String xml, int type, String id) {
-        log.info("ParseChapter [" + xml + "]");
+        log.info("ParseChapter [{}]", xml);
         Chapter chapter = new Chapter();
         chapter.setTitle(extractContents(xml, Tag.TITLE));
         // remove title
@@ -306,7 +306,7 @@ public class AcdParser {
         // this perhaps should be elsewhere
         while (xml.indexOf("<note/>") != -1) {
             book.footnoteCounter++;
-            log.info("Footnote[" + book.footnoteCounter + "]");
+            log.info("Footnote [{}]", book.footnoteCounter);
             xml = xml.replaceFirst("<note/>",
                     " <a id=\"" + Book.FOOTNOTE_LINK_ANCHOR_PREFIX + book.footnoteCounter + "\">"
                     + "<a href=\"" + Book.FOOTNOTES_FILENAME
@@ -374,7 +374,7 @@ public class AcdParser {
     // <tag name="value" name2="value2"/> -> hashmap
     // use regexp? [a-zA-Z0-9]*="[^"]*"
     public static Map<String, String> extractAttributes(String source) {
-        log.info("ExtractAttributes: [" + source + "]");
+        log.info("ExtractAttributes [{}]", source);
         Map<String, String> map = null;
         // strip first word - tag name
         source = source.replaceFirst("<[a-zA-Z]* ", "");
@@ -443,7 +443,7 @@ public class AcdParser {
     // get the contents of the ALL instances of the named tag within string
     // NB <tag will match <tags
     public static List<String> extractAllContents(String source, String name) {
-        //log.debug("ExtractAllContents: Source: [" + source + "] Name: [" + name + "]");
+        //log.debug("ExtractAllContents: Source [{}] Name [{}]", source, name);
         // this strips off the start
         String[] strings = source.split("<" + name);
         if (strings == null || strings.length == 0) {
@@ -468,11 +468,11 @@ public class AcdParser {
         int start = 0;
         while (m.find()) {
             String matched = m.group();
-            log.info("Match [" + matched + "]:" + m.start() + ":" + m.end());
+            log.info("Match [{}] - {} = {}", matched, m.start(), m.end());
             // copy start string to output
             output.append(xml.substring(start, m.start()));
             output.append(toSmallCaps(matched));
-            log.info("Output [" + output + "]");
+            log.info("Output [{}]", output);
             // next start is the current end
             start = m.end();
         }

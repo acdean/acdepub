@@ -40,7 +40,7 @@ public class ZipWriter {
             for (File f : list) {
                 // ignore the things we've already zipped
                 if (f.isDirectory() || f.getName().equals("mimetype")) {
-                    log.info(f.getAbsoluteFile() + " - ignoring");
+                    log.info("File [{}] - ignoring", f.getAbsoluteFile());
                 } else {
                     // zip all the other files
                     writeOne(zos, f.getAbsolutePath());
@@ -56,12 +56,12 @@ public class ZipWriter {
     }
 
     static void writeOne(ZipOutputStream zos, String filename) {
-        log.info("WriteOne: " + filename);
+        log.info("WriteOne [{}]", filename);
         int index = filename.lastIndexOf("/");
         writeOne(zos, filename.substring(index + 1), filename, null);
     }
     static void writeOne(ZipOutputStream zos, String entryName, String filename, Integer size) {
-        log.info("WriteOne: " + entryName + " - " + filename);
+        log.info("WriteOne [{}] - [{}]", entryName, filename);
         FileInputStream in = null;
         try {
             // name the file inside the zip file 

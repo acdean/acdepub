@@ -22,9 +22,9 @@ public class PartWriter {
         Info info = part.getInfo();
         Options options = part.getOptions();
 
-        log.debug("BookInfo [" + bookInfo + "]");
+        log.debug("BookInfo [{}]", bookInfo);
         log.debug("####### P A R T #######");
-        log.debug("PartInfo [" + info + "]");
+        log.debug("PartInfo [{}]", info);
 
         PrintStream p = null;
         try {
