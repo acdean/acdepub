@@ -258,7 +258,7 @@ public class AcdParser {
         xml = xml.replaceAll("</p>", "</p>\n");
         xml = xml.replaceAll("<hr/>", "<div class=\"hr\">" + HR_TEXT + "</div>\n");
         // break is a blank line
-        xml = xml.replaceAll("<break/>", "<br/><br/>\n");
+        xml = xml.replaceAll("<break/>", "<p><br /></p>\n");
         // remove single line comments (they clash with mdash below)
         xml = xml.replaceAll("<!--.*-->", "");
         xml = xml.replaceAll("--", "—");    // proper mdash
@@ -301,6 +301,15 @@ public class AcdParser {
         xml = xml.replaceAll("</sc>", "</span>");
         xml = xml.replaceAll("<fixed>", "<pre>");
         xml = xml.replaceAll("</fixed>", "</pre>");
+        // new bits for plays (see troades.xml)
+        xml = xml.replaceAll("<speaker>", "<p class=\"p0 speaker\">\n");
+        xml = xml.replaceAll("</speaker>", ":</p>\n");
+        xml = xml.replaceAll("<speech>", "<p class=\"p0 speech\">");
+        xml = xml.replaceAll("</speech>", "</p>\n");
+        xml = xml.replaceAll("<line>", "<span class=\"line\">[");
+        xml = xml.replaceAll("</line>", "]</span>\n");
+        xml = xml.replaceAll("<direction>", "<p class=\"p0 direction\">");
+        xml = xml.replaceAll("</direction>", "</p>");
 
         // replace all the "note" tags with a link to matching footnote
         // this perhaps should be elsewhere

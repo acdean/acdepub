@@ -59,6 +59,12 @@ public class StylesheetWriter {
             p.println(".smallcaps {font-variant: small-caps; font-size: smaller;}");
             p.println(".sc {font-variant: small-caps; font-size: smaller;}");
             p.println("pre {font-family:monospace; font-size: smaller;}");
+
+            // plays
+            p.println(".speaker {text-align: left; margin-top: 0px; margin-bottom: 0px;}");
+            p.println(".speech {margin-top: 0px; margin-left: 30px; display: block; white-space: pre-line;}");
+            p.println(".direction {font-style: italic;}");
+            p.println(".line {font-size: smaller; float: right;}");
             
         } catch (IOException e) {
             e.printStackTrace();
